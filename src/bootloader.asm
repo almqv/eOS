@@ -1,26 +1,19 @@
 %include "equ/BIOS.asm"
 %include "equ/ASCII.asm"
 
+; eLIB
+%include "elib/io.asm"
+
 mov ah, BIOS_MODE_TELETYPE ; enter teletype mode (BIOS)
 
 mov al, ASCII_LINEBREAK ; linebreak
 int BIOS_INT
 
+test db "eOS", ASCII_CARRIAGE_RETURN, ASCII_LINEBREAK 
+
+
 ; Print "eOS"
-mov al, "e"
-int BIOS_INT 
 
-mov al, "O"
-int BIOS_INT
-
-mov al, "S"
-int BIOS_INT
-
-mov al, ASCII_CARRIAGE_RETURN
-int BIOS_INT
-
-mov al, ASCII_LINEBREAK ; linebreak
-int BIOS_INT
 
 ; ALPHABET PRINT TEST
 mov al, 64 ; one less than A since we are printing in a loop and it increments before sys interupt
