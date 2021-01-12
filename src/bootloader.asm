@@ -26,14 +26,14 @@ loop:
 	inc al ; move to next char
 	int BIOS_INT ; bios interupt to print it
 	
-	;push al ; push al onto stack
+	push ax ; push ax onto stack
 
 	; Print a linebreak
-	;mov al, ASCII_LINEBREAK 
-	;int BIOS_INT 
+	mov al, ASCII_LINEBREAK 
+	int BIOS_INT 
 
 	; Prepair for next iteration
-	;pop al ; return to char
+	pop ax ; restore
 
 	cmp al, 90 ; 26 letters in english alphabet (64 + 26)
 	jl loop ; if al < 64+26: jmp loop
