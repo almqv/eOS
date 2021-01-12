@@ -34,8 +34,8 @@ loop:
 	; newline
 	mov al, ASCII_CARRIAGE_RETURN
 	int BIOS_INT
-	mov al, ASCII_LINEBREAK 
-	int BIOS_INT 
+	mov al, ASCII_LINEBREAK
+	int BIOS_INT
 
 	; Prepair for next iteration
 	pop ax ; restore
