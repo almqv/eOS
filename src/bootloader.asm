@@ -14,8 +14,6 @@ mov al, 10 ; linebreak
 int BIOS_INT
 
 ; ALPHABET PRINT
-
-
 mov al, 64 ; one less than A since we are printing in a loop and it increments before sys interupt
 loop:
 	inc al ; move to next char
