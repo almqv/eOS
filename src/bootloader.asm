@@ -1,8 +1,9 @@
 %include "equ/BIOS.asm"
 %include "equ/ASCII.asm"
 
-mov ah, 0x0e ; enter teletype mode (BIOS)
+mov ah, BIOS_MODE_TELETYPE ; enter teletype mode (BIOS)
 
+; Print "eOS"
 mov al, "e"
 int BIOS_INT 
 
@@ -33,6 +34,7 @@ loop:
 
 	cmp al, 90 ; 26 letters in english alphabet (64 + 26)
 	jl loop ; if al < 64+26: jmp loop
+
 
 jmp $ 
 
