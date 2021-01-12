@@ -22,26 +22,15 @@ int BIOS_INT
 mov al, ASCII_LINEBREAK ; linebreak
 int BIOS_INT
 
-; ALPHABET PRINT
-;; mov al, 64 ; one less than A since we are printing in a loop and it increments before sys interupt
-;; loop:
-;; 	; Print the alphabetic char
-;; 	inc al ; move to next char
-;; 	int BIOS_INT ; bios interupt to print it
+; ALPHABET PRINT TEST
+mov al, 64 ; one less than A since we are printing in a loop and it increments before sys interupt
+loop:
+	; Print the alphabetic char
+	inc al ; move to next char
+	int BIOS_INT ; bios interupt to print it
 
-;; 	push ax ; push ax onto stack
-
-;; 	; newline
-;; 	mov al, ASCII_CARRIAGE_RETURN
-;; 	int BIOS_INT
-;; 	mov al, ASCII_LINEBREAK
-;; 	int BIOS_INT
-
-;; 	; Prepair for next iteration
-;; 	pop ax ; restore
-
-;; 	cmp al, 90 ; 26 letters in english alphabet (64 + 26)
-;; 	jl loop ; if al < 64+26: jmp loop
+	cmp al, 90 ; 26 letters in english alphabet (64 + 26)
+	jl loop ; if al < 64+26: jmp loop
 
 
 jmp $ 
