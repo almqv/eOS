@@ -3,4 +3,4 @@
 srcDir=src
 binDir=bin
 
-nasm -f bin $srcDir/bootloader.asm -o $binDir/bootloader.bin
+nasm -f bin $srcDir/bootloader.asm -i $srcDir -o $binDir/bootloader.bin
