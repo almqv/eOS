@@ -13,7 +13,7 @@ int BIOS_INT
 mov al, "S"
 int BIOS_INT
 
-mov al, 10 ; linebreak
+mov al, ASCII_LINEBREAK ; linebreak
 int BIOS_INT
 
 ; ALPHABET PRINT
