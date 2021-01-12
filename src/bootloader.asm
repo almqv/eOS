@@ -16,6 +16,9 @@ int BIOS_INT
 mov al, "S"
 int BIOS_INT
 
+mov al, ASCII_CARRIAGE_RETURN
+int BIOS_INT
+
 mov al, ASCII_LINEBREAK ; linebreak
 int BIOS_INT
 
@@ -28,7 +31,9 @@ loop:
 	
 	push ax ; push ax onto stack
 
-	; Print a linebreak
+	; newline
+	mov al, ASCII_CARRIAGE_RETURN
+	int BIOS_INT
 	mov al, ASCII_LINEBREAK 
 	int BIOS_INT 
 
