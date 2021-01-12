@@ -1,3 +1,5 @@
 #!/usr/bin/bash
 
-nasm -f bin bootloader.asm -o bootloader.bin
+binDir=bin
+
+nasm -f bin bootloader.asm -o $binDir/bootloader.bin
