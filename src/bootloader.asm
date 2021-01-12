@@ -3,6 +3,9 @@
 
 mov ah, BIOS_MODE_TELETYPE ; enter teletype mode (BIOS)
 
+mov al, ASCII_LINEBREAK ; linebreak
+int BIOS_INT
+
 ; Print "eOS"
 mov al, "e"
 int BIOS_INT 
