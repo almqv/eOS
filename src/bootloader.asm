@@ -1,32 +1,19 @@
+[org 0x7c00] ; bootsector
+
+jmp $  ; inf loop
+
+;; includes
+; EQU
 %include "equ/BIOS.asm"
 %include "equ/ASCII.asm"
 
 ; eLIB
-;; %include "elib/io.asm"
+;%include "elib/io.asm"
 
-mov ah, BIOS_MODE_TELETYPE ; enter teletype mode (BIOS)
+;; Data
+welcomeString:
+	db "Welcome to eOS", ASCII_CARRIAGE_RETURN, ASCII_LINEBREAK
 
-mov al, ASCII_LINEBREAK ; linebreak
-int BIOS_INT
-
-;; test db "Welcome to eOS", ASCII_CARRIAGE_RETURN, ASCII_LINEBREAK 
-
-; Print "eOS"
-;; mov rcx, test
-;; call print
-
-; ALPHABET PRINT TEST
-mov al, 64 ; one less than A since we are printing in a loop and it increments before sys interupt
-loop:
-	; Print the alphabetic char
-	inc al ; move to next char
-	int BIOS_INT ; bios interupt to print it
-
-	cmp al, 90 ; 26 letters in english alphabet (64 + 26)
-	jl loop ; if al < 64+26: jmp loop
-
-
-jmp $ 
-
+; Magic BIOS number 
 times 510-($-$$) db 0
 db 0x55, 0xaa

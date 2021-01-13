@@ -1,27 +1,34 @@
 ; eLibrary
 ; Input/Output subroutines
 
-; String structure
-; ASCII Offset = 8 bits
-; Array of the char  bytes, ending with 0 (ASCII_END)
-
-eLIB_STR_OFFSET equ 8 ; 8 bits
-
-print:	; Subroutine to print strings (from stack)
-	; Input: RCX, takes pointer to string from stack
-	pop rcx
-
-	; rcx now holds the starting point (address)
+; Subroutine to print a string
+print:
+	pusha ; save current state of registers
 
 	printLoop:
-		; Print the char
-		mov al, [rcx] ; dereference address to get value
-		cmp al, ASCII_END ; check if ASCII end
-		je printExit ; if reached the end then return
+		; Char check
+		mov al, [bx] ; load the char
+		cmp al, ASCII_END ; check if end of string
+		je return ; if al == ASCII_END then return end | lua is good psuedo-code
 
-		int BIOS_INT ; system interupt (print string)
-		add rcx, eLIB_STR_OFFSET ; increase with offset
-		jmp printLoop ; loop for next char
 
-	printExit:
-		ret
+		; BIOS Printing
+		mov ah, BIOS_MODE_TELETYPE ; enter tty mode
+		int BIOS_INT ; interupt and print the char (from line 10)
+
+		; Preperation for next iteration
+		inc bx ; increment the pointer to get next char
+		jmp printLoop ; repeat 
+
+	return:
+		popa ; restore all registers
+		ret ; return to previous location
+
+; Subroutine to print a string on a new line
+newline:
+	db ASCII_CARRIAGE_RETURN, ASCII_LINEBREAK
+
+println:
+	; Print the newline
+	mov bx, newline
+	call print
