@@ -14,8 +14,7 @@ jmp $  ; inf loop
 %include "elib/io.asm"
 
 ;; Data
-welcomeString:
-	db "Welcome to eOS", ASCII_END
+welcomeString: db "Welcome to eOS", ASCII_END
 
 ; Magic BIOS number 
 times 510-($-$$) db 0

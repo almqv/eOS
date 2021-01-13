@@ -24,10 +24,10 @@ print:
 		popa ; restore all registers
 		ret ; return to previous location
 
-; Subroutine to print a string on a new line
-newline:
-	db ASCII_CARRIAGE_RETURN, ASCII_LINEBREAK, ASCII_END
 
+newline: db ASCII_CARRIAGE_RETURN, ASCII_LINEBREAK, ASCII_END ; used for printing newlines
+
+; Subroutine to print a string on a new line
 println:
 	pusha
 
