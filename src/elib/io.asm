@@ -26,9 +26,17 @@ print:
 
 ; Subroutine to print a string on a new line
 newline:
-	db ASCII_CARRIAGE_RETURN, ASCII_LINEBREAK
+	db ASCII_CARRIAGE_RETURN, ASCII_LINEBREAK, ASCII_END
 
 println:
+	pusha
+
+	; Print the input string
+	call print ; this will print whatever is in [bx], so clear it if you dont want to print anything
+
 	; Print the newline
 	mov bx, newline
 	call print
+
+	popa
+	ret 
