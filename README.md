@@ -1,5 +1,5 @@
 # eOS
-A simple x86_64 operating system (BIOS)
+A simple x86 operating system (BIOS)
 
 This operating system is in no way original nor do I recommend even taking a look at it. I am only making this as a learning exercise.
 ## Books
