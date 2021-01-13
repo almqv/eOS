@@ -3,6 +3,9 @@
 mov bx, welcomeString ; Print the welcome string
 call println
 
+mov bx, infoString
+call println
+
 jmp $  ; inf loop
 
 ;; includes
@@ -14,7 +17,8 @@ jmp $  ; inf loop
 %include "elib/io.asm"
 
 ;; Data
-welcomeString: db "Welcome to eOS", ASCII_END
+welcomeString: db "Welcome to    e Operating-System (eOS)", ASCII_END
+infoString: db "eOS: 2021 v0.0"
 
 ; Magic BIOS number 
 times 510-($-$$) db 0
