@@ -17,8 +17,8 @@ jmp $  ; inf loop
 %include "elib/io.asm"
 
 ;; Data
-welcomeString: db "Welcome to    e Operating-System (eOS)", ASCII_END
-infoString: db "eOS: 2021 v0.0"
+welcomeString: db "Welcome to: e Operating-System (eOS)", ASCII_END
+infoString: db "Version: 2021 0.0", ASCII_END
 
 ; Magic BIOS number 
 times 510-($-$$) db 0
