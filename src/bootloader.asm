@@ -18,7 +18,7 @@ jmp $  ; inf loop
 
 ;; Data
 welcomeString: db "Welcome to: e Operating-System (eOS)", ASCII_END
-infoString: db "Version: 2021 0.0", ASCII_END
+infoString: db    "Version 2021 0.0", ASCII_END
 
 ; Magic BIOS number 
 times 510-($-$$) db 0
