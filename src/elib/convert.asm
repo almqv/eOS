@@ -23,9 +23,11 @@ hexToASCII:
 		cmp al, 0x39 ; if al (char) > "9"
 		jle hexloop2
 
-		add al, 7
+		add al, 7 ; 7 distance from "A"
 
 	hexloop2:
+		mov bx, HEX_OUT + 5
+
 
 	return:
 		mov bx, HEX_OUT
