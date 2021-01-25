@@ -20,7 +20,12 @@ hexToASCII:
 		; convert ax into ASCII (numeric)
 		add al, ASCII_OFFSET_NUM ; add 0x30
 
-		cmp al, 0x39 ; if al (char) > 9
+		cmp al, 0x39 ; if al (char) > "9"
+		jle hexloop2
+
+		add al, 7
+
+	hexloop2:
 
 	return:
 		mov bx, HEX_OUT
