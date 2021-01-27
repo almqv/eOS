@@ -26,8 +26,15 @@ hexToASCII:
 		add al, 7 ; 7 distance from "A"
 
 	hexloop2:
+		; Write the char into the HEX_OUT string
 		mov bx, HEX_OUT + 5
+		sub bx, cx
 
+		mov [bx], al ; write the char into the string
+		ror dx, 4 ; "rotate" the string
+
+		inc cx ; increment and go onto next char
+		jmp hexloop
 
 	return:
 		mov bx, HEX_OUT
