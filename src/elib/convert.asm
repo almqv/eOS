@@ -4,13 +4,15 @@ HEX_OUT: db "0x0000", ASCII_END
 ; This SR is going to mess up some registers
 ; since it fills the register with the desired 
 ; pointer toward the string.
+;
+; Disclaimer: use popa if you want to get back your registers!!!
+
 hexToASCII:
-	; pusha
 	mov cx, 0 ; incrementor
 
 	hexloop:
 		cmp cx, 4 ; check if we reached the end 
-		je return ; if so just return our new ASCII string
+		je hexreturn ; if so just return our new ASCII string
 		
 		mov ax, dx
 
@@ -36,6 +38,6 @@ hexToASCII:
 		inc cx ; increment and go onto next char
 		jmp hexloop
 
-	return:
+	hexreturn:
 		mov bx, HEX_OUT
 		ret
