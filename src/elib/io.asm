@@ -9,7 +9,7 @@ print:
 		; Char check
 		mov al, [bx] ; load the char
 		cmp al, ASCII_END ; check if end of string
-		je return ; if al == ASCII_END then return end | lua is good psuedo-code
+		je printreturn ; if al == ASCII_END then return end | lua is good psuedo-code
 
 
 		; BIOS Printing
@@ -20,7 +20,7 @@ print:
 		inc bx ; increment the pointer to get next char
 		jmp printLoop ; repeat 
 
-	return:
+	printreturn:
 		popa ; restore all registers
 		ret ; return to previous location
 
