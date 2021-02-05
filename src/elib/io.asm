@@ -13,8 +13,8 @@ print:
 
 
 		; BIOS Printing
-		mov ah, BIOS_MODE_TELETYPE ; enter tty mode
-		int BIOS_INT ; interupt and print the char (from line 10)
+		mov ah, BIOS_TTY_MODE ; enter teletype mode
+		int BIOS_TTY_INT ; interupt and print the char (from line 10)
 
 		; Preperation for next iteration
 		inc bx ; increment the pointer to get next char
