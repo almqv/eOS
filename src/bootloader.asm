@@ -14,9 +14,11 @@
 
 	jmp $  ; inf loop
 
+; Load the EQUs
 %include "equ/BIOS.asm"
 %include "equ/ASCII.asm"
 
+; SRs
 %include "elib/io.asm"
 %include "elib/convert.asm"
 
