@@ -8,9 +8,12 @@
 
 	mov bx, hexTestPrefixString	; Hex print test (not needed but fun)
 	call print
+
+	pusha
 	mov dx, 0x002e ; test the conversion
 	call hexToASCII
 	call println
+	popa
 
 	jmp $  ; inf loop
 
