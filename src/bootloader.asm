@@ -6,14 +6,16 @@
 	mov bx, info_string		; Print version info
 	call println
 
-	mov bx, hex_test_string		; Hex print test (not needed but fun)
-	call print
+	; Read from disk
+	mov bp, 0x8000
+	mov sp, bp ; move the stack away so that it does not get overwritten
 
-	pusha
-	mov dx, 0x002e ; test the conversion
-	call hex_to_ascii
-	call println
-	popa
+	mov bx, 0x9000
+	mov dh, 2 ; read 2 sectors
+	call disk_read ; read
+
+	mov dx, [0x9000]
+	call print_hex
 
 	jmp $  ; inf loop
 
@@ -22,12 +24,14 @@
 %include "equ/ASCII.asm"
 
 ; SRs
-%include "elib/io.asm"
 %include "elib/convert.asm"
+%include "elib/io.asm"
+
+%include "elib/bios_disk.asm"
 
 welcome_string:		db "e Operating-System (eOS)", ASCII_END
 info_string: 		db "Version 2021 0.0", ASCII_END
-hex_test_string:	db "Hex printing test: ", ASCII_END
+read_test_string:	db "Disk read: ", ASCII_END
 
 times 510-($-$$) db 0
 db 0x55, 0xaa ; magic BIOS numbers

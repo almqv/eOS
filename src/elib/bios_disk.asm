@@ -28,11 +28,8 @@ read_error:
 	mov bx, read_error_string
 	call println
 
-	pusha 
 	mov dh, ah
-	call hex_to_ascii
-	call println
-	popa
+	call print_hex 
 
 disk_loop:
 	jmp $
