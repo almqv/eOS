@@ -11,14 +11,31 @@ disk_read:
 
 	; data pointer: es:bx (standard)
 	int BIOS_DISK_INT ; do the interrupt
-	jc disk_error ; if flag is set then jump to error
+	jc read_error ; if flag is set then jump to error
 
-disk_error:
-	mov bx, DISK_ERROR
+	pop dx
+	cmp al, dh
+	jne sector_error
+	
+	popa
+	ret 
+
+sector_error:
+	mov bx, sector_error_string
 	call println
 
+read_error:
+	mov bx, read_error_string
+	call println
+
+	pusha 
 	mov dh, ah
+	call hex_to_ascii
+	call println
+	popa
 
+disk_loop:
+	jmp $
 
-DISK_ERROR: db "Disk read error", ASCII_END
-SECTORS_ERROR: db "Invalid number of sectors read", ASCII_END
+read_error_string: 	db "Disk read error", ASCII_END
+sector_error_string:	db "Invalid number of sectors read", ASCII_END
