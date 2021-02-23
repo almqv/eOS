@@ -1,19 +1,21 @@
 [org 0x7c00] ; bootsector
 
-	mov bx, welcomeString		; Print the welcome string
+	mov bx, welcome_string		; Print the welcome string
 	call println
 
-	mov bx, infoString		; Print version info
+	mov bx, info_string		; Print version info
 	call println
 
-	mov bx, hexTestPrefixString	; Hex print test (not needed but fun)
-	call print
+	; Read from disk
+	mov bp, 0x8000
+	mov sp, bp ; move the stack away so that it does not get overwritten
 
-	pusha
-	mov dx, 0x002e ; test the conversion
-	call hexToASCII
-	call println
-	popa
+	mov bx, 0x9000
+	mov dh, 2 ; read 2 sectors
+	call disk_read ; read
+
+	mov dx, [0x9000]
+	call print_hex
 
 	jmp $  ; inf loop
 
@@ -22,12 +24,14 @@
 %include "equ/ASCII.asm"
 
 ; SRs
-%include "elib/io.asm"
 %include "elib/convert.asm"
+%include "elib/io.asm"
 
-welcomeString:		db "Welcome to: e Operating-System (eOS)", ASCII_END
-infoString: 		db "Version 2021 0.0", ASCII_END
-hexTestPrefixString:	db "Hex printing test: ", ASCII_END
+%include "elib/bios_disk.asm"
+
+welcome_string:		db "e Operating-System (eOS)", ASCII_END
+info_string: 		db "Version 2021 0.0", ASCII_END
+read_test_string:	db "Disk read: ", ASCII_END
 
 times 510-($-$$) db 0
 db 0x55, 0xaa ; magic BIOS numbers

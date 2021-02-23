@@ -40,3 +40,13 @@ println:
 
 	popa
 	ret 
+
+
+; Subroutine to print a hex value
+print_hex:
+	pusha
+	call hex_to_ascii
+	call print
+	popa
+
+	ret

@@ -5,7 +5,7 @@ HEX_OUT: db "0x0000", ASCII_END
 ; since it fills the register with the desired 
 ; pointer toward the string.
 
-hexToASCII:
+hex_to_ascii:
 	mov cx, 0 ; incrementor
 
 	hexloop:
