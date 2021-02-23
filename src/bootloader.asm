@@ -1,17 +1,17 @@
 [org 0x7c00] ; bootsector
 
-	mov bx, welcomeString		; Print the welcome string
+	mov bx, welcome_string		; Print the welcome string
 	call println
 
-	mov bx, infoString		; Print version info
+	mov bx, info_string		; Print version info
 	call println
 
-	mov bx, hexTestPrefixString	; Hex print test (not needed but fun)
+	mov bx, hex_test_string		; Hex print test (not needed but fun)
 	call print
 
 	pusha
 	mov dx, 0x002e ; test the conversion
-	call hexToASCII
+	call hex_to_ascii
 	call println
 	popa
 
@@ -25,9 +25,9 @@
 %include "elib/io.asm"
 %include "elib/convert.asm"
 
-welcomeString:		db "Welcome to: e Operating-System (eOS)", ASCII_END
-infoString: 		db "Version 2021 0.0", ASCII_END
-hexTestPrefixString:	db "Hex printing test: ", ASCII_END
+welcome_string:		db "e Operating-System (eOS)", ASCII_END
+info_string: 		db "Version 2021 0.0", ASCII_END
+hex_test_string:	db "Hex printing test: ", ASCII_END
 
 times 510-($-$$) db 0
 db 0x55, 0xaa ; magic BIOS numbers
