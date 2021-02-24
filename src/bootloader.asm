@@ -17,6 +17,9 @@
 	mov dx, [0x9000]
 	call print_hex
 
+	mov dx, [0x9000 + 512]
+	call print_hex
+
 	jmp $  ; inf loop
 
 ; Load the EQUs
@@ -35,3 +38,7 @@ read_test_string:	db "Disk read: ", ASCII_END
 
 times 510-($-$$) db 0
 db 0x55, 0xaa ; magic BIOS numbers
+
+; Bloat bytes to test disk read
+times 256 dw 0xeeee
+times 256 dw 0xaaaa
