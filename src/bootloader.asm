@@ -17,6 +17,9 @@
 	mov dx, [0x9000]
 	call print_hex
 
+	mov dx, [0x9000 + 512]
+	call print_hex
+
 	jmp $  ; inf loop
 
 ; Load the EQUs
