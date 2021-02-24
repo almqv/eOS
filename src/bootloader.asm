@@ -35,3 +35,7 @@ read_test_string:	db "Disk read: ", ASCII_END
 
 times 510-($-$$) db 0
 db 0x55, 0xaa ; magic BIOS numbers
+
+; Bloat bytes to test disk read
+times 256 dw 0xeeee
+times 256 dw 0xaaaa
