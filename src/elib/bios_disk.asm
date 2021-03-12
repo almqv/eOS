@@ -34,5 +34,5 @@ read_error:
 disk_loop:
 	jmp $
 
-read_error_string: 	db "Disk read error", ASCII_END
+read_error_string:		db "Disk read error", ASCII_END
 sector_error_string:	db "Invalid number of sectors read", ASCII_END
