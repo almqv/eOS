@@ -14,14 +14,20 @@
 	mov dh, 2 ; read 2 sectors
 	call disk_read ; read
 
+	mov bx, read_test_string
+	call print
+
 	mov dx, [0x9000]
+	call print_hex
+
+	mov bx, byte_sep_string
+	call print
+
+	mov dx, [0x9000 + 512]
 	call print_hex
 
 	mov bx, empty_string
 	call println
-
-	mov dx, [0x9000 + 512]
-	call print_hex
 
 	jmp $  ; inf loop
 
@@ -38,6 +44,7 @@
 welcome_string:		db "e Operating-System (eOS)", ASCII_END
 info_string: 		db "Version 2021 0.0", ASCII_END
 read_test_string:	db "Disk read: ", ASCII_END
+byte_sep_string:	db "; ", ASCII_END
 empty_string:		db ASCII_END
 
 times 510-($-$$) db 0
