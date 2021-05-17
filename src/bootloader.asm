@@ -17,6 +17,9 @@
 	mov dx, [0x9000]
 	call print_hex
 
+	mov bx, empty_string
+	call println
+
 	mov dx, [0x9000 + 512]
 	call print_hex
 
@@ -35,10 +38,11 @@
 welcome_string:		db "e Operating-System (eOS)", ASCII_END
 info_string: 		db "Version 2021 0.0", ASCII_END
 read_test_string:	db "Disk read: ", ASCII_END
+empty_string:		db ASCII_END
 
 times 510-($-$$) db 0
 db 0x55, 0xaa ; magic BIOS numbers
 
-; Bloat bytes to test disk read
+; Bloat bytes to test reading
 times 256 dw 0xeeee
 times 256 dw 0xaaaa
