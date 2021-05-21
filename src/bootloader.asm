@@ -51,5 +51,5 @@ times 510-($-$$) db 0
 db 0x55, 0xaa ; magic BIOS numbers
 
 ; Bloat bytes to test reading
-times 128 dw 0xe, 0xf
+times 256 dw 0xe
 times 256 dw 0xa
