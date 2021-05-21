@@ -12,8 +12,7 @@ compile() {
 
 if test -f "$PWD/$bootloader"; then
 	rm $PWD/$bootloader
-	compile
-	start_bootloader
-else
-	 compile && start_bootloader
 fi
+
+
+compile && start_bootloader
