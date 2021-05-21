@@ -6,8 +6,14 @@ start_bootloader() {
 	qemu-system-x86_64 $bootloader
 }
 
+compile() {
+	/usr/bin/bash $PWD/compile.sh
+}
+
 if test -f "$PWD/$bootloader"; then
+	rm $PWD/$bootloader
+	compile
 	start_bootloader
 else
-	/usr/bin/bash $PWD/compile.sh && start_bootloader
+	 compile && start_bootloader
 fi
