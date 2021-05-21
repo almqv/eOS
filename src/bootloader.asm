@@ -35,11 +35,8 @@
 %include "equ/BIOS.asm"
 %include "equ/ASCII.asm"
 
-; SRs
-%include "elib/convert.asm"
-%include "elib/io.asm"
-
-%include "elib/bios_disk.asm"
+; Load in BIOS stuff
+%include "bios.asm"
 
 welcome_string:		db "e Operating-System (eOS)", ASCII_END
 info_string: 		db "Version 2021 0.0", ASCII_END

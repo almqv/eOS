@@ -1,4 +1,3 @@
-; eLibrary
 ; Input/Output subroutines
 
 ; Subroutine to print a string
