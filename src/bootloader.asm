@@ -31,11 +31,7 @@
 
 	jmp $  ; inf loop
 
-; Load the EQUs
-%include "equ/BIOS.asm"
-%include "equ/ASCII.asm"
-
-; Load in BIOS stuff
+; Include the BIOS SRs et cetera
 %include "bios.asm"
 
 welcome_string:		db "e Operating-System (eOS)", ASCII_END
