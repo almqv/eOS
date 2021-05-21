@@ -31,7 +31,10 @@
 
 	jmp $  ; inf loop
 
-; Include the BIOS SRs et cetera
+; Constants
+%include "equ/ASCII.asm"
+
+; SRs etc
 %include "bios.asm"
 
 welcome_string:		db "e Operating-System (eOS)", ASCII_END
