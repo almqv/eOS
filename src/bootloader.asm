@@ -39,7 +39,7 @@
 
 welcome_string:		db "e Operating-System (eOS)", ASCII_END
 info_string: 		db "Version 2021 0.0", ASCII_END
-read_test_string:	db "Disk read: ", ASCII_END
+read_test_string:	db "Read bytes: ", ASCII_END
 byte_sep_string:	db "; ", ASCII_END
 empty_string:		db ASCII_END
 
