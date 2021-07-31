@@ -1,51 +1,45 @@
 [org 0x7c00] ; bootsector
+	; Save the boot drive index
+	mov [BOOT_DRIVE], dl
 
-	mov bx, welcome_string		; Print the welcome string
+	; Move the stack pointer somewhere safe
+	mov bp, 0x8000 ; move it to 0x8000
+	mov sp, bp
+
+	; Print the welcome string
+	mov bx, welcome_string
 	call println
 
-	mov bx, info_string		; Print version info
-	call println
+	; Read second sector (outside bootsector)
+	mov bx, 0x9000			; LOAD LOCATION 
+	mov dh, 2				; SECTOR-COUNT
+	mov dl, [BOOT_DRIVE]	; DISK-INDEX
+	call disk_read
 
-	; Read from disk
-	mov bp, 0x8000
-	mov sp, bp ; move the stack away so that it does not get overwritten
 
-	mov bx, 0x9000
-	mov dh, 2 ; read 2 sectors
-	call disk_read ; read
-
-	mov bx, read_test_string
-	call print
-
+	; Print out whatever bloated data that was read
 	mov dx, [0x9000]
 	call print_hex
 
-	mov bx, byte_sep_string
-	call print
-
-	mov dx, [0x9000 + 512]
-	call print_hex
-
-	mov bx, empty_string
+	mov bx, [ASCII_END]
 	call println
+
+	mov dx, [0x9000 + 512] ; read from second sector too
+	call print_hex
 
 	jmp $  ; inf loop
 
-; Constants
 %include "equ/ASCII.asm"
-
-; SRs etc
 %include "bios.asm"
 
-welcome_string:		db "e Operating-System (eOS)", ASCII_END
-info_string: 		db "Version 2021 0.0", ASCII_END
-read_test_string:	db "Disk read: ", ASCII_END
-byte_sep_string:	db "; ", ASCII_END
-empty_string:		db ASCII_END
+; Data
+welcome_string:		db "e Operating-System (eOS)", ASCII_CARRIAGE_RETURN, ASCII_LINEBREAK, "Version 2021 0.0", ASCII_END
+BOOT_DRIVE: db 0
 
+; Bootsector
 times 510-($-$$) db 0
-db 0x55, 0xaa ; magic BIOS numbers
+dw 0xaa55 ; magic BIOS numbers
 
-; Bloat bytes to test reading
+; After bootsector 
 times 256 dw 0xEEEE
 times 256 dw 0xAAAA
