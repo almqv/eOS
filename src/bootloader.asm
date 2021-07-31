@@ -1,11 +1,25 @@
 [org 0x7c00] ; bootsector
+	; Save the boot drive index
+	mov [BOOT_DRIVE], dl
+
+	; Move the stack pointer somewhere safe
+	mov bp, 0x8000 ; move it to 0x8000
+	mov sp, bp
 
 	; Print the welcome string
 	mov bx, welcome_string
 	call println
 
-	; Read second sector
+	; Read second sector (outside bootsector)
+	mov bx, 0x9000			; LOAD LOCATION 
+	mov dh, 3				; SECTOR-COUNT
+	mov dl, [BOOT_DRIVE]	; DISK-INDEX
+	call disk_read
 
+
+	; Print out whatever bloated data that was read
+	mov dx, [0x9000]
+	call print_hex
 
 	jmp $  ; inf loop
 
@@ -14,7 +28,7 @@
 
 ; Data
 welcome_string:		db "e Operating-System (eOS)", ASCII_CARRIAGE_RETURN, ASCII_LINEBREAK, "Version 2021 0.0", ASCII_END
-read_test_string:	db "Read bytes: ", ASCII_END
+BOOT_DRIVE: db 0
 
 ; Bootsector
 times 510-($-$$) db 0
