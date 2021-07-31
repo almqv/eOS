@@ -12,13 +12,19 @@
 
 	; Read second sector (outside bootsector)
 	mov bx, 0x9000			; LOAD LOCATION 
-	mov dh, 3				; SECTOR-COUNT
+	mov dh, 2				; SECTOR-COUNT
 	mov dl, [BOOT_DRIVE]	; DISK-INDEX
 	call disk_read
 
 
 	; Print out whatever bloated data that was read
 	mov dx, [0x9000]
+	call print_hex
+
+	mov bx, [ASCII_END]
+	call println
+
+	mov dx, [0x9000 + 512] ; read from second sector too
 	call print_hex
 
 	jmp $  ; inf loop
