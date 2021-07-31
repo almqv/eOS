@@ -1,22 +1,3 @@
-;disk_read:
-;	push dx
-;	mov ah, BIOS_DISK_READ 
-;	mov al, dh ; sector count 
-;	mov cl, 0x02 ; second sector (after bootsection)
-;
-;	mov ch, 0x00 ; read from first cylinder
-;	mov dh, 0x00 ; head
-;
-;	; data pointer: es:bx (standard)
-;	int BIOS_DISK_INT ; do the interrupt
-;	jc read_error ; if flag is set then jump to error
-;
-;	pop dx
-;	cmp al, dh
-;	jne sector_error
-;	
-;	ret 
-
 disk_read:
 	push dx ; store dx on stack so that we can compare later
 
