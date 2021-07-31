@@ -30,7 +30,6 @@ read_error:
 	mov dh, ah
 	call print_hex 
 
-disk_loop:
 	jmp $
 
 read_error_string:		db "Disk read error!", ASCII_END
