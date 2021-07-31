@@ -1,6 +1,4 @@
 disk_read:
-	pusha
-
 	push dx
 	mov ah, BIOS_DISK_READ 
 	mov al, dh ; sector count 
@@ -17,7 +15,6 @@ disk_read:
 	cmp al, dh
 	jne sector_error
 	
-	popa
 	ret 
 
 sector_error:
