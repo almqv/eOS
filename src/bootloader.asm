@@ -31,6 +31,7 @@
 
 %include "equ/ascii.asm"
 %include "bios.asm"
+%include "pm.asm"
 
 ; Data
 welcome_string:	db "e Operating-System (eOS)", ASCII_CARRIAGE_RETURN, ASCII_LINEBREAK, "Version 2021 0.0", ASCII_END
