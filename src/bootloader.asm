@@ -12,8 +12,8 @@
 
 	; Read second sector (outside bootsector)
 	mov bx, 0x9000			; LOAD LOCATION 
-	mov dh, 2				; SECTOR-COUNT
-	mov dl, [BOOT_DRIVE]	; DISK-INDEX
+	mov dh, 2			; SECTOR-COUNT
+	mov dl, [BOOT_DRIVE]		; DISK-INDEX
 	call disk_read
 
 
@@ -33,7 +33,7 @@
 %include "bios.asm"
 
 ; Data
-welcome_string:		db "e Operating-System (eOS)", ASCII_CARRIAGE_RETURN, ASCII_LINEBREAK, "Version 2021 0.0", ASCII_END
+welcome_string:	db "e Operating-System (eOS)", ASCII_CARRIAGE_RETURN, ASCII_LINEBREAK, "Version 2021 0.0", ASCII_END
 BOOT_DRIVE: db 0
 
 ; Bootsector
