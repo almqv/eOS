@@ -1,5 +1,4 @@
 disk_read:
-	pusha
 	push dx ; store dx on stack so that we can compare later
 
 	mov ah, BIOS_DISK_READ ; specify function
@@ -18,7 +17,6 @@ disk_read:
 	cmp dh, al ; if dh != al then error
 	jne sector_error
 	
-	popa
 	ret
 
 sector_error:
