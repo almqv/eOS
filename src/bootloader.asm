@@ -29,7 +29,7 @@
 
 	jmp $  ; inf loop
 
-%include "equ/ASCII.asm"
+%include "equ/ascii.asm"
 %include "bios.asm"
 
 ; Data

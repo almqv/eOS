@@ -1,5 +1,5 @@
 ; EQUs
-%include "equ/BIOS.asm"
+%include "equ/bios.asm"
 
 ; SRs
 %include "bios/convert.asm"
