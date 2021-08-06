@@ -14,7 +14,24 @@ gdt_code: 		; Code SD
 
 	dw 0xffff		; Limit (bits 0-15)
 	dw 0x0			; Base (bits 0-15)
-	dw 0x0			; Base (bits 16-23)
+	db 0x0			; Base (bits 16-23)
 	db 10011010b 	; Flags1 : Type
 	db 11001111b	; Flags2 : Limit (16-19)
 	db 0x0			; Base (bits 24-31)
+
+gdt_data:		; Data SD
+	; Same flags as gdt_code but different type flags
+	; Type: 	0010b (code:expand dowm:writable:accessed)
+
+	dw 0xffff		; Limit (bits 0-15)
+	dw 0x0			; Base (bits 0-15)
+	db 0x0			; Base (bits 16-23)
+	db 10010010b 	; Flags1 : Type
+	db 11001111b	; Flags2 : Limit (16-19)
+	db 0x0			; Base (bits 24-31)
+
+gdt_end:		; Mark the end so we can get the delta-memory (size of GDT)
+
+; GDT descriptor
+gdt_descriptor:
+	dw gdt_end - gdt_start - 1 ; 
