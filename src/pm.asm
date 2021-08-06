@@ -7,7 +7,7 @@
 
 ; Switching to PM
 [bits 16]
-switch_to_pm:
+pm_preinit:
 	cli			; Switch interupts
 
 	lgdt [gdt_descriptor] 	; Tell the CPU about the GDT
@@ -16,9 +16,12 @@ switch_to_pm:
 	or eax, 0x1		; to 1
 	mov cr0, eax		; Update the control register
 
+	; Initialize PM
+	jmp GDT_CODE_SEG:pm_init	
+
 [bits 32]
 ; Init registers & stack when in PM
-init_pm:
+pm_init:
 	mov ax, GDT_DATA_SEG	; Point the segment registers to GDT_DATA_SEG
 	; Segment registers
 	mov ds, ax

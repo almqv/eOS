@@ -6,36 +6,23 @@
 	mov bp, 0x8000 ; move it to 0x8000
 	mov sp, bp
 
-	; Print the welcome string
-	mov bx, welcome_string
-	call println
-
-	; Read second sector (outside bootsector)
-	mov bx, 0x9000		; LOAD LOCATION 
-	mov dh, 2		; SECTOR-COUNT
-	mov dl, [BOOT_DRIVE]	; DISK-INDEX
-	call disk_read
-
-
-	; Print out whatever bloated data that was read
-	mov dx, [0x9000]
-	call print_hex
-
-	mov bx, [ASCII_END]
-	call println
-
-	mov dx, [0x9000 + 512] ; read from second sector too
-	call print_hex
+	; Switching to PM
+	call pm_preinit
 
 	jmp $  ; inf loop
 
 %include "equ/ascii.asm"
 %include "bios.asm"
-
-welcome_string:	db "e Operating-System (eOS)", ASCII_CARRIAGE_RETURN, ASCII_LINEBREAK, "Version 2021 0.0", ASCII_END
-BOOT_DRIVE: db 0
-
 %include "pm.asm"
+
+BEGIN_PM:
+	mov ebx, welcome_string
+	call vga_print
+
+	jmp $
+
+welcome_string:	db "e Operating-System (eOS): Version 2021 0.0", ASCII_END
+BOOT_DRIVE: db 0
 
 ; Bootsector
 times 510-($-$$) db 0
