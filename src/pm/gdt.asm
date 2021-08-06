@@ -34,4 +34,10 @@ gdt_end:		; Mark the end so we can get the delta-memory (size of GDT)
 
 ; GDT descriptor
 gdt_descriptor:
-	dw gdt_end - gdt_start - 1 ; 
+	dw gdt_end - gdt_start - 1		; Size of GDT is always -1 of actual size (WHY?!?!?!?!??!)
+	dd gdt_start					; Pointer to the GDT
+
+
+; Lazy constants
+GDT_CODE_SEG equ gdt_code - gdt_start
+GDT_DATA_SEG equ gdt_data - gdt_start
