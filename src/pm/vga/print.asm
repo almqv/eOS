@@ -1,7 +1,7 @@
 [bits 32]
 
 ; VGA base address: 0xb8000
-; Charpos = 0xb8000 + 2 * (row * 80 + col)
+; Charpos = 0xb8000 + 2(row*80 + col)
 
 vga_print:
 	pusha
