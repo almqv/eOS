@@ -11,9 +11,9 @@
 	call println
 
 	; Read second sector (outside bootsector)
-	mov bx, 0x9000			; LOAD LOCATION 
-	mov dh, 2			; SECTOR-COUNT
-	mov dl, [BOOT_DRIVE]		; DISK-INDEX
+	mov bx, 0x9000		; LOAD LOCATION 
+	mov dh, 2		; SECTOR-COUNT
+	mov dl, [BOOT_DRIVE]	; DISK-INDEX
 	call disk_read
 
 
@@ -31,11 +31,11 @@
 
 %include "equ/ascii.asm"
 %include "bios.asm"
-%include "pm.asm"
 
-; Data
 welcome_string:	db "e Operating-System (eOS)", ASCII_CARRIAGE_RETURN, ASCII_LINEBREAK, "Version 2021 0.0", ASCII_END
 BOOT_DRIVE: db 0
+
+%include "pm.asm"
 
 ; Bootsector
 times 510-($-$$) db 0
