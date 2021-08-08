@@ -9,7 +9,7 @@ vga_print:
 
 	vga_print_loop:
 		mov al, [ebx]
-		mov ah, 0x0f
+		mov ah, 0x8f
 
 		cmp al, ASCII_END
 		je vga_print_return
