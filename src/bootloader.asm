@@ -27,7 +27,3 @@ BOOT_DRIVE: db 0
 ; Bootsector
 times 510-($-$$) db 0
 dw 0xaa55 ; magic BIOS numbers
-
-; After bootsector 
-times 256 dw 0xEEEE
-times 256 dw 0xAAAA
