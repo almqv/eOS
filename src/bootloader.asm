@@ -30,7 +30,6 @@ BEGIN_PM:
 
 	jmp $
 
-
 [bits 16]
 
 load_kernel:
