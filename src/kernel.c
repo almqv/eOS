@@ -1,7 +1,10 @@
-// VGA base address: 0xb8000
-// Charpos = 0xb8000 + 2(row*80 + col)
+#include "lib/vga.c"
 
 void main() {
-	char* video_mem = (char*)0xb8000; // VGA Video Memory location
-	*video_mem = 'X'; 
+	// Do kernel stuff
+	char* vidmem = (char*)0xb8000;
+	*vidmem = 'X';
+	for( int i = 0; i < 16; i++ ) {
+		println("C-Printing test!", 16);
+	}
 }
