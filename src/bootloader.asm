@@ -25,8 +25,12 @@
 %include "pm.asm"
 
 BEGIN_PM:
-	mov ebx, stat_pm_init 
+	; Inform of mode switch
+	mov ebx, stat_boot_success 
 	call vga_print
+
+	; Execute kernel code
+	call KERNEL_OFFSET
 
 	jmp $
 
