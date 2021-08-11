@@ -1,6 +1,8 @@
-#include "lib/vga.c"
+//#include "lib/vga.c"
 
 void main() {
 	// Do kernel stuff
-	println("C-Printing test!", 16);
+	char* vidmem = (char*)(0xb8000);
+	*vidmem = 'X';
+	//println("C-Printing test!", 16);
 }
