@@ -2,5 +2,5 @@
 
 void main() {
 	// Do kernel stuff
-	println("HEJ", 3);
+	println("C-Printing test!", 16);
 }
