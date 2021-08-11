@@ -10,11 +10,11 @@ char* get_cursor_pos(unsigned int row, unsigned int col) { return (char*)(VIDEO_
 
 void print(char* str, unsigned int str_len) {
 	for( unsigned int i = 0; i < str_len; i++ ) {
-		*get_cursor_pos(i, cursor_y) = str[i]; 	// write to video memory 
+		*get_cursor_pos(cursor_y, i) = 'X'; 	// write to video memory 
 	}
 }
 
 void println(char* str, unsigned int str_len) {
 	print(str, str_len);
-	cursor_y++;				// Increment to next y-pos (newline)
+	cursor_y++; // Increment to next y-pos (newline)
 }
