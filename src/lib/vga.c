@@ -4,14 +4,16 @@
 // Charpos = 0xb8000 + 2(row*80 + col)
 
 #define VIDEO_MEM (char*)0xb8000
+#define GET_INDEX(s, c) (int)(c-s)
 static int cursor_y = 0;
 
-char* get_cursor_pos(unsigned int row, unsigned int col) { return (char*)(VIDEO_MEM + 2*(row*80 + col)); }
+char* get_cursor_pos(unsigned int col, unsigned int row) { 
+	return (char*)(VIDEO_MEM + 2*((row*80) + col)); 
+}
 
 void print(char* str, unsigned int str_len) {
-	for( unsigned int i = 0; i < str_len; i++ ) {
-		*get_cursor_pos(cursor_y, i) = 'X'; 	// write to video memory 
-	}
+	for( char* c = str; *c != '\0'; c++ ) 
+		*get_cursor_pos( GET_INDEX(str, c), cursor_y ) = 'Y';
 }
 
 void println(char* str, unsigned int str_len) {
