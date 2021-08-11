@@ -1,9 +1,10 @@
 #!/usr/bin/bash
 
 bootloader=bin/bootloader.bin
+osimage=bin/os-image
 
 start_bootloader() {
-	qemu-system-x86_64 $bootloader
+	qemu-system-x86_64 $osimage
 }
 
 compile() {
