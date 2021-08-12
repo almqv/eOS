@@ -1,7 +1,5 @@
 #!/usr/bin/bash
 
-option=$1
-
 srcDir=src
 binDir=bin
 
