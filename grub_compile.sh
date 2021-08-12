@@ -6,7 +6,7 @@ bindir=bin
 make_grub() {
 	echo "Making GRUB..."
 	mkdir -p $bindir/boot/grub
-	cp $bindir/kernel.bin $bindir/boot/kernel.bin
+	cp $bindir/kernel.bin $bindir/boot/eOS.bin
 	cp $srcdir/grub/grub.cfg $bindir/boot/grub/grub.cfg
 	grub-mkrescue -o $bindir/eOS.iso $bindir
 }
