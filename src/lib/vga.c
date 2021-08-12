@@ -13,7 +13,7 @@ char* get_cursor_pos(unsigned int col, unsigned int row) {
 
 void print(char* str, unsigned int str_len) {
 	for( char* c = str; *c != '\0'; c++ ) 
-		*get_cursor_pos( GET_INDEX(str, c), cursor_y ) = 'Y';
+		*get_cursor_pos( GET_INDEX(str, c), cursor_y ) = *c;
 }
 
 void println(char* str, unsigned int str_len) {
