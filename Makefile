@@ -16,7 +16,7 @@ kernel_entry.o : src/kernel/kernel_entry.asm
 	nasm $< -f elf -o $@
 
 bootloader.bin : src/bootloader/bootloader.asm
-	nasm $< -o $@
+	nasm $< -f bin -o $@
 
 clean:
 	rm -fr bin/*.bin bin/*.dis bin/*.o bin/os-image bin/*.map
