@@ -3,6 +3,15 @@ all: os-image
 run: all
 	qemu-system-x86_64 os-image
 
+grub: eOS.iso
+	qemu-system-x86_64 eOS.iso
+
+eOS.iso : kernel.bin src/grub/grub.cfg
+	mkdir -p boot/grub
+	cp $< boot/eOS.bin
+	cp src/grub/grub.cfg boot/grub/grub.cfg
+	grub-mkrescue -o eOS.iso ./
+
 os-image: bootloader.bin kernel.bin
 	cat $^ > os-image
 
@@ -19,7 +28,8 @@ bootloader.bin : src/bootloader/bootloader.asm
 	nasm $< -f bin -o $@
 
 clean:
-	rm -fr *.bin *.dis *.o os-image *.map
+	rm -fr *.bin *.dis *.o os-image *.map boot/
 
 kernel.dis : kernel.bin
 	ndisasm -b 32 $< > $@
+
