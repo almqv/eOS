@@ -7,10 +7,10 @@ os-image: bootloader.bin kernel.bin
 	cat $^ > os-image
 
 kernel.bin: kernel_entry.o kernel.o
-	ld -o kernel.bin -Ttext 0x1000 $^ --oformat binary
+	gcc -o kernel.bin $^ -Wl,--oformat=binary -ffreestanding -nostdlib -shared -Ttext 0x1000 -m32
 
 kernel.o : src/kernel/kernel.c
-	gcc -ffreestanding -c $< -o $@
+	gcc -fno-pie -m32 -Os -ffreestanding -c $< -o $@
 
 kernel_entry.o : src/kernel/kernel_entry.asm
 	nasm $< -f elf -o $@
