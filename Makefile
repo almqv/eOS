@@ -1,12 +1,12 @@
 all: os-image
 
 run: all
-	qemu-system-x86_64 bin/os-image
+	qemu-system-x86_64 os-image
 
 os-image: bootloader.bin kernel.bin
-	cat $^ > bin/os-image
+	cat $^ > os-image
 
-kernel.bin: bin/kernel_entry.o bin/kernel.o
+kernel.bin: kernel_entry.o kernel.o
 	ld -o kernel.bin -Ttext 0x1000 $^ --oformat binary
 
 kernel.o : src/kernel/kernel.c
@@ -19,7 +19,7 @@ bootloader.bin : src/bootloader/bootloader.asm
 	nasm $< -f bin -o $@
 
 clean:
-	rm -fr bin/*.bin bin/*.dis bin/*.o bin/os-image bin/*.map
+	rm -fr *.bin *.dis *.o os-image *.map
 
-kernel.dis : bin/kernel.bin
+kernel.dis : kernel.bin
 	ndisasm -b 32 $< > $@
