@@ -1,7 +1,7 @@
 ; EQUs
-%include "equ/bios.asm"
+%include "src/bootloader/equ/bios.asm"
 
 ; SRs
-%include "bios/convert.asm"
-%include "bios/print.asm"
-%include "bios/disk.asm"
+%include "src/bootloader/bios/convert.asm"
+%include "src/bootloader/bios/print.asm"
+%include "src/bootloader/bios/disk.asm"

@@ -1,9 +1,9 @@
 all: os-image
 
 run: all
-	qemu bin/os-image
+	qemu-system-x86_64 bin/os-image
 
-os-image: bin/bootloader.bin bin/kernel.bin
+os-image: bootloader.bin kernel.bin
 	cat $^ > bin/os-image
 
 kernel.bin: bin/kernel_entry.o bin/kernel.o
