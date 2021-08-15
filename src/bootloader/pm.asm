@@ -1,9 +1,9 @@
 ; Utils
-%include "equ/vga.asm" 
-%include "pm/vga/print.asm" 
+%include "src/bootloader/equ/vga.asm" 
+%include "src/bootloader/pm/vga/print.asm" 
 
 ; GDT & switching to PM
-%include "pm/gdt.asm" 	; GDT defined here
+%include "src/bootloader/pm/gdt.asm" 	; GDT defined here
 
 ; Switching to PM
 [bits 16]

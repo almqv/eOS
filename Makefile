@@ -1,16 +1,25 @@
 all: os-image
 
 run: all
-	qemu bin/os-image
+	qemu-system-x86_64 os-image
 
-os-image: bin/bootloader.bin bin/kernel.bin
-	cat $^ > bin/os-image
+grub: eOS.iso
+	qemu-system-x86_64 eOS.iso
 
-kernel.bin: bin/kernel_entry.o bin/kernel.o
-	ld -o kernel.bin -Ttext 0x1000 $^ --oformat binary
+eOS.iso : kernel.bin src/grub/grub.cfg
+	mkdir -p boot/grub
+	cp $< boot/eOS.bin
+	cp src/grub/grub.cfg boot/grub/grub.cfg
+	grub-mkrescue -o eOS.iso ./
+
+os-image: bootloader.bin kernel.bin
+	cat $^ > os-image
+
+kernel.bin: kernel_entry.o kernel.o
+	gcc -o kernel.bin $^ -Wl,--oformat=binary -ffreestanding -nostdlib -shared -Ttext 0x1000 -m32
 
 kernel.o : src/kernel/kernel.c
-	gcc -ffreestanding -c $< -o $@
+	gcc -fno-pie -m32 -Os -ffreestanding -c $< -o $@
 
 kernel_entry.o : src/kernel/kernel_entry.asm
 	nasm $< -f elf -o $@
@@ -19,7 +28,8 @@ bootloader.bin : src/bootloader/bootloader.asm
 	nasm $< -f bin -o $@
 
 clean:
-	rm -fr bin/*.bin bin/*.dis bin/*.o bin/os-image bin/*.map
+	rm -fr *.bin *.dis *.o os-image *.map boot/ *.iso
 
-kernel.dis : bin/kernel.bin
+kernel.dis : kernel.bin
 	ndisasm -b 32 $< > $@
+
