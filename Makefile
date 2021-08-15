@@ -28,7 +28,7 @@ bootloader.bin : src/bootloader/bootloader.asm
 	nasm $< -f bin -o $@
 
 clean:
-	rm -fr *.bin *.dis *.o os-image *.map boot/
+	rm -fr *.bin *.dis *.o os-image *.map boot/ *.iso
 
 kernel.dis : kernel.bin
 	ndisasm -b 32 $< > $@
