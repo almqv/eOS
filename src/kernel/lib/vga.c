@@ -17,12 +17,15 @@ static int cursor_row = 0;
 /*
 	VGA & Memory Functions
 */
-char* get_vga_memory_pointer(unsigned int col, unsigned int row) { 
+char* get_vga_charpos_pointer(unsigned int col, unsigned int row) { 
 	return (char*)(VIDEO_MEM + 2*((row*80) + col)); 
 }
 
-void putc(char c, unsigned int col, unsigned int row) {
-	*get_vga_memory_pointer(col, row) = c;
+void putc(char c, unsigned int col, unsigned int row, int colorcode) {
+	char* mem = get_vga_charpos_pointer(col, row);
+	*mem = c;
+	*(mem+1) = colorcode;
+
 }
 
 /*
@@ -38,12 +41,12 @@ void clear_screen() {
 /*
 	General Printing Functions
 */
-void print(char* str, unsigned int str_len) {
+void print(char* str, int colorcode) {
 	for( char* c = str; *c != '\0'; c++ ) 
-		putc(*c, (int)(c - str), cursor_row);
+		putc(*c, (int)(c - str), cursor_row, colorcode);
 }
 
-void println(char* str, unsigned int str_len) {
-	print(str, str_len);
+void println(char* str, int colorcode) {
+	print(str, colorcode);
 	cursor_row++; // Increment to next y-pos (newline)
 }

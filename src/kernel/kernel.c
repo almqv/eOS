@@ -6,5 +6,5 @@ void main() {
 	*vidmem = 'X';
 
 	clear_screen();
-	println("Kernel loaded.", 14);
+	println("eOS Version 0.0 2021", 0x0f);
 }
