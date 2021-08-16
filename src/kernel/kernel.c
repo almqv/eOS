@@ -6,6 +6,6 @@ void main() {
 	*vidmem = 'X';
 
 	clear_screen();
-	set_cursor_pos(0, 5);
+	set_cursor_pos(24, 0);
 	println("\t eOS Version 0.0 2021", 0xf0);
 }

@@ -43,7 +43,8 @@ void clear_screen() {
 	General Printing Functions
 */
 void set_cursor_pos(unsigned int x, unsigned int y) {
-	cursor_col, cursor_row = x, y;
+	cursor_col = x;
+	cursor_row = y;
 }
 
 void print(char* str, int colorcode) {
