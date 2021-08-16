@@ -48,7 +48,7 @@ void set_cursor_pos(unsigned int x, unsigned int y) {
 
 void print(char* str, int colorcode) {
 	for( char* c = str; *c != '\0'; c++ ) 
-		putc(*c, (unsigned int)(c - str + cursor_col), cursor_row, colorcode);
+		putc(*c, (unsigned int)(c - str) + cursor_col, cursor_row, colorcode);
 }
 
 void println(char* str, int colorcode) {
