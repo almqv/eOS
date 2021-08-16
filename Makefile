@@ -32,4 +32,3 @@ clean:
 
 kernel.dis : kernel.bin
 	ndisasm -b 32 $< > $@
-
