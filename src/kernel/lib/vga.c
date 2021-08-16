@@ -8,7 +8,8 @@
 #define HEIGHT 480
 
 // Memory
-#define VIDEO_MEM (char*)0xb8000
+#define VIDEO_MEM 	(char*)0xb8000
+#define VIDEO_MEM_MAX	(char*)0xb8fa0
 
 // Global
 static int cursor_row = 0;
@@ -27,8 +28,10 @@ void putc(char c, unsigned int col, unsigned int row) {
 /*
 	Graphics Functions
 */
-void clear_screen(unsigned int width = 640, unsigned int height = 480) {
-	
+void clear_screen() {
+	for( char* c = VIDEO_MEM; c <= VIDEO_MEM_MAX; c += 2 ) {
+		*c = 0x20;
+	}
 }
 
 
