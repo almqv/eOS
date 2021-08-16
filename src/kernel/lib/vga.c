@@ -3,10 +3,6 @@
 // VGA base address: 0xb8000
 // Charpos = 0xb8000 + 2(row*80 + col)
 
-// Screen Dimensions
-#define WIDTH 640
-#define HEIGHT 480
-
 // Memory
 #define VIDEO_MEM 	(char*)0xb8000
 #define VIDEO_MEM_MAX	(char*)0xb8fa0
