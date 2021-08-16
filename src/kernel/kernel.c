@@ -4,7 +4,8 @@ void main() {
 	// Do kernel stuff
 	char* vidmem = (char*)0xb8000;
 	*vidmem = 'X';
-	for( int i = 0; i < 16; i++ ) {
-		println("C-Printing test!", 16);
-	}
+
+	clear_screen();
+	set_cursor_pos(24, 0);
+	println("\t eOS Version 0.0 2021", 0xf0);
 }

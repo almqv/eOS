@@ -3,6 +3,8 @@ all: os-image
 run: all
 	qemu-system-x86_64 os-image
 
+drun: clean run
+
 grub: eOS.iso
 	qemu-system-x86_64 eOS.iso
 
@@ -32,4 +34,3 @@ clean:
 
 kernel.dis : kernel.bin
 	ndisasm -b 32 $< > $@
-
