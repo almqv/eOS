@@ -1,4 +1,5 @@
 #include "lib/vga.c"
+#include <string.h>
 
 void main() {
 	clear_screen();
