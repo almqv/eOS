@@ -1,4 +1,6 @@
 C_SOURCES = $(wildcard kernel/*.c drivers/*.c)
+HEADERS = $(wildcard kernel/*.h drivers/*.h)
+OBJ = $(C_SOURCES:.c=.o)
 
 all: os-image
 
@@ -19,20 +21,18 @@ eOS.iso : kernel.bin grub/grub.cfg
 os-image: bootloader.bin kernel.bin
 	cat $^ > os-image
 
-kernel.bin: kernel_entry.o kernel.o
-	gcc -o kernel.bin $^ -Wl,--oformat=binary -ffreestanding -nostdlib -shared -Ttext 0x1000 -m32
+kernel.bin: kernel_entry.o $(OBJ) 
+	gcc -o $@ $^ -Wl,--oformat=binary -ffreestanding -nostdlib -shared -Ttext 0x1000 -m32
 
-kernel.o : kernel/kernel.c
+%.o : %.c
 	gcc -fno-pie -m32 -Os -ffreestanding -c $< -o $@
 
-kernel_entry.o : kernel/kernel_entry.asm
+%.o : %.asm
 	nasm $< -f elf -o $@
 
-bootloader.bin : bootloader/bootloader.asm
+%.bin : %.asm
 	nasm $< -f bin -o $@
 
 clean:
 	rm -fr *.bin *.dis *.o os-image *.map boot/ *.iso
-
-kernel.dis : kernel.bin
-	ndisasm -b 32 $< > $@
+	rm -fr kernel/*.o boot/*.bin drivers/*.o
