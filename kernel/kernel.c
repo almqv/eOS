@@ -1,4 +1,4 @@
-#include "lib/vga.c"
+#include "../drivers/vga.c"
 
 void main() {
 	vga_init(); 	// Initialize the screen first
