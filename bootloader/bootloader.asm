@@ -20,9 +20,9 @@
 
 	jmp $  ; inf loop
 
-%include "src/bootloader/equ/ascii.asm"
-%include "src/bootloader/bios.asm"
-%include "src/bootloader/pm.asm"
+%include "bootloader/equ/ascii.asm"
+%include "bootloader/bios.asm"
+%include "bootloader/pm.asm"
 
 BEGIN_PM:
 	; Inform of mode switch
