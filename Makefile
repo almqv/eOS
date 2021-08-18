@@ -1,3 +1,5 @@
+C_SOURCES = $(wildcard kernel/*.c drivers/*.c)
+
 all: os-image
 
 run: all
@@ -8,10 +10,10 @@ drun: clean run
 grub: eOS.iso
 	qemu-system-x86_64 eOS.iso
 
-eOS.iso : kernel.bin src/grub/grub.cfg
+eOS.iso : kernel.bin grub/grub.cfg
 	mkdir -p boot/grub
 	cp $< boot/eOS.bin
-	cp src/grub/grub.cfg boot/grub/grub.cfg
+	cp grub/grub.cfg boot/grub/grub.cfg
 	grub-mkrescue -o eOS.iso ./
 
 os-image: bootloader.bin kernel.bin
@@ -20,13 +22,13 @@ os-image: bootloader.bin kernel.bin
 kernel.bin: kernel_entry.o kernel.o
 	gcc -o kernel.bin $^ -Wl,--oformat=binary -ffreestanding -nostdlib -shared -Ttext 0x1000 -m32
 
-kernel.o : src/kernel/kernel.c
+kernel.o : kernel/kernel.c
 	gcc -fno-pie -m32 -Os -ffreestanding -c $< -o $@
 
-kernel_entry.o : src/kernel/kernel_entry.asm
+kernel_entry.o : kernel/kernel_entry.asm
 	nasm $< -f elf -o $@
 
-bootloader.bin : src/bootloader/bootloader.asm
+bootloader.bin : bootloader/bootloader.asm
 	nasm $< -f bin -o $@
 
 clean:
