@@ -12,16 +12,16 @@ drun: clean run
 grub: eOS.iso
 	qemu-system-x86_64 eOS.iso
 
-eOS.iso : kernel.bin grub/grub.cfg
+eOS.iso : kernel/kernel.bin grub/grub.cfg
 	mkdir -p boot/grub
 	cp $< boot/eOS.bin
 	cp grub/grub.cfg boot/grub/grub.cfg
 	grub-mkrescue -o eOS.iso ./
 
-os-image: bootloader.bin kernel.bin
+os-image: bootloader/bootloader.bin kernel.bin
 	cat $^ > os-image
 
-kernel.bin: kernel_entry.o $(OBJ) 
+kernel.bin: kernel/kernel_entry.o $(OBJ) 
 	gcc -o $@ $^ -Wl,--oformat=binary -ffreestanding -nostdlib -shared -Ttext 0x1000 -m32
 
 %.o : %.c
