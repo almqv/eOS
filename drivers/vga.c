@@ -36,11 +36,6 @@ void clear_screen() {
 }
 
 void disable_vga_cursor() {
-	/*
-	outb(0x3d4, 0x0a);
-	outb(0x3d5, 0x20);
-	*/
-
 	port_outb(0x0a, 0x3d4);
 	port_outb(0x20, 0x3d5);
 }
