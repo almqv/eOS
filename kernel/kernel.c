@@ -1,3 +1,5 @@
+#include "../drivers/vga.h"
+
 void main() {
 	vga_init(); 	// Initialize the screen first
 			// i.e. clear the screen et cetera.
