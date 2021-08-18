@@ -1,5 +1,5 @@
 // VGA Graphics Library
-#include <sys/io.h>
+#include "../kernel/io.h"
 
 // VGA base address: 0xb8000
 // Charpos = 0xb8000 + 2(row*80 + col)
@@ -35,9 +35,14 @@ void clear_screen() {
 		*c = 0x20;
 }
 
-void disable_cursor() {
+void disable_vga_cursor() {
+	/*
 	outb(0x3d4, 0x0a);
 	outb(0x3d5, 0x20);
+	*/
+
+	port_outb(0x0a, 0x3d4);
+	port_outb(0x20, 0x3d5);
 }
 
 
@@ -62,6 +67,6 @@ void println(char* str, int colorcode) {
 
 // VGA Initialization Function
 void vga_init() {
-	disable_cursor();
+	disable_vga_cursor();
 	clear_screen();
 }
