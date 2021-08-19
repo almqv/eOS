@@ -1,5 +1,5 @@
 // VGA Graphics Library
-#include <sys/io.h>
+#include "../kernel/io.h"
 
 // VGA base address: 0xb8000
 // Charpos = 0xb8000 + 2(row*80 + col)
@@ -19,10 +19,10 @@ char* get_vga_charpos_pointer(unsigned int col, unsigned int row) {
 	return (char*)(VIDEO_MEM + 2*((row*80) + col)); 
 }
 
-void writechar(char c, unsigned int col, unsigned int row, int colorcode) {
+void writechar(char c, unsigned int col, unsigned int row, int attribute_byte) {
 	char* mem = get_vga_charpos_pointer(col, row);
 	*mem = c; 		// Write the character
-	*(mem+1) = colorcode;	// Write the colorcode
+	*(mem+1) = attribute_byte;	// Write the attribute_byte
 
 }
 
@@ -35,9 +35,9 @@ void clear_screen() {
 		*c = 0x20;
 }
 
-void disable_cursor() {
-	outb(0x3d4, 0x0a);
-	outb(0x3d5, 0x20);
+void disable_vga_cursor() {
+	port_outb(0x0a, 0x3d4);
+	port_outb(0x20, 0x3d5);
 }
 
 
@@ -49,19 +49,19 @@ void set_cursor_pos(unsigned int x, unsigned int y) {
 	cursor_row = y;
 }
 
-void print(char* str, int colorcode) {
+void print(char* str, int attribute_byte) {
 	for( char* c = str; *c != '\0'; c++ ) 
-		writechar(*c, (unsigned int)(c - str) + cursor_col, cursor_row, colorcode);
+		writechar(*c, (unsigned int)(c - str) + cursor_col, cursor_row, attribute_byte);
 }
 
-void println(char* str, int colorcode) {
-	print(str, colorcode);
+void println(char* str, int attribute_byte) {
+	print(str, attribute_byte);
 	cursor_row++; // Increment to next y-pos (newline)
 }
 
 
 // VGA Initialization Function
 void vga_init() {
-	disable_cursor();
+	disable_vga_cursor();
 	clear_screen();
 }
