@@ -14,8 +14,8 @@ static unsigned int cursor_col = 0;
 
 void vga_init() {
 	// Disable cursor
-	port_outb(0x0a, 0x3d4);
-	port_outb(0x20, 0x3d5);
+	port_outb(0x3d4, 0x0a);
+	port_outb(0x3d5, 0x20);
 
 	// Clear screen
 	clear_screen();
@@ -42,6 +42,7 @@ void set_cursor_pos(unsigned int col, unsigned int row) {
 	cursor_col = col;
 	cursor_row = row;
 }
+
 
 /*
 	Graphics Functions
