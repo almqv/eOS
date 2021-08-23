@@ -1,4 +1,5 @@
 // VGA Graphics Library
+#include "vga.h"
 #include "../kernel/io.h"
 
 // Memory
@@ -11,10 +12,19 @@
 static unsigned int cursor_row = 0;
 static unsigned int cursor_col = 0;
 
+void vga_init() {
+	// Disable cursor
+	port_outb(0x0a, 0x3d4);
+	port_outb(0x20, 0x3d5);
+
+	// Clear screen
+	clear_screen();
+}
+
 /*
 	VGA & Memory Functions
 */
-char* get_vga_charpos_pointer(unsigned int col, unsigned int row) { 
+char* get_memory_charpos(unsigned int col, unsigned int row) { 
 	return (char*)(VGA_ADDRESS + 2*((row*80) + col)); 
 }
 
@@ -22,7 +32,7 @@ void writechar(char c, unsigned int col, unsigned int row, int attribute_byte) {
 	if( !attribute_byte ) 
 		attribute_byte = 0x0f;
 
-	char* mem = get_vga_charpos_pointer(col, row);
+	char* mem = get_memory_charpos(col, row);
 	*mem = c; 			// Write the character
 	*(mem+1) = attribute_byte;	// Write the attribute_byte
 
@@ -42,12 +52,6 @@ void clear_screen() {
 			writechar(0x20, c, r, 0xf0);
 }
 
-void disable_vga_cursor() {
-	port_outb(0x0a, 0x3d4);
-	port_outb(0x20, 0x3d5);
-}
-
-
 /*
 	General Printing Functions
 */
@@ -62,8 +66,3 @@ void println(char* str, int attribute_byte) {
 }
 
 
-// VGA Initialization Function
-void vga_init() {
-	disable_vga_cursor();
-	clear_screen();
-}
