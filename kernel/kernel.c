@@ -1,3 +1,5 @@
+#define NULL ((void*)0x0)
+
 #include "../drivers/vga.h"
 
 void main() {

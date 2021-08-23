@@ -5,8 +5,11 @@
 // Charpos = 0xb8000 + 2(row*80 + col)
 
 // Memory
-#define VIDEO_MEM 	(char*)0xb8000
-#define VIDEO_MEM_MAX	(char*)0xb8fa0
+#define VGA_ADDRESS 	(char*)0xb8000
+#define VGA_ADDRESS_MAX	(char*)0xb8fa0
+
+#define MAX_ROWS 25
+#define MAX_COLS 80
 
 // Global
 static unsigned int cursor_row = 0;
@@ -16,12 +19,15 @@ static unsigned int cursor_col = 0;
 	VGA & Memory Functions
 */
 char* get_vga_charpos_pointer(unsigned int col, unsigned int row) { 
-	return (char*)(VIDEO_MEM + 2*((row*80) + col)); 
+	return (char*)(VGA_ADDRESS + 2*((row*80) + col)); 
 }
 
 void writechar(char c, unsigned int col, unsigned int row, int attribute_byte) {
+	if( !attribute_byte ) 
+		attribute_byte = 0x0f;
+
 	char* mem = get_vga_charpos_pointer(col, row);
-	*mem = c; 		// Write the character
+	*mem = c; 			// Write the character
 	*(mem+1) = attribute_byte;	// Write the attribute_byte
 
 }
@@ -30,9 +36,9 @@ void writechar(char c, unsigned int col, unsigned int row, int attribute_byte) {
 	Graphics Functions
 */
 void clear_screen() {
-	// Make all the characters spaces
-	for( char* c = VIDEO_MEM; c <= VIDEO_MEM_MAX; c += 2 )
-		*c = 0x20;
+	for( int c = 0; c < MAX_COLS; c++ )
+		for( int r = 0; r < MAX_ROWS; r++ )
+			writechar(0x20, c, r, 0x0);
 }
 
 void disable_vga_cursor() {
