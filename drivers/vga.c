@@ -1,9 +1,6 @@
 // VGA Graphics Library
 #include "../kernel/io.h"
 
-// VGA base address: 0xb8000
-// Charpos = 0xb8000 + 2(row*80 + col)
-
 // Memory
 #define VGA_ADDRESS 	(char*)0xb8000
 #define VGA_ADDRESS_MAX	(char*)0xb8fa0
@@ -11,7 +8,6 @@
 #define MAX_ROWS 25
 #define MAX_COLS 80
 
-// Global
 static unsigned int cursor_row = 0;
 static unsigned int cursor_col = 0;
 
@@ -32,6 +28,11 @@ void writechar(char c, unsigned int col, unsigned int row, int attribute_byte) {
 
 }
 
+void set_cursor_pos(unsigned int x, unsigned int y) {
+	cursor_col = x;
+	cursor_row = y;
+}
+
 /*
 	Graphics Functions
 */
@@ -50,11 +51,6 @@ void disable_vga_cursor() {
 /*
 	General Printing Functions
 */
-void set_cursor_pos(unsigned int x, unsigned int y) {
-	cursor_col = x;
-	cursor_row = y;
-}
-
 void print(char* str, int attribute_byte) {
 	for( char* c = str; *c != '\0'; c++ ) 
 		writechar(*c, (unsigned int)(c - str) + cursor_col, cursor_row, attribute_byte);
