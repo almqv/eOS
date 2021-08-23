@@ -6,4 +6,10 @@ void main() {
 
 	set_cursor_pos(28, 2);
 	print("eOS Version 0.1 2021", 0xf0);
+
+	/*
+	set_cursor_pos(0, 0);
+	for( int i = 0; i < 255; i++ )
+		println("X", i);
+	*/
 }
