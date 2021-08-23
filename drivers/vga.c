@@ -28,9 +28,9 @@ void writechar(char c, unsigned int col, unsigned int row, int attribute_byte) {
 
 }
 
-void set_cursor_pos(unsigned int x, unsigned int y) {
-	cursor_col = x;
-	cursor_row = y;
+void set_cursor_pos(unsigned int col, unsigned int row) {
+	cursor_col = col;
+	cursor_row = row;
 }
 
 /*
