@@ -1,4 +1,5 @@
 # TO DO 
+ - String formating
  - Scrolling
  - Multiboot support (for grub etc)
  - Rendering (VGA) 
