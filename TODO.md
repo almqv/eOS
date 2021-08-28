@@ -1,5 +1,10 @@
 # TO DO 
- - String formating
+ - Malloc
+ - String Library
+ 	
+	- Concat
+	- Format
+
  - Scrolling
  - Multiboot support (for grub etc)
  - Rendering (VGA) 

@@ -12,7 +12,8 @@ char* strcat(char* buf, char* str) {
 	unsigned int bufferlen = strlen(buf);
 
 	// remove the 0x0 char from the buffer
-	*(buf + bufferlen) = 0x3f;		// placeholder
+	*(buf + bufferlen) = 0x3f;		// replace end-of-string 
+						// with a placeholder
 
 	// concat the str to buf
 	int cc = 0;

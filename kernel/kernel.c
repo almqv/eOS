@@ -6,8 +6,8 @@ void main() {
 	vga_init(); 	// Initialize the screen first
 			// i.e. clear the screen et cetera.
 
-	char* strbuf = "HEJ";
-	char* str2 = "xD";
+	char* strbuf = "Hello";
+	char* str2 = "World!";
 	strbuf = strcat(strbuf, str2); 
 	println(strbuf, 0xf0);
 
