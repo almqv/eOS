@@ -1,6 +1,11 @@
 # TO DO 
- - Refactor the VGA driver
- - Finish the book!
+ - Malloc
+ - String Library
+ 	
+	- Concat
+	- Format
+
+ - Scrolling
  - Multiboot support (for grub etc)
  - Rendering (VGA) 
  - User input (Keyboard)
