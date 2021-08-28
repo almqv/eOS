@@ -1,10 +1,11 @@
 #include "str.h"
 
 unsigned int strlen(char* str) {
-	char* c;
-	for( c = str; *c != '\0'; c++ ) 	// search for end-of-string
-
-	return (unsigned int)(c - str);		// get size by delta-address
+	unsigned int len = 0;
+	for( char* c = str; *c != '\0'; c++ ) 	// search for end-of-string
+		len++;
+	
+	return len;
 }
 
 char* strcat(char* buf, char* str) {
@@ -19,6 +20,8 @@ char* strcat(char* buf, char* str) {
 		*(buf + bufferlen + cc) = *c;
 		cc++;
 	}
+
+	*(buf + bufferlen + cc) = '\0'; 	// add end-of-string
 
 	return buf;
 }
