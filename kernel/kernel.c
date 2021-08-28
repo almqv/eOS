@@ -6,7 +6,8 @@ void main() {
 			// i.e. clear the screen et cetera.
 
 	int test = 1234;
-	char* teststr = int_to_str(test);
+	char* teststr;
+	teststr = int_to_str(test, teststr);
 	println(teststr, 0xf0);
 
 	set_cursor_pos(28, 2);
