@@ -50,7 +50,7 @@ void set_cursor_pos(unsigned int col, unsigned int row) {
 void clear_screen() {
 	for( int c = 0; c < MAX_COLS; c++ )
 		for( int r = 0; r < MAX_ROWS; r++ )
-			writechar(0x20, c, r, 0xf0);
+			writechar(0x20, c, r, 0x0f);
 }
 
 /*
