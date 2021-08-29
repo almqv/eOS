@@ -3,13 +3,6 @@
 #include "../kernel/io.h"
 #include "../lib/str.h"
 
-// Memory
-#define VGA_ADDRESS 	(char*)0xb8000
-#define VGA_ADDRESS_MAX	(char*)0xb8fa0
-
-#define MAX_ROWS 25
-#define MAX_COLS 80
-
 static unsigned int cursor_row = 0;
 static unsigned int cursor_col = 0;
 
