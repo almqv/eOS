@@ -1,13 +1,7 @@
 // VGA Graphics Library
 #include "vga.h"
 #include "../kernel/io.h"
-
-// Memory
-#define VGA_ADDRESS 	(char*)0xb8000
-#define VGA_ADDRESS_MAX	(char*)0xb8fa0
-
-#define MAX_ROWS 25
-#define MAX_COLS 80
+#include "../lib/str.h"
 
 static unsigned int cursor_row = 0;
 static unsigned int cursor_col = 0;
@@ -50,7 +44,7 @@ void set_cursor_pos(unsigned int col, unsigned int row) {
 void clear_screen() {
 	for( int c = 0; c < MAX_COLS; c++ )
 		for( int r = 0; r < MAX_ROWS; r++ )
-			writechar(0x20, c, r, 0x0f);
+			writechar(0x20, c, r, 0xf0);
 }
 
 /*
@@ -64,6 +58,20 @@ void print(char* str, int attribute_byte) {
 void println(char* str, int attribute_byte) {
 	print(str, attribute_byte);
 	cursor_row++; // Increment to next y-pos (newline)
+}
+
+void printalign(char* str, int attribute_byte, enum align alignment) {
+	unsigned int strlenbuf = strlen(str);
+
+	if( !alignment || alignment == LEFT ) {
+		print(str, attribute_byte);
+	} else if ( alignment == RIGHT ) {
+		set_cursor_pos(MAX_COLS - strlenbuf, cursor_row);
+	} else if ( alignment == MIDDLE ) {
+		set_cursor_pos((MAX_COLS/2) - (strlenbuf/2), cursor_row);
+	}
+
+	print(str, attribute_byte);
 }
 
 
