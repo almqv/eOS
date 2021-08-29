@@ -15,8 +15,8 @@ void main() {
 	printalign(subtitle, 0xf8, MIDDLE);
 
 
-	char* strbuf = "Hello";
-	char* str2 = "World!";
+	char* strbuf = "String concat: ";
+	char* str2 = "WORKS! :D";
 	strbuf = strcat(strbuf, str2); 
 	set_cursor_pos(0, 0);
 	println(strbuf, 0xf0);
