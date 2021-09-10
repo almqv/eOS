@@ -1,4 +1,5 @@
 <h1 align="center">e-Operting System</h1>
+<p align="center"><img src="logo.png" ></p>
 <p align="center">A simple x86 operating system. Maybe 64bit in the future.</p>
 <p align="center"><img src="preview.png"></p>
 
