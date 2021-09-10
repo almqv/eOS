@@ -73,5 +73,3 @@ void printalign(char* str, int attribute_byte, enum align alignment) {
 
 	print(str, attribute_byte);
 }
-
-
