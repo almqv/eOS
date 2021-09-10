@@ -17,7 +17,7 @@ You can launch eOS with a VM like <a href="https://www.qemu.org/documentation/" 
 		clean : Remove all object/binary/image files
 ## 
 ### Planned Features
-Read go to [eOS v1.0 Kanban Board](https://github.com/E-Almqvist/eOS/projects/1) to see the current progress & planned features of the project.
+Go to [eOS v1.0 Kanban Board](https://github.com/E-Almqvist/eOS/projects/1) to see the current progress & planned features of the project.
 ## 
 <br>
 <br>
