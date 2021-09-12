@@ -7,6 +7,7 @@ all: os-image
 run: all
 	qemu-system-x86_64 os-image
 
+
 drun: clean run
 
 grub: eOS.iso
@@ -23,6 +24,7 @@ os-image: bootloader/bootloader.bin kernel.bin
 
 kernel.bin: kernel/kernel_entry.o $(OBJ) 
 	gcc -o $@ $^ -Wl,--oformat=binary -ffreestanding -nostdlib -shared -Ttext 0x1000 -m32
+
 
 %.o : %.c ${HEADERS}
 	gcc -fno-pie -m32 -Os -ffreestanding -c $< -o $@
