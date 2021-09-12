@@ -7,7 +7,7 @@ Use the `Makefile` in order to build the binaries/objects et cetera- with <a hre
 <br>
 **To build the OS image run**: `$ make os-image`
 <br>
-**To build the OS image (WITH GRUB) run**: `$ make grub`
+**To build the OS image (WITH GRUB) run**: `$ make eOS.iso`
 #### Emulation
 You can launch eOS with a VM like <a href="https://www.qemu.org/documentation/" target="_blank">qemu</a>. Launch *qemu* via *make* by running: `$ make run`.
 

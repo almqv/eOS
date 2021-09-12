@@ -12,7 +12,7 @@ drun: clean run
 grub: eOS.iso
 	qemu-system-x86_64 eOS.iso
 
-eOS.iso : kernel/kernel.bin grub/grub.cfg
+eOS.iso : kernel.bin grub/grub.cfg
 	mkdir -p boot/grub
 	cp $< boot/eOS.bin
 	cp grub/grub.cfg boot/grub/grub.cfg
@@ -35,4 +35,4 @@ kernel.bin: kernel/kernel_entry.o $(OBJ)
 
 clean:
 	rm -fr *.bin *.dis *.o os-image *.map boot/ *.iso
-	rm -fr kernel/*.o boot/*.bin drivers/*.o
+	rm -fr kernel/*.o bootloader/*.bin drivers/*.o
