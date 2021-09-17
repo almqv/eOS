@@ -1,4 +1,0 @@
-; VGA EQUs
-
-VIDEO_MEM equ 0xb8000
-
