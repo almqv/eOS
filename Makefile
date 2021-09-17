@@ -2,25 +2,25 @@ C_SOURCES = $(wildcard kernel/*.c drivers/*.c lib/*.c)
 HEADERS = $(wildcard kernel/*.h drivers/*.h lib/*.h)
 OBJ = $(C_SOURCES:.c=.o)
 
-all: os-image
+all: eos.iso
 
 run: all
-	qemu-system-x86_64 os-image
+	qemu-system-x86_64 eos.iso
 
 
 drun: clean run
 
-grub: eOS.iso
-	qemu-system-x86_64 eOS.iso
+grub: eos_grub.iso
+	qemu-system-x86_64 eos_grub.iso
 
-eOS.iso : kernel.bin grub/grub.cfg
+eos_grub.iso : kernel.bin grub/grub.cfg
 	mkdir -p boot/grub
 	cp $< boot/eOS.bin
 	cp grub/grub.cfg boot/grub/grub.cfg
-	grub-mkrescue -o eOS.iso ./
+	grub-mkrescue -o eos_grub.iso ./
 
-os-image: bootloader/bootloader.bin kernel.bin
-	cat $^ > os-image
+eos.iso: bootloader/bootloader.bin kernel.bin
+	cat $^ > eos.iso
 
 kernel.bin: kernel/kernel_entry.o $(OBJ) 
 	gcc -o $@ $^ -Wl,--oformat=binary -ffreestanding -nostdlib -shared -Ttext 0x1000 -m32
@@ -36,5 +36,5 @@ kernel.bin: kernel/kernel_entry.o $(OBJ)
 	nasm $< -f bin -o $@
 
 clean:
-	rm -fr *.bin *.dis *.o os-image *.map boot/ *.iso
+	rm -fr *.bin *.dis *.o eos.iso *.map boot/ *.iso
 	rm -fr kernel/*.o bootloader/*.bin drivers/*.o
