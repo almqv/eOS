@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - name: Install Dependencies
-      run: apt install nasm gcc 
+      run: sudo apt-get install nasm gcc 
     
     - uses: actions/checkout@v2
     - name: Create ISO
