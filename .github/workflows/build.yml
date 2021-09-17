@@ -12,6 +12,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Install Dependencies
+      run: apt install nasm gcc 
+    
     - uses: actions/checkout@v2
     - name: Create ISO
       run: make
