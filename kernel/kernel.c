@@ -7,7 +7,7 @@ void main() {
 	vga_init(); 	// Initialize the screen first
 			// i.e. clear the screen et cetera.
 
-	char* title = "eOS Version 0.1 2021";
+	char* title = "eOS Version 0.2 2021";
 	set_cursor_pos(0, 2);
 	printalign(title, 0xf0, MIDDLE);
 
