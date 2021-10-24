@@ -24,7 +24,7 @@ char* get_memory_charpos(unsigned int col, unsigned int row) {
 
 void writechar(char c, unsigned int col, unsigned int row, int attribute_byte) {
 	if( !attribute_byte ) 
-		attribute_byte = 0x0f;
+		attribute_byte = DEFAULT_COLOR;
 
 	char* mem = get_memory_charpos(col, row);
 	*mem = c; 			// Write the character
@@ -44,7 +44,7 @@ void set_cursor_pos(unsigned int col, unsigned int row) {
 void clear_screen() {
 	for( int c = 0; c < MAX_COLS; c++ )
 		for( int r = 0; r < MAX_ROWS; r++ )
-			writechar(0x20, c, r, 0xf0);
+			writechar(0x20, c, r, 0x0);
 }
 
 /*
