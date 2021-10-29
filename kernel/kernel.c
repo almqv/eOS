@@ -1,9 +1,19 @@
+#include "kernel.h"
 #include "memory.h"
 #include "../drivers/vga.h"
 #include "../lib/str.h"
 #include "../lib/strf.h"
 
-void main() {
+void display_status(char* status_text) {
+	clear_row(0);
+	set_cursor_pos(0, 0);
+
+	print(status_text, 0x7f);
+}
+
+void init() {
+	display_status("Kernel loaded");
+
 	vga_init(); 	// Initialize the screen first
 			// i.e. clear the screen et cetera.
 
@@ -21,6 +31,5 @@ void main() {
 	char* strbuf = "Concat test: ";
 	char* str2 = "Works!";
 	strbuf = strcat(strbuf, str2); 
-	set_cursor_pos(0, 4);
 	println(strbuf, DEFAULT_COLOR);
 }
