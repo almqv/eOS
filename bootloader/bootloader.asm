@@ -87,7 +87,7 @@ load_kernel:
 
 stat_pm_init:		db "Entering 32bit Protected Mode...", ASCII_END
 stat_kernel_load:	db "Loading kernel into memory...", ASCII_END
-stat_boot_success:	db "Booting complete!", ASCII_END
+stat_boot_success:	db "Booting finished. Loading kernel...", ASCII_END
 
 BOOT_DRIVE: db 0
 

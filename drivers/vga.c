@@ -12,7 +12,10 @@ void vga_init() {
 	port_outb(0x3d5, 0x20);
 
 	// Clear screen
-	clear_screen();
+	// clear_row(0);
+	// clear_screen();
+
+	set_cursor_pos(0, 11);
 }
 
 /*
@@ -23,8 +26,9 @@ char* get_memory_charpos(unsigned int col, unsigned int row) {
 }
 
 void writechar(char c, unsigned int col, unsigned int row, int attribute_byte) {
+
 	if( !attribute_byte ) 
-		attribute_byte = 0x0f;
+		attribute_byte = DEFAULT_COLOR;
 
 	char* mem = get_memory_charpos(col, row);
 	*mem = c; 			// Write the character
@@ -41,10 +45,15 @@ void set_cursor_pos(unsigned int col, unsigned int row) {
 /*
 	Graphics Functions
 */
+void clear_row(unsigned int row) {
+	for( int c = 0; c < MAX_COLS; c++ ) 
+		writechar(0x20, c, row, 0x0);
+}
+
+
 void clear_screen() {
-	for( int c = 0; c < MAX_COLS; c++ )
-		for( int r = 0; r < MAX_ROWS; r++ )
-			writechar(0x20, c, r, 0xf0);
+	for( int r = 0; r < MAX_ROWS; r++ )
+		clear_row(r);
 }
 
 /*

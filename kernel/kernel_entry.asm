@@ -1,5 +1,5 @@
 [bits 32]
-[extern main]
+[extern init]
 
-call main
+call init 
 jmp $

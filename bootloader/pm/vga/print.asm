@@ -3,7 +3,7 @@
 ; VGA base address: 0xb8000
 ; Charpos = 0xb8000 + 2(row*80 + col)
 
-vga_color_buf: db 0x0f		; Buffer to be changed so that we can choose colors!
+vga_color_buf: db 0x7f		; Buffer to be changed so that we can choose colors!
 
 vga_print:
 	pusha
