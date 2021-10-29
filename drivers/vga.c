@@ -12,7 +12,9 @@ void vga_init() {
 	port_outb(0x3d5, 0x20);
 
 	// Clear screen
-	clear_screen();
+	// clear_screen();
+
+	set_cursor_pos(0, 11);
 }
 
 /*
@@ -23,6 +25,7 @@ char* get_memory_charpos(unsigned int col, unsigned int row) {
 }
 
 void writechar(char c, unsigned int col, unsigned int row, int attribute_byte) {
+
 	if( !attribute_byte ) 
 		attribute_byte = DEFAULT_COLOR;
 

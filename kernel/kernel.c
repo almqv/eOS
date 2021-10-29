@@ -13,8 +13,13 @@ void main() {
 	char* subtitle = "A x86 operating system, licenced under GPL-2.0";
 	println(subtitle, DEFAULT_COLOR);
 
-	char* strbuf = "String concat: ";
-	char* str2 = "WORKS! :D";
+	/*
+	print("Kernel offset: ", DEFAULT_COLOR);
+	println("0x1000", DEFAULT_COLOR);
+	*/
+
+	char* strbuf = "Concat test: ";
+	char* str2 = "Works!";
 	strbuf = strcat(strbuf, str2); 
 	set_cursor_pos(0, 4);
 	println(strbuf, DEFAULT_COLOR);

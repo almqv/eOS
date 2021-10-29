@@ -1,7 +1,8 @@
 #define VGA_ADDRESS 	(char*)0xb8000
 #define VGA_ADDRESS_MAX	(char*)0xb8fa0
 
-#define DEFAULT_COLOR 0x07 
+// #define DEFAULT_COLOR 0x07 
+#define DEFAULT_COLOR 0x0f
 #define MAX_ROWS 25
 #define MAX_COLS 80
 
