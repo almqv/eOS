@@ -12,6 +12,7 @@ void display_status(char* status_text) {
 }
 
 void init() {
+	clear_screen();
 	display_status("Kernel loaded");
 
 	vga_init(); 	// Initialize the screen first
