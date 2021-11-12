@@ -4,15 +4,15 @@
 #include "../lib/str.h"
 #include "../lib/strf.h"
 
-void display_status(char* status_text) {
+void display_status(char* status_text, unsigned int bg_color) {
 	clear_row(0);
 	set_cursor_pos(0, 0);
 
-	print(status_text, 0x7f);
+	print(status_text, bg_color | STATUS_TEXT_COLOR);
 }
 
 void init() {
-	display_status("Kernel loaded");
+	display_status("Kernel loaded", 0x70);
 
 	vga_init(); 	// Initialize the screen first
 			// i.e. clear the screen et cetera.
