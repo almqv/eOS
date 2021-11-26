@@ -5,5 +5,5 @@ void enable_paging();
 
 struct page_entry;
 
-char** heap_alloc(unsigned int size); // Process heap allocation
+//char** heap_alloc(unsigned int size); // Process heap allocation
 int get_phys_addr(int virt_addr);

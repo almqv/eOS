@@ -1,7 +1,7 @@
 [bits 32]  ; 32-bit mode
 
 PAGING_ENABLE equ 0x80000001
-PAGE_DIRECTORY_ADDR equ 0x80000000 ; TODO: change me to something good
+PAGE_DIRECTORY_ADDR equ 0xf000000f ; TODO: change me to something good
 
 enable_paging_registers:
 	mov eax, PAGE_DIRECTORY_ADDR ; Move the address of the 
