@@ -4,7 +4,7 @@
 void enable_paging() {
 	println("Enabling paging...", DEFAULT_COLOR);
 
-	extern int enable_paging_registers(); // Call the assembly SR
+	extern void enable_paging_registers(); // Call the assembly SR
 	enable_paging_registers();
 
 	return;

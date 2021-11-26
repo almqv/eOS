@@ -13,3 +13,6 @@ enable_paging_registers:
 	or eax, PAGING_ENABLE ; perform the OR operation on eax (ex: 0b01 or 0b10 = 0b11)
 	; This is needed to enable paging (set the flag as "enabled")
 	mov cr0, eax ; Move it into cr0 to finally enable paging 
+
+
+global enable_paging_registers ; make the SR "global" so that we can access it in the kernel etc
