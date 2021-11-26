@@ -12,7 +12,6 @@ void init() {
 
 	enable_paging();
 
-
 	println("");
 	char* title = "eOS Version 0.3 2021";
 	println(title, DEFAULT_COLOR);
