@@ -15,7 +15,7 @@ enable_paging_registers:
 	; This is needed to enable paging (set the flag as "enabled")
 	
 	; DANGER: past this op memory will get weird
-	mov cr0, eax ; Move it into cr0 to finally enable paging 
+	; mov cr0, eax ; Move it into cr0 to finally enable paging 
 	; TODO: Make this work to prevent kernel "panic" (actually death) -> bootloop
 
 	ret ; return to last location
