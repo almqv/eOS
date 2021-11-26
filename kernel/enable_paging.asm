@@ -1,10 +1,11 @@
 [bits 32]  ; 32-bit mode
 
 PAGING_ENABLE equ 0x80000001
-PAGE_DIRECTORY equ 0x8000 ; TODO: change me to something good
+PAGE_DIRECTORY_ADDR equ 0x80000000 ; TODO: change me to something good
 
 enable_paging_registers:
-	mov eax, PAGE_DIRECTORY ; Move the address of the page register (page directory) into eax
+	mov eax, PAGE_DIRECTORY_ADDR ; Move the address of the 
+	; page register (page directory) into eax
 	; (Using eax as a middle-man register)
 	mov cr3, eax ; Put the address into the cr3 register (required by the MMU)
 
