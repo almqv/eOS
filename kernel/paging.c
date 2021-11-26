@@ -1,4 +1,14 @@
 #include "paging.h"
+#include "../drivers/vga.h"
+
+void enable_paging() {
+	println("Enabling paging...", DEFAULT_COLOR);
+
+	extern int enable_paging_registers(); // Call the assembly SR
+	enable_paging_registers();
+
+	return;
+}
 
 // Page Entry struct
 struct page_entry {
