@@ -2,5 +2,6 @@
 #define PAGE_TABLE_SIZE 128
 
 struct page_entry;
-// page_entry page_table[PAGE_TABLE_SIZE];
 
+char** heap_alloc(unsigned int size); // Process heap allocation
+int get_phys_addr(int virt_addr);
