@@ -10,7 +10,7 @@ void init() {
 
 	println("Kernel loaded", DEFAULT_COLOR);
 
-	enable_paging();
+	// enable_paging();
 
 	println("");
 	char* title = "eOS Version 0.3 2021";
