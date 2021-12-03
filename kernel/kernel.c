@@ -1,4 +1,5 @@
 #include "kernel.h"
+#include "memory.h"
 #include "paging.h"
 #include "../drivers/vga.h"
 #include "../lib/str.h"
