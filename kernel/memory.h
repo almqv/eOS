@@ -1,5 +1,10 @@
-#define BLOCK_SIZE 4 // 32 bits = 4 bytes
+#include "../lib/types.h"
+
+#define BLOCK_SIZE 1024 // 1 KiB
 #define MEMSIZE_TO_BLOCKS(n) ((n*1024)/BLOCK_SIZE)
 
-void init_pmm(unsigned int map_addr, unsigned int bsize); // Initialize physical memory manager
+enum bitmap_flag;
 
+// void init_pmm(uint map_addr, uint bsize); // Initialize physical memory manager
+
+void mod_bitmap(uint block, uint bit, uint flag);

@@ -7,8 +7,18 @@
 // i.e. : bit i of byte n define status of block 8n+i
 // block = 8n+i
 
-int* alloc_cursor; // keep track of last location that was allocated (may improve speed)
+// in 32-bit mode, we have access to 2^32 blocks
+// which is (2^32)*BLOCK_SIZE blocks
+// and with a blocksize of 1024, we git around 4.3 trillion blocks
+// which is more than enough
 
-void init_pmm(unsigned int map_addr, unsigned int bsize) {
+int bitmap = 0;
 
+enum bitmap_flag {
+	FREE,
+	ALLOC
+};
+
+void mod_bitmap(uint block, uint bit, uint bflag) {
+	
 }
