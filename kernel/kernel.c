@@ -25,6 +25,11 @@ void init() {
 	println("0x1000", DEFAULT_COLOR);
 	*/
 
+	block_alloc(1);
+	block_alloc(1);
+	block_alloc(2);
+	block_alloc(2);
+
 	char* strbuf = "Concat test: ";
 	char* str2 = "Works!";
 	strbuf = strcat(strbuf, str2); 
