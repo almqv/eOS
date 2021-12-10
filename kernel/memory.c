@@ -15,9 +15,11 @@
 
 #define CHECK_BITMAP(map, idx) ((map) & (1<<(idx)))
 
-#define BM_FREE 0
+#define BLOCK_TO_MEMP(idx) idx
+
 
 static int bitmap = 0; 
+static uint last_block;
 void mod_bitmap(uint bit, uint bflag) {
 	// create a bitmask that will be applied to the bitmap
 	int bitmask = 1 << bit;
@@ -28,7 +30,7 @@ void mod_bitmap(uint bit, uint bflag) {
 }
 
 
-int block_alloc(uint blockidx) {
+int* block_alloc(uint blockidx) {
 	int block_bflag;
 	block_bflag = CHECK_BITMAP(bitmap, blockidx);
 
@@ -36,6 +38,8 @@ int block_alloc(uint blockidx) {
 		println("Alloc!", DEFAULT_COLOR);
 
 		mod_bitmap(blockidx, 1);
+		last_block = blockidx;
+
 		return 0; // placeholder
 	} else {
 		println("ERROR! Attemped to allocate non-free block.", 0x0c);
@@ -47,4 +51,11 @@ int block_alloc(uint blockidx) {
 void block_free(uint blockidx) {
 	println("Dealloc block...", DEFAULT_COLOR);	
 	mod_bitmap(blockidx, BM_FREE);
+	last_block = blockidx;
 }
+
+/*
+int* pm_malloc(uint block_count) {
+	
+}
+*/

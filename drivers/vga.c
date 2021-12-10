@@ -1,6 +1,7 @@
 // VGA Graphics Library
 #include "vga.h"
 #include "../kernel/io.h"
+#include "../kernel/memory.h"
 #include "../lib/str.h"
 #include "../lib/strf.h"
 
@@ -17,6 +18,9 @@ void vga_init() {
 	clear_screen();
 
 	set_cursor_pos(0, 0);
+
+	// TODO: allocate VGA physical memory
+	// pm_mem_alloc(VGA_ADDRESS, VGA_ADDRESS_MAX);
 }
 
 /*

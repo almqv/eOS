@@ -36,7 +36,7 @@ void init() {
 	block_alloc(2); // this should fail
 
 	println("(2) Freeing 2nd block, alloc after should succeed", DEFAULT_COLOR);
-	block_free(2);
+	block_free(2); // after this, allocation of 2nd block should work
 	block_alloc(2);
 
 	char* strbuf = "Concat test: ";
