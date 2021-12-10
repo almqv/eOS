@@ -25,10 +25,15 @@ void init() {
 	println("0x1000", DEFAULT_COLOR);
 	*/
 
-	block_alloc(1);
-	block_alloc(1);
-	block_alloc(2);
-	block_alloc(2);
+
+	// Memory allocation testing
+	println("THESE ALLOC SHOULD WORK:", 0xa0);
+	for(int i=0; i < 4; i++) {
+		block_alloc(i);
+	}
+
+	println("(2) THIS ALLOC SHOULD FAIL:", 0xc0);
+	block_alloc(2); // this should fail
 
 	char* strbuf = "Concat test: ";
 	char* str2 = "Works!";
