@@ -31,6 +31,7 @@ int block_alloc(uint blockidx) {
 		println("Alloc!", DEFAULT_COLOR);
 
 		mod_bitmap(blockidx, 0);
+		return 0; // placeholder
 
 	} else {
 		println("ERROR! Attemped to allocate non-free block.", 0x0c);
