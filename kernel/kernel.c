@@ -35,6 +35,10 @@ void init() {
 	println("(2) THIS ALLOC SHOULD FAIL:", 0xc0);
 	block_alloc(2); // this should fail
 
+	println("(2) Freeing 2nd block, alloc after should succeed", DEFAULT_COLOR);
+	block_free(2);
+	block_alloc(2);
+
 	char* strbuf = "Concat test: ";
 	char* str2 = "Works!";
 	strbuf = strcat(strbuf, str2); 

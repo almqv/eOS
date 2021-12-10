@@ -9,4 +9,4 @@
 void mod_bitmap(uint bit, uint flag);
 
 int block_alloc(uint blockidx);
-int block_free(uint blockidx);
+void block_free(uint blockidx);

@@ -15,6 +15,8 @@
 
 #define CHECK_BITMAP(map, idx) ((map) & (1<<(idx)))
 
+#define BM_FREE 0
+
 static int bitmap = 0; 
 void mod_bitmap(uint bit, uint bflag) {
 	// create a bitmask that will be applied to the bitmap
@@ -30,16 +32,19 @@ int block_alloc(uint blockidx) {
 	int block_bflag;
 	block_bflag = CHECK_BITMAP(bitmap, blockidx);
 
-	if( block_bflag == 0 ) { // check if block is free
+	if( block_bflag == BM_FREE ) { // check if block is free
 		println("Alloc!", DEFAULT_COLOR);
-		println(block_bflag, 0x8e);
 
 		mod_bitmap(blockidx, 1);
 		return 0; // placeholder
 	} else {
 		println("ERROR! Attemped to allocate non-free block.", 0x0c);
-		printint(block_bflag, 0x9c);
 
 		return -1;
 	}
+}
+
+void block_free(uint blockidx) {
+	println("Dealloc block...", DEFAULT_COLOR);	
+	mod_bitmap(blockidx, BM_FREE);
 }
