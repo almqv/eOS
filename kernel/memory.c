@@ -30,7 +30,7 @@ int block_alloc(uint blockidx) {
 	int block_bflag;
 	block_bflag = CHECK_BITMAP(bitmap, blockidx);
 
-	if( block_bflag != 1 ) { // check if block is free
+	if( block_bflag == 0 ) { // check if block is free
 		println("Alloc!", DEFAULT_COLOR);
 		println(block_bflag, 0x8e);
 
