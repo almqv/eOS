@@ -2,6 +2,7 @@
 #include "vga.h"
 #include "../kernel/io.h"
 #include "../lib/str.h"
+#include "../lib/strf.h"
 
 static unsigned int cursor_row = 0;
 static unsigned int cursor_col = 0;
@@ -67,6 +68,13 @@ void print(char* str, int attribute_byte) {
 void println(char* str, int attribute_byte) {
 	print(str, attribute_byte);
 	cursor_row++; // Increment to next y-pos (newline)
+}
+
+void printint(int i, int attribute_byte) {
+	char* strbuf;
+
+	strbuf = int_to_str(i, strbuf);
+	println(strbuf, attribute_byte);
 }
 
 void printalign(char* str, int attribute_byte, enum align alignment) {

@@ -15,7 +15,7 @@
 
 #define CHECK_BITMAP(map, idx) ((map) & (1<<(idx)))
 
-int bitmap = 0; 
+static int bitmap = 0; 
 void mod_bitmap(uint bit, uint bflag) {
 	// create a bitmask that will be applied to the bitmap
 	int bitmask = 1 << bit;
@@ -38,7 +38,8 @@ int block_alloc(uint blockidx) {
 		return 0; // placeholder
 	} else {
 		println("ERROR! Attemped to allocate non-free block.", 0x0c);
-		println(block_bflag, 0x9c);
+		printint(block_bflag, 0x9c);
+
 		return -1;
 	}
 }
