@@ -15,7 +15,7 @@
 
 #define CHECK_BITMAP(map, idx) ((map) & (1<<(idx)))
 
-#define BLOCK_TO_MEMP(idx) idx
+#define BLOCK_TO_MEMP(idx) (int*)(PM_MEM_START + (idx*BLOCK_SIZE))
 
 
 static int bitmap = 0; 
@@ -40,11 +40,11 @@ int* block_alloc(uint blockidx) {
 		mod_bitmap(blockidx, 1);
 		last_block = blockidx;
 
-		return 0; // placeholder
+		return BLOCK_TO_MEMP(blockidx); // placeholder
 	} else {
 		println("ERROR! Attemped to allocate non-free block.", 0x0c);
 
-		return -1;
+		return 0;
 	}
 }
 

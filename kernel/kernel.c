@@ -27,6 +27,8 @@ void init() {
 
 
 	// Memory allocation testing
+	printalign("-- PMM Tests --", DEFAULT_COLOR, MIDDLE);
+
 	println("THESE ALLOC SHOULD WORK:", 0xa0);
 	for(int i=0; i < 4; i++) {
 		block_alloc(i);
@@ -38,6 +40,8 @@ void init() {
 	println("(2) Freeing 2nd block, alloc after should succeed", DEFAULT_COLOR);
 	block_free(2); // after this, allocation of 2nd block should work
 	block_alloc(2);
+
+	printalign("-- End of PMM Tests --", DEFAULT_COLOR, MIDDLE);
 
 	char* strbuf = "Concat test: ";
 	char* str2 = "Works!";

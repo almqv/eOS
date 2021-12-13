@@ -85,7 +85,7 @@ void printalign(char* str, int attribute_byte, enum align alignment) {
 	unsigned int strlenbuf = strlen(str);
 
 	if( !alignment || alignment == LEFT ) {
-		print(str, attribute_byte);
+		set_cursor_pos(0, cursor_row);
 	} else if ( alignment == RIGHT ) {
 		set_cursor_pos(MAX_COLS - strlenbuf, cursor_row);
 	} else if ( alignment == MIDDLE ) {
@@ -93,4 +93,5 @@ void printalign(char* str, int attribute_byte, enum align alignment) {
 	}
 
 	print(str, attribute_byte);
+	set_cursor_pos(0, cursor_row+1);
 }
