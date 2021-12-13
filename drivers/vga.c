@@ -1,12 +1,13 @@
 // VGA Graphics Library
 #include "vga.h"
+#include "../lib/types.h"
 #include "../kernel/io.h"
 #include "../kernel/memory.h"
 #include "../lib/str.h"
 #include "../lib/strf.h"
 
-static unsigned int cursor_row = 0;
-static unsigned int cursor_col = 0;
+static uint cursor_row = 0;
+static uint cursor_col = 0;
 
 void vga_init() {
 	// Disable cursor
@@ -19,18 +20,17 @@ void vga_init() {
 
 	set_cursor_pos(0, 0);
 
-	// TODO: allocate VGA physical memory
-	// pm_mem_alloc(VGA_ADDRESS, VGA_ADDRESS_MAX);
+	pm_alloc_range(VGA_ADDRESS, VGA_ADDRESS_MAX, true); // force alloc the VGA range
 }
 
 /*
 	VGA & Memory Functions
 */
-char* get_memory_charpos(unsigned int col, unsigned int row) { 
+char* get_memory_charpos(uint col, uint row) { 
 	return (char*)(VGA_ADDRESS + 2*((row*80) + col)); 
 }
 
-void writechar(char c, unsigned int col, unsigned int row, int attribute_byte) {
+void writechar(char c, uint col, uint row, int attribute_byte) {
 
 	if( !attribute_byte ) 
 		attribute_byte = DEFAULT_COLOR;
@@ -41,7 +41,7 @@ void writechar(char c, unsigned int col, unsigned int row, int attribute_byte) {
 
 }
 
-void set_cursor_pos(unsigned int col, unsigned int row) {
+void set_cursor_pos(uint col, uint row) {
 	cursor_col = col;
 	cursor_row = row;
 }
@@ -50,7 +50,7 @@ void set_cursor_pos(unsigned int col, unsigned int row) {
 /*
 	Graphics Functions
 */
-void clear_row(unsigned int row) {
+void clear_row(uint row) {
 	for( int c = 0; c < MAX_COLS; c++ ) 
 		writechar(0x20, c, row, 0x0);
 }
@@ -66,7 +66,7 @@ void clear_screen() {
 */
 void print(char* str, int attribute_byte) {
 	for( char* c = str; *c != '\0'; c++ ) 
-		writechar(*c, (unsigned int)(c - str) + cursor_col, cursor_row, attribute_byte);
+		writechar(*c, (uint)(c - str) + cursor_col, cursor_row, attribute_byte);
 }
 
 void println(char* str, int attribute_byte) {
@@ -82,7 +82,7 @@ void printint(int i, int attribute_byte) {
 }
 
 void printalign(char* str, int attribute_byte, enum align alignment) {
-	unsigned int strlenbuf = strlen(str);
+	uint strlenbuf = strlen(str);
 
 	if( !alignment || alignment == LEFT ) {
 		set_cursor_pos(0, cursor_row);

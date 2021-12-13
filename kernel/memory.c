@@ -54,6 +54,15 @@ void block_free(uint blockidx) {
 	last_block = blockidx;
 }
 
+void pm_alloc_range(uint start, uint end, bool force) {
+	uint idx_start;
+	uint idx_end;
+
+	// calculate idx_start and idx_end
+	// if not force, check if avaliable
+	// allocate (if permitted)
+}
+
 /*
 int* pm_malloc(uint block_count) {
 	
