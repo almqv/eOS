@@ -15,7 +15,7 @@
 
 #define CHECK_BITMAP(map, idx) ((map) & (1<<(idx)))
 
-#define BLOCK_TO_MEMP(idx) (int*)(PM_MEM_START + (idx*BLOCK_SIZE))
+#define BLOCK_TO_MEMP(idx) (pointer)(PM_MEM_START + (idx*BLOCK_SIZE))
 
 
 static int bitmap = 0; 
@@ -30,7 +30,7 @@ void mod_bitmap(uint bit, uint bflag) {
 }
 
 
-int* block_alloc(uint blockidx) {
+pointer block_alloc(uint blockidx) {
 	int block_bflag;
 	block_bflag = CHECK_BITMAP(bitmap, blockidx);
 
@@ -40,7 +40,7 @@ int* block_alloc(uint blockidx) {
 		mod_bitmap(blockidx, 1);
 		last_block = blockidx;
 
-		return BLOCK_TO_MEMP(blockidx); // placeholder
+		return BLOCK_TO_MEMP(blockidx); 
 	} else {
 		println("ERROR! Attemped to allocate non-free block.", 0x0c);
 
@@ -64,7 +64,7 @@ void pm_alloc_range(uint start, uint end, bool force) {
 }
 
 /*
-int* pm_malloc(uint block_count) {
+pointer pm_malloc(uint block_count) {
 	
 }
 */
