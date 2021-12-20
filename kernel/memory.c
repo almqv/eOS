@@ -55,6 +55,10 @@ void block_free(uint blockidx) {
 	last_block = blockidx;
 }
 
+uint find_free(uint block_count) {
+	// TODO: find a free start block to allocate	
+}
+
 bool check_block_range(uint start, uint end) {
 	bool allowed = true;	
 
@@ -91,8 +95,6 @@ void pm_alloc_range(ulong start, ulong end, bool force) {
 	}
 }
 
-/*
 pointer pm_malloc(uint block_count) {
 	
 }
-*/

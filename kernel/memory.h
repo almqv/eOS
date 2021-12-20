@@ -16,6 +16,8 @@ void mod_bitmap(uint bit, uint flag);
 pointer block_alloc(uint blockidx); // allocate a block
 void block_free(uint blockidx); // free a block
 
+uint find_free(uint block_count);
+
 bool check_block_range(uint start, uint end);
 void pm_alloc_range(ulong start, ulong end, bool force); // allocate a range of memory 
 
