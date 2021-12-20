@@ -1,4 +1,5 @@
 typedef unsigned int uint;
+typedef unsigned long ulong;
 typedef unsigned long* pointer;
 typedef int bool;
 #define true 1

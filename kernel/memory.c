@@ -17,6 +17,7 @@
 
 #define BLOCK_TO_MEMP(idx) (pointer)(PM_MEM_START + (idx*BLOCK_SIZE))
 
+#define MEMP_TO_BLOCK(memp) (uint)((memp - PM_MEM_START)/BLOCK_SIZE)
 
 static int bitmap = 0; 
 static uint last_block;
@@ -42,7 +43,7 @@ pointer block_alloc(uint blockidx) {
 
 		return BLOCK_TO_MEMP(blockidx); 
 	} else {
-		println("ERROR! Attemped to allocate non-free block.", 0x0c);
+		println("[ERROR] Attemped to allocate non-free block.", 0x0c);
 
 		return 0;
 	}
@@ -54,13 +55,40 @@ void block_free(uint blockidx) {
 	last_block = blockidx;
 }
 
-void pm_alloc_range(uint start, uint end, bool force) {
+bool check_block_range(uint start, uint end) {
+	bool allowed = true;	
+
+	uint idx;
+	for(idx = start; idx <= end; idx++) {
+		if( CHECK_BITMAP(bitmap, idx) != BM_FREE )
+			allowed = false;
+			break;
+	}
+
+	return allowed;
+}
+
+void pm_alloc_range(ulong start, ulong end, bool force) {
 	uint idx_start;
 	uint idx_end;
 
-	// calculate idx_start and idx_end
-	// if not force, check if avaliable
+	ulong d_addr = end - start; // memory size
+	uint num_blocks = (d_addr/BLOCK_SIZE) + 1; // amount of blocks to be allocated
+
+	uint start_block = MEMP_TO_BLOCK(start); // start idx, end = start_block + num_blocks - 1
+	bool allowed = true && check_block_range(start_block, start_block + num_blocks - 1);
+
 	// allocate (if permitted)
+	if( allowed ) {
+		uint idx;
+		for(idx=start_block; idx <= start_block + num_blocks - 1; idx++) 
+			block_alloc(idx);
+
+		return;
+	} else {
+		println("[ERROR] Tried to allocate memory range without permission!", 0x0c);
+		return;
+	}
 }
 
 /*
