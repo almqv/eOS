@@ -57,6 +57,8 @@ void block_free(uint blockidx) {
 
 uint find_free(uint block_count) {
 	// TODO: find a free start block to allocate	
+	// loop through bitmap
+	// check if range is free
 }
 
 bool check_block_range(uint start, uint end) {
