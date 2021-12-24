@@ -1,4 +1,5 @@
 #include "util.h"
+#include "math.h"
 
 uint ulong_len(ulong n) { // get the digit length of a number
     int len = 0;

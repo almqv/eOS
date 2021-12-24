@@ -9,7 +9,7 @@ void init() {
 	vga_init(); 	// Initialize the screen first
 			// i.e. clear the screen et cetera.
 
-	println("Kernel loaded", DEFAULT_COLOR);
+	println("Kernel loaded", SUCCESS_COLOR);
 
 	// enable_paging();
 
@@ -25,6 +25,14 @@ void init() {
 	println("0x1000", DEFAULT_COLOR);
 	*/
 
+
+	char* intbuf = "xxxx";
+	int num = 1234;
+	intbuf = int_to_str(num, intbuf);
+	print("TEST NUM: ", DEFAULT_COLOR);
+	println(intbuf, DEFAULT_COLOR);
+
+	/*
 
 	// Memory allocation testing
 	printalign("-- PMM Tests --", DEFAULT_COLOR, MIDDLE);
@@ -47,4 +55,5 @@ void init() {
 	char* str2 = "Works!";
 	strbuf = strcat(strbuf, str2); 
 	println(strbuf, DEFAULT_COLOR);
+	*/
 }

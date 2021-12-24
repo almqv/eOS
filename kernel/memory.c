@@ -36,7 +36,7 @@ pointer block_alloc(uint blockidx) {
 	block_bflag = CHECK_BITMAP(bitmap, blockidx);
 
 	if( block_bflag == BM_FREE ) { // check if block is free
-		println("Alloc!", DEFAULT_COLOR);
+		println("Allocating block...", DEFAULT_COLOR);
 
 		mod_bitmap(blockidx, 1);
 		last_block = blockidx;
