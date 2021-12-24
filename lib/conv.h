@@ -1,4 +1,5 @@
 #include "types.h"
+#include "util.h"
 
 #define ASCII_OFFSET 0x30
 

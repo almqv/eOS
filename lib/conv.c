@@ -1,7 +1,7 @@
 #include "conv.h"
 
 void int_to_str(int i, char* buf) {
-	uint num = (uint)i; // convert to uint
+	ulong num = (ulong)i; // convert to ulong
 	uint len = ulong_len(num); // number of digits
 
 	&buf[len] = '\0'; // add a "end-of-string" at the end
