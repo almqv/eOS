@@ -10,5 +10,6 @@ uint ulong_len(ulong n) { // get the digit length of a number
 }
 
 uint ndigit(ulong n, uint i) { // OBS: index order is reversed
-	return (n/(10**i)) % 10
+	long den = pow(10, i);
+	return (n/den) % 10;
 }
