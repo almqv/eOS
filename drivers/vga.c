@@ -4,7 +4,7 @@
 #include "../kernel/io.h"
 #include "../kernel/memory.h"
 #include "../lib/str.h"
-#include "../lib/strf.h"
+#include "../lib/conv.h"
 
 static uint cursor_row = 0;
 static uint cursor_col = 0;
@@ -75,10 +75,12 @@ void println(char* str, int attribute_byte) {
 }
 
 void printint(int i, int attribute_byte) {
+	/*
 	char* strbuf;
 
 	strbuf = int_to_str(i, strbuf);
 	println(strbuf, attribute_byte);
+	*/
 }
 
 void printalign(char* str, int attribute_byte, enum align alignment) {

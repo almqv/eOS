@@ -3,7 +3,7 @@
 #include "paging.h"
 #include "../drivers/vga.h"
 #include "../lib/str.h"
-#include "../lib/strf.h"
+#include "../lib/conv.h"
 
 void init() {
 	vga_init(); 	// Initialize the screen first
