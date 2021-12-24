@@ -1,12 +1,13 @@
 #include "conv.h"
 
 void int_to_str(int i, char* buf) {
-	bool use_sign = false;
+	uint num = (uint)i; // convert to uint
+	uint len = ulong_len(num); // number of digits
 
-	if( i < 0 ) {
-		i = (ulong)(i * (-1))
-		use_sign = true;
-	}
+	&buf[len] = '\0'; // add a "end-of-string" at the end
 
-	uint len = ulong_len(i); 
+	int j;
+	for(j = 0; j < len; j++) // iterate over each digit and assign it to the buffer
+		&buf[j] = (char)(ndigit(num, len-1-j) + ASCII_OFFSET); // apply the ascii offset so that i becomes a char
+
 }
