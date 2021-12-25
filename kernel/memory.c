@@ -43,7 +43,7 @@ pointer block_alloc(uint blockidx) {
 
 		return BLOCK_TO_MEMP(blockidx); 
 	} else {
-		println("[ERROR] Attemped to allocate non-free block.", 0x0c);
+		println("[ERROR] Attemped to allocate non-free block.", URGENT_COLOR);
 
 		return 0;
 	}
@@ -92,7 +92,7 @@ void pm_alloc_range(ulong start, ulong end, bool force) {
 
 		return;
 	} else {
-		println("[ERROR] Tried to allocate memory range without permission!", 0x0c);
+		println("[ERROR] Tried to allocate memory range without permission!", URGENT_COLOR);
 		return;
 	}
 }
