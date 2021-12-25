@@ -1,23 +1,20 @@
 #include "kernel.h"
 #include "memory.h"
+#include "paging.h"
 #include "../drivers/vga.h"
 #include "../lib/str.h"
-#include "../lib/strf.h"
-
-void display_status(char* status_text, unsigned int bg_color) {
-	clear_row(0);
-	set_cursor_pos(0, 0);
-
-	print(status_text, bg_color | STATUS_TEXT_COLOR);
-}
+#include "../lib/conv.h"
 
 void init() {
-	display_status("Kernel loaded", 0x70);
-
 	vga_init(); 	// Initialize the screen first
 			// i.e. clear the screen et cetera.
 
-	char* title = "eOS Version 0.2 2021";
+	println("Kernel loaded", SUCCESS_COLOR);
+
+	// enable_paging();
+
+	println("");
+	char* title = "eOS Version 0.3 2021";
 	println(title, DEFAULT_COLOR);
 
 	char* subtitle = "A x86 operating system, licenced under GPL-2.0";
@@ -28,8 +25,35 @@ void init() {
 	println("0x1000", DEFAULT_COLOR);
 	*/
 
+
+	char* intbuf = "xxxx";
+	int num = 1234;
+	intbuf = int_to_str(num, intbuf);
+	print("TEST NUM: ", DEFAULT_COLOR);
+	println(intbuf, DEFAULT_COLOR);
+
+	/*
+
+	// Memory allocation testing
+	printalign("-- PMM Tests --", DEFAULT_COLOR, MIDDLE);
+
+	println("THESE ALLOC SHOULD WORK:", 0xa0);
+	for(int i=0; i < 4; i++) {
+		block_alloc(i);
+	}
+
+	println("(2) THIS ALLOC SHOULD FAIL:", 0xc0);
+	block_alloc(2); // this should fail
+
+	println("(2) Freeing 2nd block, alloc after should succeed", DEFAULT_COLOR);
+	block_free(2); // after this, allocation of 2nd block should work
+	block_alloc(2);
+
+	printalign("-- End of PMM Tests --", DEFAULT_COLOR, MIDDLE);
+
 	char* strbuf = "Concat test: ";
 	char* str2 = "Works!";
 	strbuf = strcat(strbuf, str2); 
 	println(strbuf, DEFAULT_COLOR);
+	*/
 }

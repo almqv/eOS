@@ -1,7 +1,10 @@
-#define VGA_ADDRESS 	(char*)0xb8000
-#define VGA_ADDRESS_MAX	(char*)0xb8fa0
+#define VGA_ADDRESS 	0xb8000
+#define VGA_ADDRESS_MAX	0xb8fa0
 
 #define DEFAULT_COLOR 0x07 
+#define URGET_COLOR 0x0c
+#define SUCCESS_COLOR 0x0a
+
 #define MAX_ROWS 25
 #define MAX_COLS 80
 
@@ -17,5 +20,6 @@ void clear_row(unsigned int row);
 void set_cursor_pos();
 void print();
 void println();
+void printint(int i, int attribute_byte);
 void printalign(char* str, int attribute_byte, enum align alignment);
 void vga_init();
