@@ -25,6 +25,9 @@ void init() {
 	println("0x1000", DEFAULT_COLOR);
 	*/
 
+	char* malloctest = pm_malloc(2); // allocate two blocks
+
+
 
 	char* intbuf = "xxxx";
 	int num = 1234;
