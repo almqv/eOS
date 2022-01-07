@@ -113,15 +113,15 @@ pointer pm_malloc(uint block_count) {
 	lower = find_free(block_count);
 
 	if( lower < 0 )
-		println("--! OUT OF MEMORY !--", URGENT_COLOR);
+		println("malloc: OUT OF MEMORY", URGENT_COLOR);
 		// do some out-of-memory interupt
 		return 0x0;
 
 	// allocate those blocks
 	uint i;
-	for( i = lower; i <= lower + block_count - 1; i++ ) {
+	for( i = lower; i <= lower + block_count - 1; i++ ) 
+		block_alloc(i);
 		
-	}
-	
 	// return pointer to start of first block
+	return BLOCK_TO_MEMP(lower);
 }
