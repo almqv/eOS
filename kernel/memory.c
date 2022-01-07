@@ -55,22 +55,23 @@ void block_free(uint blockidx) {
 	last_block = blockidx;
 }
 
-uint find_free(uint block_count) {
-	uint lower;
-	uint upper;
+int find_free(uint block_count) {
+	int lowerb = -1; // if this function returns -1
+	// then it has failed.
 
 	// Loop through bitmap starting at last_block 
-	for( lower = last_block; lower < MAX_BLOCK_COUNT - block_count; lower++ ) {
+	for( uint lower = last_block; lower < MAX_BLOCK_COUNT - block_count; lower++ ) {
 		bool range_is_free = true;
-		for( upper = 0; upper < block_count; upper++ ) {
+		for( uint upper = 0; upper < block_count; upper++ ) {
 			range_is_free &= CHECK_BITMAP(bitmap, lower+upper); // perform AND on each block (if free)
 		}
 
 		if(range_is_free) // if range is free
+			lowerb = (int)lower;
 			break; // then stop searching
 	}
 
-	return lower; // return the lower block index
+	return lowerb; // return the lower block index
 }
 
 bool check_block_range(uint start, uint end) {
@@ -86,7 +87,7 @@ bool check_block_range(uint start, uint end) {
 	return allowed;
 }
 
-void pm_alloc_range(ulong start, ulong end, bool force) {
+void pm_malloc_range(ulong start, ulong end, bool force) {
 	uint idx_start;
 	uint idx_end;
 
@@ -110,5 +111,15 @@ void pm_alloc_range(ulong start, ulong end, bool force) {
 }
 
 pointer pm_malloc(uint block_count) {
-	
+	// find free block range and get lower offset
+	int lower;
+	lower = find_free(block_count);
+
+	if( lower < 0 )
+		println("--! OUT OF MEMORY !--", URGENT_COLOR);
+		// do some out-of-memory interupt
+		return 0x0;
+
+	// allocate those blocks
+	// return pointer to start of first block
 }

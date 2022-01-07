@@ -16,10 +16,10 @@ void mod_bitmap(uint bit, uint flag);
 pointer block_alloc(uint blockidx); // allocate a block
 void block_free(uint blockidx); // free a block
 
-uint find_free(uint block_count);
+int find_free(uint block_count);
 
 bool check_block_range(uint start, uint end);
-void pm_alloc_range(ulong start, ulong end, bool force); // allocate a range of memory 
+void pm_malloc_range(ulong start, ulong end, bool force); // allocate a range of memory 
 
 pointer pm_malloc(uint block_count); // allocate some blocks
 void pm_free(int* p); // free a var (if allocated with pm_malloc)

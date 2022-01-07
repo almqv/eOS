@@ -11,7 +11,7 @@ static uint cursor_col = 0;
 
 void vga_init() {
 	// Allocate VGA memory range
-	pm_alloc_range(VGA_ADDRESS, VGA_ADDRESS_MAX, true); // force alloc the VGA range
+	pm_malloc_range(VGA_ADDRESS, VGA_ADDRESS_MAX, true); // force alloc the VGA range
 
 	// Disable cursor
 	port_outb(0x3d4, 0x0a);
