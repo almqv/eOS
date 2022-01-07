@@ -56,9 +56,21 @@ void block_free(uint blockidx) {
 }
 
 uint find_free(uint block_count) {
-	// TODO: find a free start block to allocate	
-	// loop through bitmap
-	// check if range is free
+	uint lower;
+	uint upper;
+
+	// Loop through bitmap starting at last_block 
+	for( lower = last_block; lower < MAX_BLOCK_COUNT - block_count; lower++ ) {
+		bool range_is_free = true;
+		for( upper = 0; upper < block_count; upper++ ) {
+			range_is_free &= CHECK_BITMAP(bitmap, lower+upper); // perform AND on each block (if free)
+		}
+
+		if(range_is_free) // if range is free
+			break; // then stop searching
+	}
+
+	return lower; // return the lower block index
 }
 
 bool check_block_range(uint start, uint end) {
