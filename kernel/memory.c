@@ -55,25 +55,6 @@ void block_free(uint blockidx) {
 	last_block = blockidx;
 }
 
-int find_free(uint block_count) {
-	int lowerb = -1; // if this function returns -1
-	// then it has failed.
-
-	// Loop through bitmap starting at last_block 
-	for( uint lower = last_block; lower < MAX_BLOCK_COUNT - block_count; lower++ ) {
-		bool range_is_free = true;
-		for( uint upper = 0; upper < block_count; upper++ ) {
-			range_is_free &= CHECK_BITMAP(bitmap, lower+upper); // perform AND on each block (if free)
-		}
-
-		if(range_is_free) // if range is free
-			lowerb = (int)lower;
-			break; // then stop searching
-	}
-
-	return lowerb; // return the lower block index
-}
-
 bool check_block_range(uint start, uint end) {
 	bool allowed = true;	
 
@@ -85,6 +66,22 @@ bool check_block_range(uint start, uint end) {
 	}
 
 	return allowed;
+}
+
+int find_free(uint block_count) {
+	int lowerb = -1; // if this function returns -1
+	// then it has failed.
+
+	// Loop through bitmap starting at last_block 
+	for( uint lower = last_block; lower < MAX_BLOCK_COUNT - block_count; lower++ ) {
+		bool range_is_free = check_block_range(lower, lower + block_count - 1);
+
+		if(range_is_free) // if range is free
+			lowerb = (int)lower;
+			break; // then stop searching
+	}
+
+	return lowerb; // return the lower block index
 }
 
 void pm_malloc_range(ulong start, ulong end, bool force) {
@@ -105,7 +102,7 @@ void pm_malloc_range(ulong start, ulong end, bool force) {
 
 		return;
 	} else {
-		println("[ERROR] Tried to allocate memory range without permission!", 0x0c);
+		println("[ERROR] Tried to allocate memory range without permission!", URGENT_COLOR);
 		return;
 	}
 }
@@ -121,5 +118,10 @@ pointer pm_malloc(uint block_count) {
 		return 0x0;
 
 	// allocate those blocks
+	uint i;
+	for( i = lower; i <= lower + block_count - 1; i++ ) {
+		
+	}
+	
 	// return pointer to start of first block
 }
