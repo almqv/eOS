@@ -14,7 +14,7 @@ void init() {
 	// enable_paging();
 
 	println("");
-	char* title = "eOS Version 0.3 2021";
+	char* title = "eOS Version 0.4 2022";
 	println(title, DEFAULT_COLOR);
 
 	char* subtitle = "A x86 operating system, licenced under GPL-2.0";
