@@ -1,5 +1,6 @@
 #include "memory.h"
 #include "../drivers/vga.h"
+#include "../lib/conv.h"
 
 // https://wiki.osdev.org/Page_Frame_Allocation
 // page = block
@@ -60,9 +61,10 @@ bool check_block_range(uint start, uint end) {
 
 	uint idx;
 	for(idx = start; idx <= end; idx++) {
-		if( CHECK_BITMAP(bitmap, idx) != BM_FREE )
+		if( CHECK_BITMAP(bitmap, idx) != BM_FREE ) {
 			allowed = false;
 			break;
+		}
 	}
 
 	return allowed;
@@ -74,11 +76,12 @@ int find_free(uint block_count) {
 
 	// Loop through bitmap starting at last_block 
 	for( uint lower = last_block; lower < MAX_BLOCK_COUNT - block_count; lower++ ) {
-		bool range_is_free = check_block_range(lower, lower + block_count - 1);
+		bool range_is_free = check_block_range(lower, lower + block_count);
 
-		if(range_is_free) // if range is free
+		if(range_is_free) { // if range is free
 			lowerb = (int)lower;
 			break; // then stop searching
+		}
 	}
 
 	return lowerb; // return the lower block index
@@ -111,11 +114,14 @@ pointer pm_malloc(uint block_count) {
 	// find free block range and get lower offset
 	int lower;
 	lower = find_free(block_count);
+	println("lower: ", DEFAULT_COLOR);
+	println((lower+46), 0xfc);
 
-	if( lower < 0 )
+	if( lower < 0 ) {
 		println("malloc: OUT OF MEMORY :(", URGENT_COLOR);
 		// do some out-of-memory interupt
 		return 0x0;
+	}
 
 	// allocate those blocks
 	uint i;
