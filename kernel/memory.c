@@ -72,7 +72,7 @@ bool check_block_range(uint start, uint end) {
 
 int find_free(uint block_count) {
 	// Loop through bitmap starting at last_block 
-	for( uint lower = last_block; lower < MAX_BLOCK_COUNT - block_count; lower++ ) {
+	for( uint lower = 0; lower < MAX_BLOCK_COUNT - block_count; lower++ ) {
 		bool range_is_free = check_block_range(lower, lower + block_count);
 
 		if(range_is_free == true) { // if range is free
