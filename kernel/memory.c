@@ -71,20 +71,16 @@ bool check_block_range(uint start, uint end) {
 }
 
 int find_free(uint block_count) {
-	int lowerb = -1; // if this function returns -1
-	// then it has failed.
-
 	// Loop through bitmap starting at last_block 
 	for( uint lower = last_block; lower < MAX_BLOCK_COUNT - block_count; lower++ ) {
 		bool range_is_free = check_block_range(lower, lower + block_count);
 
 		if(range_is_free == true) { // if range is free
-			lowerb = (int)lower;
-			break; // then stop searching
+			return lower;
 		}
 	}
 
-	return lowerb; // return the lower block index
+	return -1; // return the lower block index
 }
 
 void pm_malloc_range(ulong start, ulong end, bool force) {
