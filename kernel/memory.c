@@ -42,7 +42,7 @@ pointer block_alloc(uint blockidx) {
 
 		return BLOCK_TO_MEMP(blockidx); 
 	} else {
-		println("[ERROR] Attemped to allocate non-free block.", 0x0c);
+		println("[ERROR] Attemped to allocate non-free block.", URGENT_COLOR);
 
 		return 0;
 	}
