@@ -78,7 +78,7 @@ int find_free(uint block_count) {
 	for( uint lower = last_block; lower < MAX_BLOCK_COUNT - block_count; lower++ ) {
 		bool range_is_free = check_block_range(lower, lower + block_count);
 
-		if(range_is_free) { // if range is free
+		if(range_is_free == true) { // if range is free
 			lowerb = (int)lower;
 			break; // then stop searching
 		}
