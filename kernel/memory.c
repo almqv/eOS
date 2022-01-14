@@ -37,8 +37,6 @@ pointer block_alloc(uint blockidx) {
 	block_bflag = CHECK_BITMAP(bitmap, blockidx);
 
 	if( block_bflag == BM_FREE ) { // check if block is free
-		println("Allocating block...", DEFAULT_COLOR);
-
 		mod_bitmap(blockidx, 1);
 		last_block = blockidx;
 
@@ -107,11 +105,15 @@ void pm_malloc_range(ulong start, ulong end, bool force) {
 }
 
 pointer pm_malloc(uint block_count) {
+	// failsafe if the dev is a moron
+	if( block_count < 1 ) {
+		println("[ERROR] Attempted to allocated zero blocks!", URGENT_COLOR);
+		return 0x0;
+	}
+
 	// find free block range and get lower offset
 	int lower;
 	lower = find_free(block_count);
-	println("lower: ", DEFAULT_COLOR);
-	println((lower+46), 0xfc);
 
 	if( lower < 0 ) {
 		println("malloc: OUT OF MEMORY :(", URGENT_COLOR);

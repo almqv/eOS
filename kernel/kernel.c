@@ -11,6 +11,23 @@ void init() {
 
 	println("Kernel loaded", SUCCESS_COLOR);
 
+	// Allocate VGA memory range
+	println("Allocating VGA memory...", DEFAULT_COLOR);
+	pm_malloc_range(VGA_ADDRESS, VGA_ADDRESS_MAX, true); // force alloc the VGA range
+
+	// TODO: MAKE THESE DYNAMIC
+	print("Kernel offset: ", DEFAULT_COLOR);
+	println("0x1000", DEFAULT_COLOR);
+	
+	println("-VGA Stats-", DEFAULT_COLOR);
+	print("Start: ", DEFAULT_COLOR);
+	println("0xb7000", DEFAULT_COLOR);
+
+	print("End:   ", DEFAULT_COLOR);
+	println("0xb8fa0", DEFAULT_COLOR);
+
+	// ENABLE PAGING 
+	// TODO: make this work
 	// enable_paging();
 
 	println("");
@@ -20,29 +37,12 @@ void init() {
 	char* subtitle = "A x86 operating system, licenced under GPL-2.0";
 	println(subtitle, DEFAULT_COLOR);
 
-	/*
-	print("Kernel offset: ", DEFAULT_COLOR);
-	println("0x1000", DEFAULT_COLOR);
-	*/
-
-	char* malloctest = pm_malloc(1); // allocate two blocks
-
-
-
-	char* intbuf = "xxxx";
-	int num = 1234;
-	intbuf = int_to_str(num, intbuf);
-	print("TEST NUM: ", DEFAULT_COLOR);
-	println(intbuf, DEFAULT_COLOR);
-
-	/*
-
 	// Memory allocation testing
-	printalign("-- PMM Tests --", DEFAULT_COLOR, MIDDLE);
+	printalign("-- PMM malloc Tests --", DEFAULT_COLOR, MIDDLE);
 
-	println("THESE ALLOC SHOULD WORK:", 0xa0);
+	println("THESE MALLOC SHOULD WORK (no text => success):", 0xa0);
 	for(int i=0; i < 4; i++) {
-		block_alloc(i);
+		pm_malloc(1);
 	}
 
 	println("(2) THIS ALLOC SHOULD FAIL:", 0xc0);
@@ -52,11 +52,10 @@ void init() {
 	block_free(2); // after this, allocation of 2nd block should work
 	block_alloc(2);
 
-	printalign("-- End of PMM Tests --", DEFAULT_COLOR, MIDDLE);
+	printalign("-- End of PMM malloc Tests --", DEFAULT_COLOR, MIDDLE);
 
 	char* strbuf = "Concat test: ";
 	char* str2 = "Works!";
 	strbuf = strcat(strbuf, str2); 
 	println(strbuf, DEFAULT_COLOR);
-	*/
 }

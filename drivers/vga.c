@@ -10,9 +10,6 @@ static uint cursor_row = 0;
 static uint cursor_col = 0;
 
 void vga_init() {
-	// Allocate VGA memory range
-	pm_malloc_range(VGA_ADDRESS, VGA_ADDRESS_MAX, true); // force alloc the VGA range
-
 	// Disable cursor
 	port_outb(0x3d4, 0x0a);
 	port_outb(0x3d5, 0x20);
@@ -68,11 +65,14 @@ void clear_screen() {
 void print(char* str, int attribute_byte) {
 	for( char* c = str; *c != '\0'; c++ ) 
 		writechar(*c, (uint)(c - str) + cursor_col, cursor_row, attribute_byte);
+
+	cursor_col += strlen(str);
 }
 
 void println(char* str, int attribute_byte) {
 	print(str, attribute_byte);
 	cursor_row++; // Increment to next y-pos (newline)
+	cursor_col = 0;
 }
 
 void printint(int i, int attribute_byte) {
