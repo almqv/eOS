@@ -15,6 +15,7 @@ void init() {
 	println("Allocating VGA memory...", DEFAULT_COLOR);
 	pm_malloc_range(VGA_ADDRESS, VGA_ADDRESS_MAX, true); // force alloc the VGA range
 
+	/*
 	// TODO: MAKE THESE DYNAMIC
 	print("Kernel offset: ", DEFAULT_COLOR);
 	println("0x1000", DEFAULT_COLOR);
@@ -25,6 +26,7 @@ void init() {
 
 	print("End:   ", DEFAULT_COLOR);
 	println("0xb8fa0", DEFAULT_COLOR);
+	*/
 
 	// ENABLE PAGING 
 	// TODO: make this work
