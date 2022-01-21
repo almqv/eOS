@@ -22,7 +22,7 @@ eos_grub.iso : kernel.bin grub/grub.cfg
 eos.iso: bootloader/bootloader.bin kernel.bin
 	cat $^ > eos.iso
 
-kernel.bin: kernel/kernel_entry.o kernel/sr_memory.o kernel/enable_paging.o $(OBJ) 
+kernel.bin: kernel/kernel_entry.o kernel/enable_paging.o $(OBJ) 
 	gcc -o $@ $^ -Wl,--oformat=binary -ffreestanding -nostdlib -shared -Ttext 0x1000 -m32
 
 
