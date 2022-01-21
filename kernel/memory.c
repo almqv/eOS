@@ -116,7 +116,7 @@ pointer pm_malloc(uint block_count) {
 	lower = find_free(block_count);
 
 	if( lower < 0 ) {
-		println("malloc: OUT OF MEMORY :(", URGENT_COLOR);
+		println("malloc: out of memory!", URGENT_COLOR);
 		// do some out-of-memory interupt
 		return 0x0;
 	}
