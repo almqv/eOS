@@ -1,4 +1,4 @@
-# Compilation/assembler settings
+# Compiler/assembler settings
 CC			= gcc
 CFLAGS 		= -fno-pie -m32 -Os -ffreestanding
 
@@ -8,7 +8,7 @@ AFLAGS		=
 LD			= gcc
 LDFLAGS		= -Wl,--oformat=binary -ffreestanding -nostdlib -shared -Ttext 0x1000 -m32
 
-# Debug settings
+# VM/Debug settings
 VM			= qemu-system-x86_64
 VMFLAGS		= 
 
