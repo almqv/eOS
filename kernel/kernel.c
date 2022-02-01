@@ -1,9 +1,4 @@
 #include "kernel.h"
-#include "memory.h"
-#include "paging.h"
-#include "../drivers/vga.h"
-#include "../lib/str.h"
-#include "../lib/conv.h"
 
 void init() {
 	vga_init(); 	// Initialize the screen first
@@ -14,19 +9,6 @@ void init() {
 	// Allocate VGA memory range
 	println("Allocating VGA memory...", DEFAULT_COLOR);
 	pm_malloc_range(VGA_ADDRESS, VGA_ADDRESS_MAX, true); // force alloc the VGA range
-
-	/*
-	// TODO: MAKE THESE DYNAMIC
-	print("Kernel offset: ", DEFAULT_COLOR);
-	println("0x1000", DEFAULT_COLOR);
-	
-	println("-VGA Stats-", DEFAULT_COLOR);
-	print("Start: ", DEFAULT_COLOR);
-	println("0xb7000", DEFAULT_COLOR);
-
-	print("End:   ", DEFAULT_COLOR);
-	println("0xb8fa0", DEFAULT_COLOR);
-	*/
 
 	// ENABLE PAGING 
 	// TODO: make this work
