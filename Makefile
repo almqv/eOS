@@ -1,6 +1,19 @@
+# Compilation/assembler settings
 CC			= gcc
 CFLAGS 		= -fno-pie -m32 -Os -ffreestanding
 
+AA			= nasm
+AFLAGS		= 
+
+LD			= gcc
+LDFLAGS		= -Wl,--oformat=binary -ffreestanding -nostdlib -shared -Ttext 0x1000 -m32
+
+# Debug settings
+VM			= qemu-system-x86_64
+VMFLAGS		= 
+
+
+# Do not touch these.
 C_SOURCES 	= $(wildcard kernel/*.c drivers/*.c lib/*.c)
 HEADERS 	= $(wildcard kernel/*.h drivers/*.h lib/*.h)
 OBJ 		= $(C_SOURCES:.c=.o)
@@ -8,13 +21,13 @@ OBJ 		= $(C_SOURCES:.c=.o)
 all: eos.iso
 
 run: all
-	qemu-system-x86_64 eos.iso
+	$(VM) $(VMFLAGS) eos.iso
 
 
 drun: clean run
 
 grub: eos_grub.iso
-	qemu-system-x86_64 eos_grub.iso
+	$(VM) $(VMFLAGS) eos_grub.iso
 
 eos_grub.iso : kernel.bin grub/grub.cfg
 	mkdir -p boot/grub
@@ -26,17 +39,17 @@ eos.iso: bootloader/bootloader.bin kernel.bin
 	cat $^ > eos.iso
 
 kernel.bin: kernel/kernel_entry.o kernel/enable_paging.o $(OBJ) 
-	gcc -o $@ $^ -Wl,--oformat=binary -ffreestanding -nostdlib -shared -Ttext 0x1000 -m32
+	$(LD) -o $@ $^ $(LDFLAGS) 
 
 
 %.o : %.c ${HEADERS}
 	$(CC) $(CFLAGS) -c $< -o $@
 
 %.o : %.asm
-	nasm $< -f elf -o $@
+	$(AA) $< -f elf -o $@ $(AFLAGS)
 
 %.bin : %.asm
-	nasm $< -f bin -o $@
+	$(AA) $< -f bin -o $@ $(AFLAGS)
 
 clean:
 	rm -fr *.bin *.dis *.o eos.iso *.map boot/ *.iso
