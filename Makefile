@@ -1,6 +1,9 @@
-C_SOURCES = $(wildcard kernel/*.c drivers/*.c lib/*.c)
-HEADERS = $(wildcard kernel/*.h drivers/*.h lib/*.h)
-OBJ = $(C_SOURCES:.c=.o)
+CC			= gcc
+CFLAGS 		= -fno-pie -m32 -Os -ffreestanding
+
+C_SOURCES 	= $(wildcard kernel/*.c drivers/*.c lib/*.c)
+HEADERS 	= $(wildcard kernel/*.h drivers/*.h lib/*.h)
+OBJ 		= $(C_SOURCES:.c=.o)
 
 all: eos.iso
 
@@ -27,7 +30,7 @@ kernel.bin: kernel/kernel_entry.o kernel/enable_paging.o $(OBJ)
 
 
 %.o : %.c ${HEADERS}
-	gcc -fno-pie -m32 -Os -ffreestanding -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 %.o : %.asm
 	nasm $< -f elf -o $@
