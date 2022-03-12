@@ -1,12 +1,9 @@
 # TO DO 
- - Malloc
- - String Library
- 	
-	- Concat
-	- Format
+ - Multiboot (read end of memory etc)
+ - String interpolation
+ - Screen scrolling
 
- - Scrolling
- - Multiboot support (for grub etc)
- - Rendering (VGA) 
- - User input (Keyboard)
- - File system?
+## Long term
+ - Get rust lang to work/switch to rust
+ - Shell?
+ - Improve memory management
