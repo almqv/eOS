@@ -1,6 +1,6 @@
 #include "kernel.h"
 
-void init() {
+void kernel_init() {
 	vga_init(); 	// Initialize the screen first
 			// i.e. clear the screen et cetera.
 

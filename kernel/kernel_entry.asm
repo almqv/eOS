@@ -1,8 +1,8 @@
 [bits 32]
-[extern init]
+[extern kernel_init]
 
 multiboot2:
 	dw 0xE85250D6
 
-call init 
+call kernel_init 
 jmp $
