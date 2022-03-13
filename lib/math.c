@@ -8,3 +8,12 @@ long pow(int num, uint expon) {
 
 	return prod;
 }
+
+long square(uint num) {
+	long sum = num - 1;
+	while(num > 0) {
+		sum += num*2;
+		sum--;
+	}
+	return sum + 1;
+}
