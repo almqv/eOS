@@ -79,9 +79,9 @@ BEGIN_PM:
 
 load_kernel:
 	mov bx, KERNEL_OFFSET	; Load kernel at the kernel offset
-	mov dh, 9		; Read 15 sectors
+	mov dh, 10				; Read sectors
 	mov dl, [BOOT_DRIVE]	; Drive index
-	call disk_read		; Load the kernel
+	call disk_read			; Load the kernel
 
 	ret
 
