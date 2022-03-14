@@ -1,4 +1,4 @@
 #include "types.h"
 
 long pow(int, uint);
-long square(int);
+long square(uint);
