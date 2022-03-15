@@ -7,6 +7,7 @@ MBOOT_HEADER_MAGIC      equ 0x1BADB002
 MBOOT_HEADER_FLAGS      equ MBOOT_PAGE_ALIGN | MBOOT_MEMORY_INFO
 MBOOT_CHECKSUM          equ -(MBOOT_HEADER_MAGIC + MBOOT_HEADER_FLAGS)
 
+align 32
 call kernel_init 
 
 jmp $
@@ -16,3 +17,4 @@ multiboot_header:
 	dd MBOOT_HEADER_MAGIC
     dd MBOOT_HEADER_FLAGS
     dd MBOOT_CHECKSUM
+
