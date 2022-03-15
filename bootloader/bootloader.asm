@@ -27,6 +27,7 @@
 %include "bootloader/bios/convert.asm"
 %include "bootloader/bios/print.asm"
 %include "bootloader/bios/disk.asm"
+%include "bootloader/bios/memory.asm"
 
 ; Protected Mode SRs 
 %include "bootloader/equ/vga.asm"
@@ -43,7 +44,7 @@ pm_preinit:
 	lgdt [gdt_descriptor] 	; Tell the CPU about the GDT
 
 	mov eax, cr0		; Set first bit of the CR0 register
-	or eax, 0x1		; to 1
+	or eax, 0x1			; to 1
 	mov cr0, eax		; Update the control register
 
 	; Initialize PM
