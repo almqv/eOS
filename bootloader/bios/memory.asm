@@ -11,8 +11,10 @@ addr_eng_dt_end:
 map_phys_mem_init:
 	mov ebx, 0
 map_phys_mem:
-	mov eax, 0xe820 ; Function code
+	mov eax, 0xE820 ; Function code
+	; Tell the CPU about the descriptors location (ES:DI)
 	;mov es, addr_rng_dt_start
+	;mov di,
 	mov edx, 'SMAP' ; Signature
 	int BIOS_PMEM_INT
 
