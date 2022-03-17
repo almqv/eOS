@@ -9,13 +9,9 @@
 	mov sp, bp
 
 	; Load kernel into memory
-	mov bx, stat_kernel_load
-	call println
 	call load_kernel
 
 	; Switching to PM
-	mov bx, stat_pm_init
-	call println
 	call pm_preinit
 
 	jmp $  ; inf loop
@@ -67,13 +63,8 @@ pm_init:
 	call BEGIN_PM
 
 BEGIN_PM:
-	; Inform of mode switch
-	mov ebx, stat_boot_success 
-	call vga_print
-
-	; Execute kernel code
+	; Call the kernel 
 	call KERNEL_OFFSET
-
 	jmp $
 
 [bits 16]
@@ -85,10 +76,6 @@ load_kernel:
 	call disk_read			; Load the kernel
 
 	ret
-
-stat_pm_init:		db "Entering 32bit Protected Mode...", ASCII_END
-stat_kernel_load:	db "Loading kernel into memory...", ASCII_END
-stat_boot_success:	db "Booting finished. Loading kernel...", ASCII_END
 
 BOOT_DRIVE: db 0
 

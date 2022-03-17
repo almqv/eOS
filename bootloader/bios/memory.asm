@@ -1,8 +1,4 @@
 ; SRs to find memory size and leave it as a "note" for the kernel
-[org 0x0000]
-
-sig_0x15: db "SMAP"
-
 ; Descriptor Table for address ranges
 addr_rng_dt_start:	
 	addr_rng_low: dd 0
@@ -16,8 +12,8 @@ map_phys_mem_init:
 	mov ebx, 0
 map_phys_mem:
 	mov eax, 0xe820 ; Function code
-	mov es, addr_rng_dt_start
-	mov edx, sig_0x15 ; Signature
+	;mov es, addr_rng_dt_start
+	mov edx, 'SMAP' ; Signature
 	int BIOS_PMEM_INT
 
 
