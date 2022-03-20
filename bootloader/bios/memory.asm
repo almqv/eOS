@@ -21,6 +21,7 @@ mmap_e820:
 	mov eax, 0xe820	; function reg
 	mov edx, 'SMAP'
 
+	; TODO: update es:di to e820_dt
 	mov [es:di + 20], dword 1	; fill
 	mov ecx, 24					; ask for 24 bytes
 	int 0x15					; Do the interupt
