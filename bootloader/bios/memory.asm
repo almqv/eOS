@@ -1,5 +1,18 @@
 ; SRs to find memory size and leave it as a "note" for the kernel
 
+mmap_probe:		; literally just test the memory boundaries
+	push eax
+	push ebx
+	push edx
+	push ebp
+
+	mov ebp, esi
+	add esi, 0x00000ff
+	and esi, ~0x00000ff
+mmap_probe_addr:
+
+mmap_probe_done:
+
 mmap_e820:
 	mov di, 0x8004
 	mov ebx, 0	; Must be 0 
@@ -13,16 +26,15 @@ mmap_e820:
 	int 0x15					; Do the interupt
 
 	; carry flag = (un)supported function
-	jc short mmap_fail
+	jc short mmap_e820_fail		; Try probing instead
 
-	; TODO more error stuff
-	cmp eax, edx
-	jne short mmap_fail
+	cmp eax, edx				; eax should be = 'SMAP'
+	jne short mmap_e820_fail	; if not then fail
 
 	test ebx, ebx
-	je short mmap_fail
+	je short mmap_e820_fail
 
-mmap_fail:
+mmap_e820_fail:
 	stc
 	ret
 
