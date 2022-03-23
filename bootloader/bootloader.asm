@@ -35,6 +35,8 @@
 ; Switching to PM
 [bits 16]
 pm_preinit:
+	call mmap_e820	; Map the physical memory
+
 	cli			; Switch interupts
 
 	lgdt [gdt_descriptor] 	; Tell the CPU about the GDT
