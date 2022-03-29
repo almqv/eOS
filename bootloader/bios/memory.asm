@@ -19,7 +19,7 @@ mmap_e820:
 	mov bp, 0	; entry count
 
 	mov eax, 0xe820	; function reg
-	mov edx, 'SMAP'
+	mov edx, 'SMAP' ; function sig
 
 	; TODO: update es:di to e820_dt
 	mov [es:di + 20], dword 1	; fill
@@ -27,10 +27,10 @@ mmap_e820:
 	int 0x15					; Do the interupt
 
 	; carry flag = (un)supported function
-	jc mmap_e820_fail		; Try probing instead
+	jc mmap_e820_fail			; Try probing instead
 
 	cmp eax, edx				; eax should be = 'SMAP'
-	jne mmap_e820_fail	; if not then fail
+	jne mmap_e820_fail			; if not then fail
 
 	test ebx, ebx
 	je mmap_e820_fail
