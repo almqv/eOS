@@ -27,13 +27,13 @@ mmap_e820:
 	int 0x15					; Do the interupt
 
 	; carry flag = (un)supported function
-	jc short mmap_e820_fail		; Try probing instead
+	jc mmap_e820_fail		; Try probing instead
 
 	cmp eax, edx				; eax should be = 'SMAP'
-	jne short mmap_e820_fail	; if not then fail
+	jne mmap_e820_fail	; if not then fail
 
 	test ebx, ebx
-	je short mmap_e820_fail
+	je mmap_e820_fail
 
 mmap_e820_fail:
 	stc
