@@ -1,12 +1,12 @@
 # Compiler/assembler settings
 CC			= gcc
-CFLAGS 		= -fno-pie -m32 -Os -frfeestanding
+CFLAGS 		= -fno-pie -m32 -Os -ffreestanding
 
 AA			= nasm
 AFLAGS		= 
 
 LD			= gcc
-LDFLAGS		= -Wl,--oformat=binary -frfeestanding -nostdlib -shared -Ttext 0x1000 -m32
+LDFLAGS		= -Wl,--oformat=binary -ffreestanding -nostdlib -shared -Ttext 0x1000 -m32
 
 RS			= rustc
 RFLAGS		= --emit=obj --target i686-unknown-linux-gnu # WARN: target might not exist on your machine. Just swap it out to whatever 32bit target that you have.
