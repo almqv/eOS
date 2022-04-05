@@ -1,15 +1,21 @@
 # Compiler/assembler settings
+
+# C
 CC			= gcc
 CFLAGS 		= -fno-pie -m32 -Os -ffreestanding
 
+# Rust
+RC			= rustc
+# WARN: target might not exist on your machine. Just swap it out to whatever 32bit target that you have.
+RFLAGS		= --emit=obj --target i686-unknown-linux-gnu 
+
+# Assembly
 AA			= nasm
 AFLAGS		= 
 
+# Linking
 LD			= gcc
 LDFLAGS		= -Wl,--oformat=binary -ffreestanding -nostdlib -shared -Ttext 0x1000 -m32
-
-RS			= rustc
-RFLAGS		= --emit=obj --target i686-unknown-linux-gnu # WARN: target might not exist on your machine. Just swap it out to whatever 32bit target that you have.
 
 # VM/Debug settings
 VM			= qemu-system-x86_64
@@ -49,7 +55,7 @@ kernel.bin: kernel/kernel_entry.o kernel/enable_paging.o $(OBJ) $(ROBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 %.o : %.rs
-	$(RC) $(RFLAGS) $< -O $@ 
+	$(RC) $(RFLAGS) $< -o $@ 
 
 %.o : %.asm
 	$(AA) $< -f elf -o $@ $(AFLAGS)
