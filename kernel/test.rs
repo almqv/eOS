@@ -1,3 +1,6 @@
+#![no_std] 
+#![no_main] 
+
 extern "C" {
     fn println(text: &str);
 }

@@ -7,7 +7,8 @@ CFLAGS 		= -fno-pie -m32 -Os -ffreestanding
 # Rust
 RC			= rustc
 # WARN: target might not exist on your machine. Just swap it out to whatever 32bit target that you have.
-RFLAGS		= --emit=obj --target i686-unknown-linux-gnu 
+RTARGET		= i686-unknown-linux-gnu
+RFLAGS		= --emit=obj --target $(RTARGET)
 
 # Assembly
 AA			= nasm
@@ -55,7 +56,7 @@ kernel.bin: kernel/kernel_entry.o kernel/enable_paging.o $(OBJ) $(ROBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 %.o : %.rs
-	$(RC) $(RFLAGS) $< -o $@ 
+	$(RC) $< -o $@ $(RFLAGS)
 
 %.o : %.asm
 	$(AA) $< -f elf -o $@ $(AFLAGS)
