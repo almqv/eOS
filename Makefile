@@ -1,28 +1,32 @@
 # Compiler/assembler settings
 CC			= gcc
-CFLAGS 		= -fno-pie -m32 -Os -ffreestanding
+CFLAGS 		= -fno-pie -m32 -Os -frfeestanding
 
 AA			= nasm
 AFLAGS		= 
 
 LD			= gcc
-LDFLAGS		= -Wl,--oformat=binary -ffreestanding -nostdlib -shared -Ttext 0x1000 -m32
+LDFLAGS		= -Wl,--oformat=binary -frfeestanding -nostdlib -shared -Ttext 0x1000 -m32
+
+RS			= rustc
+RFLAGS		= --emit=obj --target i686-unknown-linux-gnu # WARN: target might not exist on your machine. Just swap it out to whatever 32bit target that you have.
 
 # VM/Debug settings
 VM			= qemu-system-x86_64
 VMFLAGS		= 
 
-
 # Do not touch these.
 C_SOURCES 	= $(wildcard kernel/*.c drivers/*.c lib/*.c)
 HEADERS 	= $(wildcard kernel/*.h drivers/*.h lib/*.h)
+R_SOURCES	= $(wildcard kernel/*.rs drivers/*.rs lib/*.rs)
+
 OBJ 		= $(C_SOURCES:.c=.o)
+ROBJ		= $(R_SOURCES:.rs=.o)
 
 all: eos.iso
 
 run: all
 	$(VM) $(VMFLAGS) eos.iso
-
 
 drun: clean run
 
@@ -38,12 +42,14 @@ eos_grub.iso : kernel.bin grub/grub.cfg
 eos.iso: bootloader/bootloader.bin kernel.bin
 	cat $^ > eos.iso
 
-kernel.bin: kernel/kernel_entry.o kernel/enable_paging.o $(OBJ) 
+kernel.bin: kernel/kernel_entry.o kernel/enable_paging.o $(OBJ) $(ROBJ)
 	$(LD) -o $@ $^ $(LDFLAGS) 
-
 
 %.o : %.c ${HEADERS}
 	$(CC) $(CFLAGS) -c $< -o $@
+
+%.o : %.rs
+	$(RC) $(RFLAGS) $< -O $@ 
 
 %.o : %.asm
 	$(AA) $< -f elf -o $@ $(AFLAGS)
@@ -52,5 +58,5 @@ kernel.bin: kernel/kernel_entry.o kernel/enable_paging.o $(OBJ)
 	$(AA) $< -f bin -o $@ $(AFLAGS)
 
 clean:
-	rm -fr *.bin *.dis *.o eos.iso *.map boot/ *.iso
-	rm -fr kernel/*.o bootloader/*.bin drivers/*.o
+	rm -rf *.bin *.dis *.o eos.iso *.map boot/ *.iso
+	rm -rf kernel/*.o bootloader/*.bin drivers/*.o
