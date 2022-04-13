@@ -5,7 +5,7 @@
 	mov [BOOT_DRIVE], dl
 
 	; Move the stack pointer somewhere safe
-	mov bp, 0x9000 ; move it to 0x9000
+	mov bp, 0xe000 
 	mov sp, bp
 
 	; Load kernel into memory

@@ -21,31 +21,41 @@ e820:
 	mov eax, 0xe820	; function reg
 	mov edx, 'SMAP' ; function sig
 
-	; TODO: update es:di to e820_dt
 	mov [es:di + 20], dword 1	; fill
 	mov ecx, 24					; ask for 24 bytes
 	int 0x15					; Do the interupt
 
 	; carry flag = (un)supported function
-	jc e820_fail			; Try probing instead
+	jc e820_fail				; TODO: Try probing instead
 
 	cmp eax, edx				; eax should be = 'SMAP'
-	jne e820_fail			; if not then fail
+	jne e820_fail				; if not then fail
 
 	test ebx, ebx				; no entries
 	je e820_fail
 
+e820_parse:
+	mov eax, 0xe820
+	mov [es:di + 20], dword 1
+	mov ecx, 24
+	int 0x15
+	jc e820_write ; carry => finished -> save entry count
 
+mmap_ent equ 0x9000
+e820_write:
+	mov [mmap_ent], bp ; save entry count at mmap_ent
+	clc
+	ret
 
 e820_fail:
 	stc
 	ret
 
-e820_dt_start:	
-	e820_low: dd 0
-	e820_high: dd 0
-	e820_len_low: dd 0
-	e820_len_high: dd 0
-	e820_type: dd 0
-e820_dt_end:
+; e820_dt_start:	
+; 	e820_low: dd 0
+; 	e820_high: dd 0
+; 	e820_len_low: dd 0
+; 	e820_len_high: dd 0
+; 	e820_type: dd 0
+; e820_dt_end:
 
