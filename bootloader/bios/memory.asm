@@ -41,9 +41,9 @@ e820_parse:
 	int 0x15
 	jc e820_write ; carry => finished -> save entry count
 
-mmap_ent equ 0x9000
+e820_ent equ 0x9820
 e820_write:
-	mov [mmap_ent], bp ; save entry count at mmap_ent
+	mov [e820_ent], bp ; save entry count at e820_ent
 	clc
 	ret
 
