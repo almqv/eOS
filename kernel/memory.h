@@ -1,5 +1,7 @@
 #include "../lib/types.h"
 
+#define BIOS_E820 (char*)0x9820
+
 #define BLOCK_SIZE 1024 // 1 KiB
 #define MAX_BLOCK_COUNT 32 // placeholder
 #define MEMSIZE_TO_BLOCKS(n) ((n*1024)/BLOCK_SIZE)
@@ -23,3 +25,5 @@ void pm_malloc_range(ulong start, ulong end, bool force); // allocate a range of
 
 pointer pm_malloc(uint block_count); // allocate some blocks
 void pm_free(int* p); // free a var (if allocated with pm_malloc)
+
+uint get_phys_mem_size(); // physical memory size with e820 left by the bootloader

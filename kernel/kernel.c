@@ -20,12 +20,7 @@ void kernel_init() {
 	char* subtitle = "A x86 operating system, licenced under GPL-2.0";
 	println(subtitle, DEFAULT_COLOR);
 
-	char* e820_addr = (char*)0x9820;
-	uint e820_count = &e820_addr;
-	if ( e820_count <= 0 ) {
-		println(":(", DEFAULT_COLOR);
-	} else {
-		println(":D", DEFAULT_COLOR);
-	}
-	
+	char* mem = (char*) get_phys_mem_size();
+	println(mem, DEFAULT_COLOR);
+
 }
