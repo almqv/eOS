@@ -34,28 +34,45 @@ e820:
 	test ebx, ebx				; no entries
 	je e820_fail
 
-e820_parse:
+e820_lp:
 	mov eax, 0xe820
 	mov [es:di + 20], dword 1
 	mov ecx, 24
 	int 0x15
 	jc e820_write ; carry => finished -> save entry count
 
-e820_ent equ 0x9820
+e820_iter:
+	; skip 0 entries
+	jcxz e820_skip
+
+	; check resp
+	cmp cl, 20
+	jbe e820_ntxt
+
+	; check the ignore bit 
+	test byte [es:di + 20], 1
+	je e820_skip
+
+e820_ntxt:
+	mov ecx, [es:di + 8] ; lower mem length
+	; test for 0
+	or ecx, [es:di + 12] 
+	jz e820_skip
+
+	; next entry
+	inc bp
+	add di, 24
+
+e820_skip:
+	test ebx, ebx ; of ebx = 0 then complete
+	jne e820_lp
+
+e820_stats_addr equ 0x9820
 e820_write:
-	mov [e820_ent], bp ; save entry count at e820_ent
+	mov [e820_stats_addr], bp ; save entry count at e820_ent
 	clc
 	ret
 
 e820_fail:
 	stc
 	ret
-
-; e820_dt_start:	
-; 	e820_low: dd 0
-; 	e820_high: dd 0
-; 	e820_len_low: dd 0
-; 	e820_len_high: dd 0
-; 	e820_type: dd 0
-; e820_dt_end:
-
