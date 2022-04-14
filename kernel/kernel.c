@@ -20,6 +20,7 @@ void kernel_init() {
 	char* subtitle = "A x86 operating system, licenced under GPL-2.0";
 	println(subtitle, DEFAULT_COLOR);
 
+	print("Ent count: ", DEFAULT_COLOR);
 	char* mem = (char*) get_phys_mem_size();
 	println(mem, DEFAULT_COLOR);
 
