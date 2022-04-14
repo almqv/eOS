@@ -24,6 +24,7 @@ static int bitmap = 0;
 static uint last_block;
 
 uint get_phys_mem_size() {
+	// TODO: read actual mappings
 	uint e820_count = (uint) *BIOS_E820;
 	return e820_count;
 }
