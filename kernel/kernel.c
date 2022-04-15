@@ -23,9 +23,14 @@ void kernel_init() {
 
 	// Allocate VGA memory range
 	pm_malloc_range(VGA_ADDRESS, VGA_ADDRESS_MAX, true); // force alloc the VGA range
-
 	// ENABLE PAGING 
 	// TODO: make this work
 	// enable_paging();
-	
+
+	set_cursor_pos(0, 8);
+	print("E820 loaded entries: ", DEFAULT_COLOR);
+	uint entries = get_phys_mem_size();
+	char* buf;
+	buf = int_to_str(entries, buf);
+	println(buf, DEFAULT_COLOR);
 }

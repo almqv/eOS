@@ -6,4 +6,5 @@
 
 #define BANNER_COLOR 0x0f
 
+void kernel_motd();
 void kernel_init();

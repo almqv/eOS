@@ -1,9 +1,14 @@
-# TO DO 
- - Multiboot (read end of memory etc)
- - String interpolation
- - Screen scrolling
+# TO DO
+ - Math lib: powf, log10, numlen
+ - Str lib: int\_to\_str
+ - Read and display e820 memory mapping
+ - (Random lib: random num from a to b?)
+ - Shell: input, execute
 
-## Long term
- - Get rust lang to work/switch to rust
- - Shell?
- - Improve memory management
+ - prog/time: show time
+ - prog/date: show date
+ - prog/mem: show amount of memory
+ - prog/bitmap: show phys bitmap
+
+# Long term
+ - Rust?
