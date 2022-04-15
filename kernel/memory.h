@@ -25,5 +25,3 @@ void pm_malloc_range(ulong start, ulong end, bool force); // allocate a range of
 
 pointer pm_malloc(uint block_count); // allocate some blocks
 void pm_free(int* p); // free a var (if allocated with pm_malloc)
-
-uint get_phys_mem_size(); // physical memory size with e820 left by the bootloader
