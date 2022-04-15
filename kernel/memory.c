@@ -29,6 +29,10 @@ uint get_phys_mem_size() {
 	return entry_count;
 }
 
+int get_bitmap() {
+	return bitmap;
+}
+
 void mod_bitmap(uint bit, uint bflag) {
 	// create a bitmask that will be applied to the bitmap
 	int bitmask = 1 << bit;

@@ -26,13 +26,13 @@ e820:
 	int 0x15					; Do the interupt
 
 	; carry flag = (un)supported function
-	jc e820_fail				; TODO: Try probing instead
+	jc e820_fail_unsup				; TODO: Try probing instead
 
 	cmp eax, edx				; eax should be = 'SMAP'
-	jne e820_fail				; if not then fail
+	jne e820_fail_smap				; if not then fail
 
 	test ebx, ebx				; no entries
-	je e820_fail
+	je e820_fail_noent
 
 e820_lp:
 	mov eax, 0xe820
@@ -72,6 +72,16 @@ e820_write:
 	mov [e820_stats_addr], bp ; save entry count at e820_ent
 	clc
 	ret
+
+e820_fail_unsup:
+	mov [e820_stats_addr], byte -1 
+	jmp e820_fail
+e820_fail_smap:
+	mov [e820_stats_addr], byte -2 
+	jmp e820_fail
+e820_fail_noent:
+	mov [e820_stats_addr], byte -3
+	jmp e820_fail
 
 e820_fail:
 	stc

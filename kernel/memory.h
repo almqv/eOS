@@ -13,6 +13,7 @@
 
 // void init_pmm(uint map_addr, uint bsize); // Initialize physical memory manager
 
+int get_bitmap();
 void mod_bitmap(uint bit, uint flag);
 
 pointer block_alloc(uint blockidx); // allocate a block
