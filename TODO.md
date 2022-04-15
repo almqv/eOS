@@ -1,5 +1,8 @@
 # TO DO
- - Read and display e820 memory mapping
+ - FIX E820
+ - CPU freq detection
+ - Screen scrolling
+ - Malloc all kernel code
  - (Random lib: random num from a to b?)
 
 ## Userland?????????
