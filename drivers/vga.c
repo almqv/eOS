@@ -16,7 +16,7 @@ void vga_init() {
 
 	// Clear screen
 	// clear_row(0);
-	clear_screen();
+	// clear_screen();
 
 	set_cursor_pos(0, 0);
 }
