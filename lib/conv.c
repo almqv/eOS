@@ -1,23 +1,37 @@
 #include "conv.h"
 #include "../drivers/vga.h"
 
-// char* int_to_str(int i, char* buf) {
-// 	ulong num = (ulong)i; // convert to ulong
-// 	uint len = ulong_len(num); // number of digits
-// 
-// 	*(buf+len) = '\0'; // add a "end-of-string" at the end
-// 
-// 	int j;
-// 	for(j = 0; j < len; j++) { // iterate over each digit and assign it to the buffer
-// 		// super dangerous memory write 
-// 		*(buf+j) = (char)(ndigit(num, len-1-j) + ASCII_OFFSET); // apply the ascii offset so that i becomes a char
-// 		println(*(buf+j), 0xc0);
-// 	}
-// 	
-// 	return buf;
-// }
+char* itoa( int value, char * str, int base ) {
+	char* rc;
+	char* ptr;
+	char* low;
 
-char* int_to_str(int i, char* buf) {
-	char* sign = (i < 0) ? "-" : "+";
-	return (char*) sign;
+	// Check for supported base.
+	if ( base < 2 || base > 36 ) {
+		*str = '\0';
+		return str;
+	}
+	rc = ptr = str;
+
+	if ( value < 0 && base == 10 )  // sign
+		*ptr++ = '-';
+
+	// Remember where the numbers start.
+	low = ptr;
+
+	// The actual conversion.
+	do {
+		// Modulo is negative for negative value. This trick makes abs() unnecessary.
+		*ptr++ = "zyxwvutsrqponmlkjihgfedcba9876543210123456789abcdefghijklmnopqrstuvwxyz"[35 + value % base];
+		value /= base;
+	} while ( value );
+	// Terminating the string.
+	*ptr-- = '\0';
+	// Invert the numbers.
+	while ( low < ptr ) {
+		char tmp = *low;
+		*low++ = *ptr;
+		*ptr-- = tmp;
+	}
+	return rc;
 }

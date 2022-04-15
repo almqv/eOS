@@ -17,6 +17,3 @@ long square(uint num) {
 	}
 	return sum + 1;
 }
-
-
-float powf(float n) {}

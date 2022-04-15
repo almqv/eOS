@@ -27,10 +27,9 @@ void kernel_init() {
 	// TODO: make this work
 	// enable_paging();
 
-	set_cursor_pos(0, 8);
 	print("E820 loaded entries: ", DEFAULT_COLOR);
 	uint entries = get_phys_mem_size();
 	char* buf;
-	buf = int_to_str(entries, buf);
+	buf = itoa(entries, buf, 10);
 	println(buf, DEFAULT_COLOR);
 }
