@@ -9,7 +9,7 @@ void print_kernel_motd() {
 
 	println("");
 	printalign("Fun fact: e = lim[h->0] (1+h)^(1/h)", DEFAULT_COLOR, MIDDLE);
-	printalign("Created by Elias Almqvist", DEFAULT_COLOR, MIDDLE);
+	printalign("Created by E. Almqvist", DEFAULT_COLOR, MIDDLE);
 	println("");
 }
 
@@ -22,7 +22,7 @@ void print_kernel_stats() {
 
 	println("");
 
-	println("Memory", 0x0f);
+	println("BIOS E820", 0x0f);
 	print("Loaded Entries: ", DEFAULT_COLOR);
 	uint entries = get_phys_mem_size();
 	buf = itoa(entries, buf, 10);
@@ -52,8 +52,8 @@ void print_kernel_stats() {
 	uint ticks = 0;
 	while (true) {
 		set_cursor_pos(0, 20);
-		buf = itoa(ticks/1000000, buf, 10);
-		print(buf, 0x0f);
+		buf = itoa(ticks, buf, 10);
+		printalign(buf, 0x0f, MIDDLE);
 		++ticks;
 	}
 
