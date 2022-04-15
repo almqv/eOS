@@ -11,8 +11,8 @@ static uint cursor_col = 0;
 
 void vga_init() {
 	// Disable cursor
-	// port_outb(0x3d4, 0x0a);
-	// port_outb(0x3d5, 0x20);
+	port_outb(0x3d4, 0x0a);
+	port_outb(0x3d5, 0x20);
 
 	// Clear screen
 	// clear_row(0);

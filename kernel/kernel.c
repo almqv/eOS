@@ -49,6 +49,13 @@ void print_kernel_stats() {
 	buf = itoa(MAX_ROWS, buf, 10);
 	println(buf, DEFAULT_COLOR);
 
+	uint ticks = 0;
+	while (true) {
+		set_cursor_pos(0, 20);
+		buf = itoa(ticks/1000000, buf, 10);
+		print(buf, 0x0f);
+		++ticks;
+	}
 
 }
 
