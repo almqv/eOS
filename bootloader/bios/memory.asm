@@ -41,7 +41,7 @@ e820_lp:
 	mov [es:di + 20], dword 1
 	mov ecx, 24
 	int 0x15
-	jc e820_write ; carry => finished -> save entry count
+	jc e820_finish ; carry => finished -> save entry count
 
 e820_iter:
 	; skip 0 entries
@@ -69,7 +69,7 @@ e820_skip:
 	test ebx, ebx ; of ebx = 0 then complete
 	jne e820_lp
 
-e820_write:
+e820_finish:
 	mov [e820_stats_addr], bp ; save entry count at e820_ent
 	clc
 	ret
