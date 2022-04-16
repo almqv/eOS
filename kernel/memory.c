@@ -22,6 +22,17 @@
 
 static int bitmap = 0; 
 static uint last_block;
+
+uint get_phys_mem_size() {
+	// TODO: read actual mappings
+	uint entry_count = (uint) *BIOS_E820;
+	return entry_count;
+}
+
+int get_bitmap() {
+	return bitmap;
+}
+
 void mod_bitmap(uint bit, uint bflag) {
 	// create a bitmask that will be applied to the bitmap
 	int bitmask = 1 << bit;
@@ -30,7 +41,6 @@ void mod_bitmap(uint bit, uint bflag) {
 	// set to bflag
 	bitmap = (((bitmap & ~bitmask)) | (bflag << bit));
 }
-
 
 pointer block_alloc(uint blockidx) {
 	int block_bflag;

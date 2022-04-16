@@ -5,7 +5,7 @@
 	mov [BOOT_DRIVE], dl
 
 	; Move the stack pointer somewhere safe
-	mov bp, 0x9000 ; move it to 0x9000
+	mov bp, 0xe000 
 	mov sp, bp
 
 	; Load kernel into memory
@@ -35,15 +35,15 @@
 ; Switching to PM
 [bits 16]
 pm_preinit:
-	call mmap_e820	; Map the physical memory
+	; Do stats before mode switch
+	call e820				; Map the physical memory
 
-	cli			; Switch interupts
-
+	; PM prep stuff
+	cli						; Switch interupts
 	lgdt [gdt_descriptor] 	; Tell the CPU about the GDT
-
-	mov eax, cr0		; Set first bit of the CR0 register
-	or eax, 0x1			; to 1
-	mov cr0, eax		; Update the control register
+	mov eax, cr0			; Set first bit of the CR0 register
+	or eax, 0x1				; to 1
+	mov cr0, eax			; Update the control register
 
 	; Initialize PM
 	jmp GDT_CODE_SEG:pm_init	

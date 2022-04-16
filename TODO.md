@@ -1,9 +1,19 @@
-# TO DO 
- - Multiboot (read end of memory etc)
- - String interpolation
+# TO DO
+ - FIX E820
+ - actual gdt
+ - CPU freq detection
+ - proc?
  - Screen scrolling
+ - Malloc all kernel code
+ - (Random lib: random num from a to b?)
 
-## Long term
- - Get rust lang to work/switch to rust
- - Shell?
- - Improve memory management
+## Userland?????????
+ - Shell: input, execute
+
+ - prog/time: show time
+ - prog/date: show date
+ - prog/mem: show amount of memory
+ - prog/bitmap: show phys bitmap
+
+# Long term
+ - Rust?
