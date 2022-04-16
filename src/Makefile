@@ -4,12 +4,6 @@
 CC			= gcc
 CFLAGS 		= -fno-pie -m32 -Os -ffreestanding
 
-# Rust
-RC			= rustc
-# WARN: target might not exist on your machine. Just swap it out to whatever 32bit target that you have.
-RTARGET		= i686-unknown-linux-gnu
-RFLAGS		= --emit=obj --target $(RTARGET)
-
 # Assembly
 AA			= nasm
 AFLAGS		= 
@@ -25,10 +19,8 @@ VMFLAGS		=
 # Do not touch these.
 C_SOURCES 	= $(wildcard kernel/*.c drivers/*.c lib/*.c)
 HEADERS 	= $(wildcard kernel/*.h drivers/*.h lib/*.h)
-R_SOURCES	= $(wildcard kernel/*.rs drivers/*.rs lib/*.rs)
 
 OBJ 		= $(C_SOURCES:.c=.o)
-ROBJ		= $(R_SOURCES:.rs=.o)
 
 all: eos.iso
 
@@ -49,14 +41,11 @@ eos_grub.iso : kernel.bin grub/grub.cfg
 eos.iso: bootloader/bootloader.bin kernel.bin
 	cat $^ > eos.iso
 
-kernel.bin: kernel/kernel_entry.o kernel/enable_paging.o $(OBJ) $(ROBJ)
+kernel.bin: kernel/kernel_entry.o kernel/enable_paging.o $(OBJ) 
 	$(LD) -o $@ $^ $(LDFLAGS) 
 
 %.o : %.c ${HEADERS}
 	$(CC) $(CFLAGS) -c $< -o $@
-
-%.o : %.rs
-	$(RC) $< -o $@ $(RFLAGS)
 
 %.o : %.asm
 	$(AA) $< -f elf -o $@ $(AFLAGS)

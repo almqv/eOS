@@ -1,7 +1,12 @@
-bin/
+src/bin/
 *.bin
 *.o
-os-image
+src/os-image
 *.dis
-boot/
+src/boot/
 *.iso
+
+
+# Added by cargo
+
+/target
