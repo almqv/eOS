@@ -60,10 +60,6 @@ void print_kernel_stats() {
 }
 
 void kernel_init() {
-	// Display a nice MOTD
-	clear_screen();
-	print_kernel_motd();
-
 	vga_init(); 	// Initialize the screen first
 					// i.e. clear the screen et cetera.
 
@@ -73,6 +69,8 @@ void kernel_init() {
 	// TODO: make this work
 	// enable_paging();
 
+	clear_screen();
+	print_kernel_motd();
 	print_kernel_stats();
 
 }
