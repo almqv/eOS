@@ -13,8 +13,10 @@
 ; 
 ; mmap_probe_done:
 
+e820_stats_addr equ 0x9820
+
 e820:
-	mov di, 0x8004
+	mov di, e820_stats_addr + 4
 	mov ebx, 0	; Must be 0 
 	mov bp, 0	; entry count
 
@@ -26,10 +28,10 @@ e820:
 	int 0x15					; Do the interupt
 
 	; carry flag = (un)supported function
-	jc e820_fail_unsup				; TODO: Try probing instead
+	jc e820_fail_unsup			; TODO: Try probing instead
 
 	cmp eax, edx				; eax should be = 'SMAP'
-	jne e820_fail_smap				; if not then fail
+	jne e820_fail_smap			; if not then fail
 
 	test ebx, ebx				; no entries
 	je e820_fail_noent
@@ -67,7 +69,6 @@ e820_skip:
 	test ebx, ebx ; of ebx = 0 then complete
 	jne e820_lp
 
-e820_stats_addr equ 0x9820
 e820_write:
 	mov [e820_stats_addr], bp ; save entry count at e820_ent
 	clc
