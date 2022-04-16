@@ -1,6 +1,8 @@
 # TO DO
  - FIX E820
+ - actual gdt
  - CPU freq detection
+ - proc?
  - Screen scrolling
  - Malloc all kernel code
  - (Random lib: random num from a to b?)
