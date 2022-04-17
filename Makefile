@@ -38,7 +38,7 @@ eos_grub.iso : kernel.bin grub/grub.cfg
 eos.iso: bootloader/bootloader.bin kernel.bin
 	cat $^ > eos.iso
 
-kernel.bin: kernel/kernel_entry.o kernel/enable_paging.o $(OBJ) 
+kernel.bin: kernel/multiboot2.o kernel/kernel_entry.o kernel/enable_paging.o $(OBJ) 
 	$(LD) -o $@ $^ $(LDFLAGS) 
 
 

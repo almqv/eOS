@@ -16,19 +16,19 @@
 e820_stats_addr equ 0x9820
 
 e820:
-	mov di, e820_stats_addr + 4
+	pusha
+	mov di, e820_stats_addr + 4 
 	mov ebx, 0	; Must be 0 
 	mov bp, 0	; entry count
 
 	mov eax, 0xe820	; function reg
-	mov edx, 'SMAP' ; function sig
+	mov edx, "SMAP" ; function sig
 
 	mov [es:di + 20], dword 1	; fill
 	mov ecx, 24					; ask for 24 bytes
 	int 0x15					; Do the interupt
 
-	; carry flag = (un)supported function
-	jc e820_fail_unsup			; TODO: Try probing instead
+	jc e820_fail_unsup			; carry flag = (un)supported function
 
 	cmp eax, edx				; eax should be = 'SMAP'
 	jne e820_fail_smap			; if not then fail
@@ -72,6 +72,7 @@ e820_skip:
 e820_finish:
 	mov [e820_stats_addr], bp ; save entry count at e820_ent
 	clc
+	popa
 	ret
 
 e820_fail_unsup:
@@ -86,4 +87,5 @@ e820_fail_noent:
 
 e820_fail:
 	stc
+	popa
 	ret

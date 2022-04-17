@@ -8,6 +8,9 @@
 	mov bp, 0xe000 
 	mov sp, bp
 
+	; BIOS stuff
+	call e820 ; map physical memory
+
 	; Load kernel into memory
 	call load_kernel
 
@@ -35,8 +38,6 @@
 ; Switching to PM
 [bits 16]
 pm_preinit:
-	; Do stats before mode switch
-	call e820				; Map the physical memory
 
 	; PM prep stuff
 	cli						; Switch interupts
@@ -70,7 +71,6 @@ BEGIN_PM:
 	jmp $
 
 [bits 16]
-
 load_kernel:
 	mov bx, KERNEL_OFFSET	; Load kernel at the kernel offset
 	mov dh, 10				; Read sectors

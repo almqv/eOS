@@ -1,8 +1,13 @@
 # TO DO
- - FIX E820
- - actual gdt
- - CPU freq detection
+ - IDT
+ - Interputs
+ - keeb drivers
+----------------
+ - shell?
  - proc?
+ - CPU freq detection
+
+ - FIX E820
  - Screen scrolling
  - Malloc all kernel code
  - (Random lib: random num from a to b?)
