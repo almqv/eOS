@@ -31,7 +31,7 @@ void idt_set_desc(uint8 idx, void* isr, uint8 flags) {
 	idt_entry* desc = &IDT[idx]; // get descriptor
 
 	desc->offset_1	= (uint) isr & 0xffff;
-	desc->selector	= 0x08; // kernel code selector for the GDT (null is 0x0 - 0x4 => code is 0x05 to something...)
+	desc->selector	= 0x08; // kernel code selector for the GDT 
 	desc->reserved	= 0; 
 	desc->type_attr	= flags;
 	desc->offset_2	= (uint) isr >> 16;
