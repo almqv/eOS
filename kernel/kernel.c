@@ -52,7 +52,6 @@ void print_kernel_stats() {
 }
 
 void kernel_init() {
-	idt_init();		// Enable interupts
 
 	vga_init(); 	// Initialize the screen first
 					// i.e. clear the screen et cetera.
@@ -67,6 +66,6 @@ void kernel_init() {
 	print_kernel_motd();
 	print_kernel_stats();
 
+	idt_init();		// Enable interupts
 	while(true) {}
-
 }

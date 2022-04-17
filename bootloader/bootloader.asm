@@ -60,7 +60,7 @@ pm_init:
 	mov fs, ax
 	mov gs, ax
 
-	mov ebp, 0x900000	; Update the stack pointer
+	mov ebp, 0xf00000	; Update the stack pointer
 	mov esp, ebp
 
 	call BEGIN_PM
