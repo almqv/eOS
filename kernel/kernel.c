@@ -49,14 +49,6 @@ void print_kernel_stats() {
 	buf = itoa(MAX_ROWS, buf, 10);
 	println(buf, DEFAULT_COLOR);
 
-	uint ticks = 0;
-	while (true) {
-		set_cursor_pos(0, 20);
-		buf = itoa(ticks, buf, 10);
-		printalign(buf, 0x0f, MIDDLE);
-		++ticks;
-	}
-
 }
 
 void kernel_init() {
@@ -74,5 +66,7 @@ void kernel_init() {
 	clear_screen();
 	print_kernel_motd();
 	print_kernel_stats();
+
+	while(true) {}
 
 }

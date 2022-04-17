@@ -73,7 +73,7 @@ BEGIN_PM:
 [bits 16]
 load_kernel:
 	mov bx, KERNEL_OFFSET	; Load kernel at the kernel offset
-	mov dh, 10				; Read sectors
+	mov dh, 14				; Read sectors
 	mov dl, [BOOT_DRIVE]	; Drive index
 	call disk_read			; Load the kernel
 
