@@ -1,7 +1,7 @@
 # TO DO
- - IDT
- - Interputs
- - keeb drivers
+ - PIC
+ - Interupts
+ - keeb?
 ----------------
  - shell?
  - proc?
