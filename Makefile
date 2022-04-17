@@ -15,14 +15,15 @@ VMFLAGS		=
 
 # Do not touch these.
 C_SOURCES 	= $(wildcard kernel/*.c drivers/*.c lib/*.c)
+ASM_SOURCES	= $(wildcard kernel/*.asm drivers/*.asm lib/*.asm)
 HEADERS 	= $(wildcard kernel/*.h drivers/*.h lib/*.h)
 OBJ 		= $(C_SOURCES:.c=.o)
+AOBJ		= $(ASM_SOURCES:.asm=.o)
 
 all: eos.iso
 
 run: all
 	$(VM) $(VMFLAGS) eos.iso
-
 
 drun: clean run
 
@@ -38,9 +39,8 @@ eos_grub.iso : kernel.bin grub/grub.cfg
 eos.iso: bootloader/bootloader.bin kernel.bin
 	cat $^ > eos.iso
 
-kernel.bin: kernel/multiboot2.o kernel/kernel_entry.o kernel/enable_paging.o $(OBJ) 
+kernel.bin: kernel/kernel_entry.o $(OBJ) $(AOBJ)
 	$(LD) -o $@ $^ $(LDFLAGS) 
-
 
 %.o : %.c ${HEADERS}
 	$(CC) $(CFLAGS) -c $< -o $@
