@@ -60,6 +60,8 @@ void print_kernel_stats() {
 }
 
 void kernel_init() {
+	idt_init();		// Enable interupts
+
 	vga_init(); 	// Initialize the screen first
 					// i.e. clear the screen et cetera.
 

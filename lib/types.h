@@ -10,8 +10,9 @@ typedef unsigned char uint8;
 typedef short int int16;
 typedef unsigned short int uint16;
 
-// MISC
+// POINTERS 
 typedef char* pointer;
+typedef unsigned long int uintptr;
 
 // BOOL
 typedef int bool;

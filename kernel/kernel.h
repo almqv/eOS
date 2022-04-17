@@ -1,3 +1,4 @@
+#include "interupt.h"
 #include "memory.h"
 #include "paging.h"
 #include "../drivers/vga.h"
