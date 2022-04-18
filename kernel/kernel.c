@@ -48,14 +48,19 @@ void print_kernel_stats() {
 	print("x");
 	buf = itoa(MAX_ROWS, buf, 10);
 	println(buf, DEFAULT_COLOR);
-
+	
+	int i = 0;
+	while(true) {
+		set_cursor_pos(0, 20);
+		buf = itoa(i, buf, 10);
+		printalign(buf, 0x0f, MIDDLE);
+		++i;
+	}
 }
 
 void kernel_init() {
 	idt_init();		// Enable interupts
-
-	vga_init(); 	// Initialize the screen first
-					// i.e. clear the screen et cetera.
+	vga_init(); 	// Initialize the screen
 
 	// Allocate VGA memory range
 	pm_malloc_range(VGA_ADDRESS, VGA_ADDRESS_MAX, true); // force alloc the VGA range

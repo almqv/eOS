@@ -1,6 +1,5 @@
 # TO DO
- - PIC
- - Interupts
+ - Interupt handlers
  - keeb?
 ----------------
  - shell?
