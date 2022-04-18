@@ -11,6 +11,7 @@
 #define PIC2_CMD	PIC2
 #define PIC2_DATA	(PIC2+1)
 
+// ICWx
 #define ICW1_ICW4		0x01
 #define ICW1_SINGLE		0x02
 #define ICW1_INTERVAL4	0x04
@@ -24,6 +25,10 @@
 #define ICW4_SFNM		0x10	
 
 #define ICW_INIT_MASK	(ICW1_INIT | ICW1_ICW4)
+
+// ISR & IRR
+#define PIC_R_IRR		0x0a
+#define PIC_R_ISR		0x0b
 
 // Ints
 #define PIC_EOI	0x20 // End-of-interupt

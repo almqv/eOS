@@ -32,6 +32,7 @@ void pic_remap(uint offset_1, uint offset_2) {
 }
 
 // disable the PIC
+// will probably never use this.
 void pic_disable() {
 	outb(PIC1_DATA, 0xff);
 	outb(PIC2_DATA, 0xff);
