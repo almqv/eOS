@@ -20,6 +20,7 @@ void clear_row(unsigned int row);
 void set_cursor_pos();
 void print();
 void println();
+void new_line();
 void printint(int i, int attribute_byte);
 void printalign(char* str, int attribute_byte, enum align alignment);
 void vga_init();

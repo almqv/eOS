@@ -18,13 +18,18 @@ static idt_entry IDT[IDT_MAX_DESCS];
 static idtr	IDTR;
 
 void exception_handler() {
-	__asm__ __volatile__("cli; hlt");
-}
+	uint* debug_ptr = 0xe222;
+	uint8 debug = *debug_ptr;
 
-void interupt_handler() {
-	__asm__("pusha");
-	// handle stuff
-	__asm__("popa; leave; iret");
+	char* buf;
+
+	new_line();
+	print("Exception: ", INT_COLOR);
+
+	buf = itoa(debug, buf, 10);
+	println(buf, 0x0f);
+
+	//__asm__ __volatile__("cli; hlt");
 }
 
 void idt_set_desc(uint8 idx, void* isr, uint8 flags) {

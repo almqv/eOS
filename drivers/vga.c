@@ -69,10 +69,19 @@ void print(char* str, int attribute_byte) {
 	cursor_col += strlen(str);
 }
 
-void println(char* str, int attribute_byte) {
-	print(str, attribute_byte);
-	cursor_row++; // Increment to next y-pos (newline)
+void new_line() {
+	cursor_row++;
 	cursor_col = 0;
+}
+
+void println(char* str, int attribute_byte) {
+	if( cursor_row > MAX_ROWS ) {
+		set_cursor_pos(0, MAX_ROWS);
+		println(str, attribute_byte);
+		return;
+	}
+	print(str, attribute_byte);
+	new_line();
 }
 
 void printint(int i, int attribute_byte) {

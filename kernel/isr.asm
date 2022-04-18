@@ -1,13 +1,15 @@
-; osdev crap
+isr_debug_ptr equ 0xe222
 
 %macro isr_err_stub 1
 isr_stub_%+%1:
+	mov [isr_debug_ptr], byte %1
 	call exception_handler
 	iret	
 %endmacro
 
 %macro isr_no_err_stub 1
 isr_stub_%+%1:
+	mov [isr_debug_ptr], byte %1
 	call exception_handler
 	iret
 %endmacro
