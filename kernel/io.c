@@ -24,3 +24,6 @@ unsigned short port_inw(unsigned short port) {
 void port_outw(unsigned short port, unsigned short data) {
 	__asm__("out %%ax, %%dx" : :"a" (data), "d" (port));
 }
+
+
+static inline void io_wait() { port_outb(0x80, 0); }
