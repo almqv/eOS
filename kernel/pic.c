@@ -36,3 +36,24 @@ void pic_disable() {
 	outb(PIC1_DATA, 0xff);
 	outb(PIC2_DATA, 0xff);
 }
+
+// set a specific irq
+void irq(uint8 idx, bool t) {
+	uint16 port;
+	uint8 data;
+
+	if(idx < 8) {
+		port = PIC1_DATA;
+	} else {
+		port = PIC2_DATA;
+		idx -= 8;
+	}
+
+	if( t == true ) { // set irq 
+		data = inb(port) | (1 << idx);
+		outb(port, data);
+	} else { // clear irq
+		data = inb(port) & ~(1 << idx);
+		outb(port, data);
+	}
+}

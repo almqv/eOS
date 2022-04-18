@@ -34,4 +34,6 @@ void pic_remap(uint, uint);
 void pic_disable();
 
 // IRQs
-void irq_set(uint8);
+void irq(uint8, bool);
+
+static uint16 irq_reg(int ocw3);
