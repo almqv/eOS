@@ -15,6 +15,7 @@ void print_kernel_motd() {
 
 void print_kernel_stats() {
 	char* buf;
+	set_cursor_pos(0, 12);
 	// Memory stats
 	print("MEMORY BITMAP: ", 0x0f);
 	buf = itoa(get_bitmap(), buf, 2);
@@ -50,8 +51,10 @@ void print_kernel_stats() {
 	println(buf, DEFAULT_COLOR);
 	
 	int i = 0;
+	set_cursor_pos(0, 9);
+	printalign("[Ticks since boot]", 0xf0, MIDDLE);
 	while(true) {
-		set_cursor_pos(0, 20);
+		set_cursor_pos(0, 10);
 		buf = itoa(i, buf, 10);
 		printalign(buf, 0x0f, MIDDLE);
 		++i;
