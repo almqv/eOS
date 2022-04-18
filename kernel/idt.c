@@ -1,4 +1,4 @@
-#include "interupt.h"
+#include "idt.h"
 
 typedef struct {
 	uint16	offset_1;	// offset 0 to 15 bits

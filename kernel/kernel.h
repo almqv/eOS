@@ -1,4 +1,4 @@
-#include "interupt.h"
+#include "idt.h"
 #include "pic.h"
 #include "memory.h"
 #include "paging.h"
