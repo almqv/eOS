@@ -38,7 +38,7 @@ void pic_disable() {
 	outb(PIC2_DATA, 0xff);
 }
 
-// set a specific irq
+// (un)set a specific irq
 void irq(uint8 idx, bool t) {
 	uint16 port;
 	uint8 data;
