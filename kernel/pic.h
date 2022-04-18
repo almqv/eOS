@@ -28,5 +28,10 @@
 // Ints
 #define PIC_EOI	0x20 // End-of-interupt
 
-void PIC_sendEOI(uint8);
-void PIC_remap(uint, uint);
+// PIC
+void pic_send_eoi(uint8);
+void pic_remap(uint, uint);
+void pic_disable();
+
+// IRQs
+void irq_set(uint8);
