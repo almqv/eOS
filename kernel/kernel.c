@@ -50,7 +50,7 @@ void print_kernel_stats() {
 	buf = itoa(MAX_ROWS, buf, 10);
 	println(buf, DEFAULT_COLOR);
 	
-	int i = 0;
+	uint i = 0;
 	set_cursor_pos(0, 9);
 	printalign("[Ticks since boot]", 0xf0, MIDDLE);
 	while(true) {
