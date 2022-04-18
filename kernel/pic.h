@@ -23,6 +23,8 @@
 #define ICW4_BUF_MASTER	0x0C	
 #define ICW4_SFNM		0x10	
 
+#define ICW_INIT_MASK	(ICW1_INIT | ICW1_ICW4)
+
 // Ints
 #define PIC_EOI	0x20 // End-of-interupt
 

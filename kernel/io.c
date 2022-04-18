@@ -1,5 +1,5 @@
 // Function to read a byte from port
-unsigned char port_inb(unsigned short port) {
+unsigned char inb(unsigned short port) {
 	unsigned char res;
 	__asm__("in %%dx, %%al" : "=a" (res) : "d" (port));
 
@@ -7,13 +7,13 @@ unsigned char port_inb(unsigned short port) {
 }
 
 // to write a byte to port
-void port_outb(unsigned short port, unsigned char data) {
+void outb(unsigned short port, unsigned char data) {
 	__asm__("out %%al, %%dx" : :"a" (data), "d" (port));	
 }
 
 
 // Read word from port
-unsigned short port_inw(unsigned short port) {
+unsigned short inw(unsigned short port) {
 	unsigned short res;
 	__asm__("in %%dx, %%ax" : "=a" (res) : "d" (port));
 
@@ -21,9 +21,32 @@ unsigned short port_inw(unsigned short port) {
 }
 
 // write word to port
-void port_outw(unsigned short port, unsigned short data) {
+void outw(unsigned short port, unsigned short data) {
 	__asm__("out %%ax, %%dx" : :"a" (data), "d" (port));
 }
 
 
-static inline void io_wait() { port_outb(0x80, 0); }
+static inline void io_wait() { 
+	outb(0x80, 0); 
+}
+
+unsigned char inb_w(unsigned short port) {
+	inb(port);
+	io_wait();
+}
+
+void outb_w(unsigned short port, unsigned char data) {
+	outb(port, data);
+	io_wait();
+}
+
+unsigned short inw_w(unsigned short port) {
+	inw(port);
+	io_wait();
+}
+
+void outw_w(unsigned short port, unsigned short data) {
+	outw(port, data);
+	io_wait();
+}
+
