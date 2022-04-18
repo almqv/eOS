@@ -42,3 +42,5 @@ void pic_disable();
 void irq(uint8, bool);
 
 static uint16 irq_reg(int ocw3);
+uint16 get_irr();
+uint16 get_isr();

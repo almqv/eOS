@@ -58,3 +58,13 @@ void irq(uint8 idx, bool t) {
 		outb(port, data);
 	}
 }
+
+static uint16 irq_reg(int ocw3) {
+	outb(PIC1_CMD, ocw3);
+	outb(PIC2_CMD, ocw3);
+	return (inb(PIC2_CMD) << 8 | inb(PIC1_CMD));
+}
+
+uint16 get_irr() { return irq_reg(PIC_R_IRR); } // fetch IRR 
+uint16 get_isr() { return irq_reg(PIC_R_ISR); } // fetch ISR
+
