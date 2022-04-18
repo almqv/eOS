@@ -23,12 +23,12 @@ void exception_handler() {
 
 	char* buf;
 
-	print("[E] ", INT_COLOR);
+	print("[exc] ", INT_COLOR);
 
 	buf = itoa(debug, buf, 10);
 	println(buf, 0x0f);
 
-	__asm__ __volatile__("cli; iret");
+	__asm__ __volatile__("cli; hlt");
 }
 
 void idt_set_desc(uint8 idx, void* isr, uint8 flags) {
