@@ -10,7 +10,7 @@ LDFLAGS		= -Wl,--oformat=binary -ffreestanding -nostdlib -shared -Ttext 0x1000 -
 
 # VM/Debug settings
 VM			= qemu-system-x86_64
-VMFLAGS		= -usb 
+VMFLAGS		= -serial stdio
 
 
 # Do not touch these.

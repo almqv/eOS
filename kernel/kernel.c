@@ -65,6 +65,7 @@ void kernel_init() {
 
 	clear_screen();
 	print_kernel_motd();
+	print_kernel_stats();
 
 	char* buf;
 	uint i = 0;
@@ -76,5 +77,4 @@ void kernel_init() {
 		printalign(buf, 0x0f, MIDDLE);
 		++i;
 	}
-	//print_kernel_stats();
 }
