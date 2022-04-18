@@ -54,6 +54,7 @@ void print_kernel_stats() {
 }
 
 void kernel_init() {
+	pic_init();		// Init the PIC and remap it
 	idt_init();		// Enable interupts
 	vga_init(); 	// Initialize the screen
 
@@ -61,11 +62,11 @@ void kernel_init() {
 	pm_malloc_range(VGA_ADDRESS, VGA_ADDRESS_MAX, true); // force alloc the VGA range
 	// ENABLE PAGING 
 	// TODO: make this work
-	// enable_paging();
+	//enable_paging();
 
 	clear_screen();
 	print_kernel_motd();
-	print_kernel_stats();
+	//print_kernel_stats();
 
 	char* buf;
 	uint i = 0;
@@ -77,4 +78,6 @@ void kernel_init() {
 		printalign(buf, 0x0f, MIDDLE);
 		++i;
 	}
+
+	while(true) { __asm__("hlt"); } // never escape this function
 }

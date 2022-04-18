@@ -37,6 +37,7 @@
 void pic_send_eoi(uint8);
 void pic_remap(uint, uint);
 void pic_disable();
+void pic_init();
 
 // IRQs
 void irq(uint8, bool);

@@ -23,10 +23,10 @@ void exception_handler() {
 
 	char* buf;
 
-	print("[exc] ", INT_COLOR);
+	print("[exc] ", EXC_COLOR);
 
 	buf = itoa(debug, buf, 10);
-	println(buf, 0x0f);
+	println(buf, 0x0c);
 
 	__asm__ __volatile__("cli; hlt");
 }

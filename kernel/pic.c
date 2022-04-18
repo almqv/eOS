@@ -38,6 +38,11 @@ void pic_disable() {
 	outb(PIC2_DATA, 0xff);
 }
 
+
+void pic_init() {
+	pic_remap(PIC1, PIC2);
+}
+
 // (un)set a specific irq
 void irq(uint8 idx, bool t) {
 	uint16 port;

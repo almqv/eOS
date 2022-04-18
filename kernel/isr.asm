@@ -10,7 +10,7 @@ isr_stub_%+%1:
 %macro isr_no_err_stub 1
 isr_stub_%+%1:
 	mov [isr_debug_ptr], byte %1
-	;call exception_handler
+	call exception_handler
 	iret
 %endmacro
 

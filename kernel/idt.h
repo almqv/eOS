@@ -1,7 +1,7 @@
 #include "../lib/types.h"
 
 #define IDT_MAX_DESCS 256
-#define INT_COLOR	0x08
+#define EXC_COLOR	0x08
 
 __attribute__((noreturn))
 void exception_handler();
