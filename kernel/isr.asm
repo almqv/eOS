@@ -1,13 +1,9 @@
 isr_debug_ptr equ 0xe222
-isr_eip_ptr equ 0xe223
 
 %macro isr_err_stub 1
 isr_stub_%+%1:
 	; Save exception vec 
 	mov [isr_debug_ptr], byte %1
-
-	; Save the instruction pointer
-	mov [isr_eip_ptr], dword eax
 
 	; Handle the exception
 	call exception_handler

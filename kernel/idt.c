@@ -26,15 +26,6 @@ void exception_handler() {
 	print("[exc] ", EXC_COLOR);
 	buf = itoa(debug, buf, 10);
 	print(buf, 0x0c);
-
-	if( debug == 13 ) { // General Protection Fault 
-		uint* eip_ptr = 0xe223;
-		uint eip = *eip_ptr;	
-		buf = itoa(eip, buf, 16);
-		print(" eax=", EXC_COLOR);
-		print(buf, 0x0e);
-	}
-
 	new_line();
 
 	__asm__ __volatile__("cli; hlt");
