@@ -24,7 +24,7 @@
 #define ICW4_BUF_MASTER	0x0C	
 #define ICW4_SFNM		0x10	
 
-#define ICW_INIT_MASK	(ICW1_INIT | ICW1_ICW4)
+#define ICW_INIT_MASK	(ICW1_INIT | ICW1_ICW4) // 0x11
 
 // ISR & IRR
 #define PIC_R_IRR		0x0a

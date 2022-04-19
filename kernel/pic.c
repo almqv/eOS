@@ -7,35 +7,35 @@ void pic_send_eoi(uint8 irq) {
 	outb(PIC1_CMD, PIC_EOI);
 }
 
-void pic_remap(uint offset_1, uint offset_2) {
-	// Start the init sequance
-	outb_w(PIC1_CMD, ICW_INIT_MASK);
-
-	outb_w(PIC2_CMD, ICW_INIT_MASK);
-
-	outb_w(PIC1_DATA, offset_1); 
-	outb_w(PIC2_DATA, offset_2); 
-
-	outb_w(PIC1_DATA, 0x4); 
-	outb_w(PIC2_DATA, 0x2);
-
-	outb_w(PIC1_DATA, ICW4_8086);
-	outb_w(PIC2_DATA, ICW4_8086);
-
-	outb(PIC1_DATA, 0xff);
-	outb(PIC2_DATA, 0xff);
-}
-
 // disable the PIC
-// will probably never use this.
 void pic_disable() {
 	outb(PIC1_DATA, 0xff);
 	outb(PIC2_DATA, 0xff);
 }
 
+void pic_remap(uint offset_1, uint offset_2) {
+	// Start the init sequance
+	outb_w(PIC1_CMD, ICW_INIT_MASK); // write ICW1 to PIC master
+	outb_w(PIC2_CMD, ICW_INIT_MASK); // --||-- to PIC slave
+
+	outb_w(PIC1_DATA, offset_1);  // remap master
+	outb_w(PIC2_DATA, offset_2);  // remap slave
+
+	outb_w(PIC1_DATA, 0x04); // IRQ2 to slave 
+	outb_w(PIC2_DATA, 0x02);
+
+	outb_w(PIC1_DATA, ICW4_8086); // write ICW4 to PIC master
+	outb_w(PIC2_DATA, ICW4_8086); // --||-- to PIC slave
+
+	//pic_disable();
+
+	// enable all
+	outb(PIC1_DATA, 0x01);
+	outb(PIC2_DATA, 0x01);
+}
 
 void pic_init() {
-	pic_remap(PIC1, PIC2);
+	pic_remap(0x20, 0x28);
 }
 
 // (un)set a specific irq

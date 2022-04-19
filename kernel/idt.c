@@ -18,14 +18,11 @@ static idt_entry IDT[IDT_MAX_DESCS];
 static idtr	IDTR;
 
 void interupt_handler(uint interupt) {
-	uint* exc_ptr = 0xe222;
-	uint8 exc = *exc_ptr;
-
 	pic_send_eoi(interupt);
 
 	char* buf;
 	set_cursor_pos(0, 0);
-	print("[exc] ", EXC_COLOR);
+	print("[int] ", EXC_COLOR);
 	buf = itoa(interupt, buf, 10);
 	print(buf, 0x0c);
 }
