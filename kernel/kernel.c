@@ -66,7 +66,7 @@ void kernel_init() {
 
 	clear_screen();
 	print_kernel_motd();
-	//print_kernel_stats();
+	print_kernel_stats();
 
 	char* buf;
 	uint i = 0;
