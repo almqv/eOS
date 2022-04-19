@@ -17,16 +17,16 @@ __attribute__((aligned(16)))
 static idt_entry IDT[IDT_MAX_DESCS];
 static idtr	IDTR;
 
-void exception_handler() {
+void interupt_handler(uint interupt) {
 	uint* exc_ptr = 0xe222;
 	uint8 exc = *exc_ptr;
 
-	pic_send_eoi(exc);
+	pic_send_eoi(interupt);
 
 	char* buf;
 	set_cursor_pos(0, 0);
 	print("[exc] ", EXC_COLOR);
-	buf = itoa(exc, buf, 10);
+	buf = itoa(interupt, buf, 10);
 	print(buf, 0x0c);
 }
 
@@ -52,9 +52,10 @@ void idt_init() {
 		idt_set_desc(idx, isr_stub_table[idx], 0x8e);
 
 
+	/*
 	outb_w(PIC1, 0xfd);
 	outb_w(PIC2, 0xfd);
+	*/
 	__asm__ __volatile__("lidt %0" : : "m"(IDTR));
-
-	//__asm__ __volatile__("sti"); 
+	__asm__ __volatile__("sti"); 
 }

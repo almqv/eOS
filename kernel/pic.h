@@ -40,7 +40,7 @@ void pic_disable();
 void pic_init();
 
 // IRQs
-void irq(uint8, bool);
+void irq_mask(uint8, bool);
 
 static uint16 irq_reg(int ocw3);
 uint16 get_irr();

@@ -8,10 +8,6 @@ void pic_send_eoi(uint8 irq) {
 }
 
 void pic_remap(uint offset_1, uint offset_2) {
-	uint8 a1, a2; 
-	a1 = inb(PIC1_DATA);
-	a2 = inb(PIC2_DATA);
-
 	// Start the init sequance
 	outb_w(PIC1_CMD, ICW_INIT_MASK);
 
@@ -26,9 +22,8 @@ void pic_remap(uint offset_1, uint offset_2) {
 	outb_w(PIC1_DATA, ICW4_8086);
 	outb_w(PIC2_DATA, ICW4_8086);
 
-	// restore old masks
-	outb(PIC1_DATA, a1);
-	outb(PIC2_DATA, a2);
+	outb(PIC1_DATA, 0xff);
+	outb(PIC2_DATA, 0xff);
 }
 
 // disable the PIC
@@ -44,7 +39,7 @@ void pic_init() {
 }
 
 // (un)set a specific irq
-void irq(uint8 idx, bool t) {
+void irq_mask(uint8 idx, bool t) {
 	uint16 port;
 	uint8 data;
 
