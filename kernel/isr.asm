@@ -1,8 +1,18 @@
 isr_debug_ptr equ 0xe222
+isr_eip_ptr equ 0xe223
 
 %macro isr_err_stub 1
 isr_stub_%+%1:
+	; Save exception vec 
 	mov [isr_debug_ptr], byte %1
+
+	; Save the instruction pointer
+	push eax
+	;mov eax, eip
+	mov [isr_eip_ptr], dword eax
+	pop eax
+
+	; Handle the exception
 	call exception_handler
 	iret	
 %endmacro
@@ -24,7 +34,7 @@ isr_no_err_stub	4
 isr_no_err_stub	5
 isr_no_err_stub	6
 isr_no_err_stub	7
-isr_no_err_stub	8 ; err
+isr_err_stub	8 ; err
 isr_no_err_stub	9
 isr_err_stub	10
 isr_err_stub	11

@@ -22,9 +22,6 @@ char* itoa( int value, char * str, int base ) {
 				*ptr++ = '-';
 	}
 
-// 	if(value < 0 && base == 10 )  // sign
-// 		*ptr++ = '-';
-
 	// Remember where the numbers start.
 	low = ptr;
 
