@@ -21,14 +21,13 @@ void exception_handler() {
 	uint* irq_ptr = 0xe222;
 	uint8 irq = *irq_ptr;
 
+	pic_send_eoi(irq);
 	char* buf;
-
 	print("[exc] ", EXC_COLOR);
 	buf = itoa(irq, buf, 10);
 	print(buf, 0x0c);
 	new_line();
 
-	pic_send_eoi(irq);
 }
 
 void idt_set_desc(uint8 idx, void* isr, uint8 flags) {

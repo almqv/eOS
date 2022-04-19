@@ -2,22 +2,25 @@ isr_debug_ptr equ 0xe222
 
 %macro isr_err_stub 1
 isr_stub_%+%1:
-	; Save exception vec 
 	mov [isr_debug_ptr], byte %1
-
-	; Handle the exception
+	pusha
 	call exception_handler
+	sti
 	cli
-	hlt
-	iret	
+	;hlt
+	popa
+	iret
 %endmacro
 
 %macro isr_no_err_stub 1
 isr_stub_%+%1:
 	mov [isr_debug_ptr], byte %1
+	pusha
 	call exception_handler
+	sti
 	cli
 	;hlt
+	popa
 	iret
 %endmacro
 
