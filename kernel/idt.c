@@ -18,23 +18,26 @@ static idt_entry IDT[IDT_MAX_DESCS];
 static idtr	IDTR;
 
 void exception_handler() {
-	uint* irq_ptr = 0xe222;
-	uint8 irq = *irq_ptr;
+	uint* exc_ptr = 0xe222;
+	uint8 exc = *exc_ptr;
 
-	pic_send_eoi(irq);
+	pic_send_eoi(exc);
+
 	char* buf;
+	set_cursor_pos(0, 0);
 	print("[exc] ", EXC_COLOR);
-	buf = itoa(irq, buf, 10);
+	buf = itoa(exc, buf, 10);
 	print(buf, 0x0c);
-	new_line();
-
 }
 
 void idt_set_desc(uint8 idx, void* isr, uint8 flags) {
 	idt_entry* desc = &IDT[idx]; // get descriptor
 
+	uint* gdt_code_ptr = 0xee88;
+	uint8 gdt_code = *gdt_code_ptr;
+
 	desc->offset_1	= (uint) isr & 0xffff;
-	desc->selector	= 0x08; // kernel code selector for the GDT 
+	desc->selector	= gdt_code; // kernel code selector for the GDT 
 	desc->reserved	= 0; 
 	desc->type_attr	= flags;
 	desc->offset_2	= (uint) isr >> 16;
@@ -48,6 +51,10 @@ void idt_init() {
 	for (uint8 idx = 0; idx < 32; idx++) 
 		idt_set_desc(idx, isr_stub_table[idx], 0x8e);
 
+
+	outb_w(PIC1, 0xfd);
+	outb_w(PIC2, 0xfd);
 	__asm__ __volatile__("lidt %0" : : "m"(IDTR));
-	__asm__ __volatile__("sti");
+
+	//__asm__ __volatile__("sti"); 
 }

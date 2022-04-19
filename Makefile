@@ -1,6 +1,6 @@
 # Compiler/assembler settings
 CC			= gcc
-CFLAGS 		= -fno-pie -m32 -Os -ffreestanding
+CFLAGS 		= -fno-pie -m32 -Os -ffreestanding -g3
 
 AA			= nasm
 AFLAGS		= 
@@ -10,7 +10,7 @@ LDFLAGS		= -Wl,--oformat=binary -ffreestanding -nostdlib -shared -Ttext 0x1000 -
 
 # VM/Debug settings
 VM			= qemu-system-x86_64
-VMFLAGS		= -serial stdio -no-reboot -no-shutdown -d int
+VMFLAGS		= -serial stdio -no-reboot -no-shutdown #-d int
 
 
 # Do not touch these.

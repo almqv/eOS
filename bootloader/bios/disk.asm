@@ -40,6 +40,6 @@ read_error:
 	
 	jmp $
 
-read_error_string:		db ASCII_CARRIAGE_RETURN, ASCII_LINEBREAK, "ERROR! Disk read failed.", ASCII_END
+read_error_string:		db ASCII_CARRIAGE_RETURN, ASCII_LINEBREAK, "Disk read failed.", ASCII_END
 error_code_string:		db "Error code: ", ASCII_END
 sector_error_string:	db "Invalid number of sectors read!", ASCII_END

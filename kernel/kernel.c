@@ -8,21 +8,37 @@ void print_kernel_motd() {
 	printalign("|  __/ |_| |___) |    A x86 operating system,", BANNER_COLOR, MIDDLE);
 	printalign(" \\___|\\___/|____/     licenced under GPL-2.0", BANNER_COLOR, MIDDLE);
 
-	println("");
-	printalign("Fun fact: e = lim[h->0] (1+h)^(1/h)", DEFAULT_COLOR, MIDDLE);
+	new_line();
+	printalign("e = lim[h->0] (1+h)^(1/h)", DEFAULT_COLOR, MIDDLE);
 	printalign("Created by E. Almqvist", DEFAULT_COLOR, MIDDLE);
-	println("");
+	new_line();
 }
 
 void print_kernel_stats() {
 	char* buf;
 	set_cursor_pos(0, 12);
+
+	// GDT stuff
+	print("GDT Code Seg: ", 0x0f);
+	uint* code_ptr = 0xee88;
+	uint8 code = *code_ptr;
+	buf = itoa(code, buf, 16);
+	println(buf, DEFAULT_COLOR);
+
+	print("GDT Data Seg: ", 0x0f);
+	uint* data_ptr = 0xee89;
+	uint8 data = *data_ptr;
+	buf = itoa(data, buf, 16);
+	println(buf, DEFAULT_COLOR);
+
+	new_line();
+
 	// Memory stats
 	print("MEMORY BITMAP: ", 0x0f);
 	buf = itoa(get_bitmap(), buf, 2);
 	println(buf, DEFAULT_COLOR);
 
-	println("");
+	new_line();
 
 	println("BIOS E820", 0x0f);
 	print("Loaded Entries: ", DEFAULT_COLOR);
@@ -33,7 +49,7 @@ void print_kernel_stats() {
 	print("Physical Memory Size: ");
 	println("?", DEFAULT_COLOR);
 
-	println("");
+	new_line();
 
 	// VGA stats	
 	println("Display (VGA)", 0x0f);
@@ -56,17 +72,18 @@ void print_kernel_stats() {
 void kernel_init() {
 	pic_init();		// Init the PIC and remap it
 	idt_init();		// Enable interupts
+
+	//enable_paging();
+
 	vga_init(); 	// Initialize the screen
 
 	// Allocate VGA memory range
 	pm_malloc_range(VGA_ADDRESS, VGA_ADDRESS_MAX, true); // force alloc the VGA range
 	// ENABLE PAGING 
 	// TODO: make this work
-	//enable_paging();
 
 	clear_screen();
 	print_kernel_motd();
-	/*
 	print_kernel_stats();
 
 	char* buf;
@@ -79,7 +96,6 @@ void kernel_init() {
 		printalign(buf, 0x0f, MIDDLE);
 		++i;
 	}
-	*/
 
 	while(true) { __asm__("hlt"); } // never escape this function
 }

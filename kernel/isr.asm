@@ -3,43 +3,36 @@ isr_debug_ptr equ 0xe222
 %macro isr_err_stub 1
 isr_stub_%+%1:
 	mov [isr_debug_ptr], byte %1
-	pusha
 	call exception_handler
-	sti
+	hlt
 	cli
-	;hlt
-	popa
 	iret
 %endmacro
 
 %macro isr_no_err_stub 1
 isr_stub_%+%1:
 	mov [isr_debug_ptr], byte %1
-	pusha
 	call exception_handler
-	sti
+	hlt
 	cli
-	;hlt
-	popa
 	iret
 %endmacro
 
 extern exception_handler
-isr_no_err_stub	0
-; TODO: make keeb drivers
+isr_err_stub	0
 isr_err_stub	1 
 isr_no_err_stub	2
 isr_no_err_stub	3
 isr_no_err_stub	4
 isr_no_err_stub	5
-isr_no_err_stub	6
+isr_err_stub	6
 isr_no_err_stub	7
 isr_err_stub	8 ; err
 isr_no_err_stub	9 ; keyboard?
 isr_err_stub	10
 isr_err_stub	11
 isr_err_stub	12
-isr_err_stub	13
+isr_no_err_stub	13
 isr_err_stub	14
 isr_no_err_stub	15
 isr_no_err_stub	16

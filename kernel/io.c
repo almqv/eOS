@@ -26,9 +26,7 @@ void outw(unsigned short port, unsigned short data) {
 }
 
 
-static inline void io_wait() { 
-	outb(0x80, 0); 
-}
+static inline void io_wait() { outb(0x80, 0); }
 
 unsigned char inb_w(unsigned short port) {
 	inb(port);

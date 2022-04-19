@@ -17,8 +17,8 @@ void pic_remap(uint offset_1, uint offset_2) {
 
 	outb_w(PIC2_CMD, ICW_INIT_MASK);
 
-	outb_w(PIC1_DATA, offset_1); // ICW2 master offset
-	outb_w(PIC2_DATA, offset_2); // ICW2 slave offset
+	outb_w(PIC1_DATA, offset_1); 
+	outb_w(PIC2_DATA, offset_2); 
 
 	outb_w(PIC1_DATA, 0x4); 
 	outb_w(PIC2_DATA, 0x2);

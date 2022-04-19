@@ -66,6 +66,9 @@ pm_init:
 	call BEGIN_PM
 
 BEGIN_PM:
+	mov [0xee88], byte GDT_CODE_SEG ; save code seg
+	mov [0xee89], byte GDT_DATA_SEG ; save data seg
+
 	; Call the kernel 
 	call KERNEL_OFFSET
 	jmp $
