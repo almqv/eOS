@@ -7,7 +7,6 @@ isr_stub_%+%1:
 	mov [isr_debug_ptr], byte %1
 
 	; Save the instruction pointer
-	pop eax
 	mov [isr_eip_ptr], dword eax
 
 	; Handle the exception

@@ -31,7 +31,7 @@ void exception_handler() {
 		uint* eip_ptr = 0xe223;
 		uint eip = *eip_ptr;	
 		buf = itoa(eip, buf, 16);
-		print(" eax= ", EXC_COLOR);
+		print(" eax=", EXC_COLOR);
 		print(buf, 0x0e);
 	}
 
