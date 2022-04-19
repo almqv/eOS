@@ -1,4 +1,5 @@
 #include "../lib/types.h"
+#include "pic.h"
 
 #define IDT_MAX_DESCS 256
 #define EXC_COLOR	0x08

@@ -75,22 +75,13 @@ void new_line() {
 }
 
 void println(char* str, int attribute_byte) {
-	if( cursor_row > MAX_ROWS ) {
-		set_cursor_pos(0, MAX_ROWS);
+	if( cursor_row >= MAX_ROWS ) {
+		set_cursor_pos(0, 0);
 		println(str, attribute_byte);
 		return;
 	}
 	print(str, attribute_byte);
 	new_line();
-}
-
-void printint(int i, int attribute_byte) {
-	/*
-	char* strbuf;
-
-	strbuf = int_to_str(i, strbuf);
-	println(strbuf, attribute_byte);
-	*/
 }
 
 void printalign(char* str, int attribute_byte, enum align alignment) {

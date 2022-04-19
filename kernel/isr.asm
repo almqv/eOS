@@ -7,6 +7,8 @@ isr_stub_%+%1:
 
 	; Handle the exception
 	call exception_handler
+	cli
+	hlt
 	iret	
 %endmacro
 
@@ -14,13 +16,15 @@ isr_stub_%+%1:
 isr_stub_%+%1:
 	mov [isr_debug_ptr], byte %1
 	call exception_handler
+	cli
+	;hlt
 	iret
 %endmacro
 
 extern exception_handler
 isr_no_err_stub	0
 ; TODO: make keeb drivers
-isr_err_stub	1 ; keyboard : noerr
+isr_err_stub	1 
 isr_no_err_stub	2
 isr_no_err_stub	3
 isr_no_err_stub	4
@@ -28,7 +32,7 @@ isr_no_err_stub	5
 isr_no_err_stub	6
 isr_no_err_stub	7
 isr_err_stub	8 ; err
-isr_no_err_stub	9
+isr_no_err_stub	9 ; keyboard?
 isr_err_stub	10
 isr_err_stub	11
 isr_err_stub	12

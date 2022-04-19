@@ -18,17 +18,17 @@ static idt_entry IDT[IDT_MAX_DESCS];
 static idtr	IDTR;
 
 void exception_handler() {
-	uint* debug_ptr = 0xe222;
-	uint8 debug = *debug_ptr;
+	uint* irq_ptr = 0xe222;
+	uint8 irq = *irq_ptr;
 
 	char* buf;
 
 	print("[exc] ", EXC_COLOR);
-	buf = itoa(debug, buf, 10);
+	buf = itoa(irq, buf, 10);
 	print(buf, 0x0c);
 	new_line();
 
-	__asm__ __volatile__("cli; hlt");
+	pic_send_eoi(irq);
 }
 
 void idt_set_desc(uint8 idx, void* isr, uint8 flags) {
