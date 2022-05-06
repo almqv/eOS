@@ -96,6 +96,5 @@ void kernel_init() {
 		printalign(buf, 0x0f, MIDDLE);
 		++i;
 	}
-
-	while(true) { __asm__("hlt"); } // never escape this function
+	//while(true) { __asm__("hlt"); } // never escape this function
 }

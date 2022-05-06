@@ -1,5 +1,3 @@
-isr_debug_ptr equ 0xe222
-
 %macro isr_err_stub 1
 isr_stub_%+%1:
 	cli
