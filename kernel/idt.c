@@ -1,4 +1,7 @@
 #include "idt.h"
+// VGA stuff
+extern void set_cursor_pos(uint, uint);
+extern void print(char*, int);
 
 typedef struct {
 	uint16	offset_1;	// offset 0 to 15 bits
@@ -18,7 +21,7 @@ static idt_entry IDT[IDT_MAX_DESCS];
 static idtr	IDTR;
 
 void interupt_handler(uint interupt) {
-	pic_send_eoi(interupt);
+	pic_send_eoi(interupt); // ack int
 
 	char* buf;
 	set_cursor_pos(0, 0);
@@ -30,7 +33,7 @@ void interupt_handler(uint interupt) {
 void idt_set_desc(uint8 idx, void* isr, uint8 flags) {
 	idt_entry* desc = &IDT[idx]; // get descriptor
 
-	uint* gdt_code_ptr = 0xee88;
+	uint* gdt_code_ptr = (uint*)0xee88;
 	uint8 gdt_code = *gdt_code_ptr;
 
 	desc->offset_1	= (uint) isr & 0xffff;
