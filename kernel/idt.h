@@ -1,5 +1,7 @@
 #include "../lib/types.h"
 #include "pic.h"
+#include "../drivers/vga.h"
+#include "../lib/conv.h"
 
 #define IDT_MAX_DESCS 256
 #define EXC_COLOR	0x08
