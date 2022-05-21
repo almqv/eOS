@@ -7,7 +7,7 @@
 #define EXC_COLOR	0x08
 
 //__attribute__((noreturn))
-void interupt_handler(uint);
+void interupt_handler(uint8);
 
 void idt_set_desc(uint8, void*, uint8);
 void idt_init();

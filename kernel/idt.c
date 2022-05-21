@@ -20,14 +20,14 @@ __attribute__((aligned(16)))
 static idt_entry IDT[IDT_MAX_DESCS];
 static idtr	IDTR;
 
-void interupt_handler(uint interupt) {
-	pic_send_eoi(interupt); // ack int
-
+void interupt_handler(uint8 interupt) {
 	char* buf;
 	set_cursor_pos(0, 0);
 	print("[int] ", EXC_COLOR);
 	buf = itoa(interupt, buf, 10);
 	print(buf, 0x0c);
+
+	pic_send_eoi(interupt); // ack int
 }
 
 void idt_set_desc(uint8 idx, void* isr, uint8 flags) {
