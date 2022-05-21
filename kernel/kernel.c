@@ -14,6 +14,7 @@ void print_kernel_motd() {
 	new_line();
 }
 
+/*
 void print_kernel_stats() {
 	char* buf;
 	set_cursor_pos(0, 12);
@@ -68,6 +69,7 @@ void print_kernel_stats() {
 	println(buf, DEFAULT_COLOR);
 	
 }
+*/
 
 void kernel_init() {
 	pic_init();		// Init the PIC and remap it
@@ -84,7 +86,7 @@ void kernel_init() {
 
 	clear_screen();
 	print_kernel_motd();
-	print_kernel_stats();
+	//print_kernel_stats();
 
 	char* buf;
 	uint i = 0;
