@@ -13,6 +13,7 @@ typedef unsigned short int uint16;
 // POINTERS 
 typedef char* pointer;
 typedef unsigned long int uintptr;
+typedef unsigned long ulong;
 
 // BOOL
 typedef int bool;

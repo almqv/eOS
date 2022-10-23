@@ -36,11 +36,11 @@ void idt_set_desc(uint8 idx, void* isr, uint8 flags) {
 	uint* gdt_code_ptr = (uint*)0xee88;
 	uint8 gdt_code = *gdt_code_ptr;
 
-	desc->offset_1	= (uint) isr & 0xffff;
+	desc->offset_1	= (ulong) isr & 0xffff;
 	desc->selector	= gdt_code; // kernel code selector for the GDT 
 	desc->reserved	= 0; 
 	desc->type_attr	= flags;
-	desc->offset_2	= (uint) isr >> 16;
+	desc->offset_2	= (ulong) isr >> 16;
 }
 
 extern void* isr_stub_table[];
